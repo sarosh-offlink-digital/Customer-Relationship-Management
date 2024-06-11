@@ -1,0 +1,51 @@
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Login from './components/Login';
+import Dashboard from './components/Dashboard';
+import Home from './components/Home';
+import Leads from './components/Leads';
+import SideNav from './components/shared_components/SideNav';
+import LeadForm from './components/forms/LeadForm';
+import MyDataTable from './components/dataTables/MyDataTable';
+import CustomerDetail from './components/forms/CustomerDetail';
+
+const App = () => {
+  const [selectedId, setSelectedId] = useState(null);
+
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route
+          path="/mydatatable"
+          element={<MyDataTable setSelectedId={setSelectedId} />}
+        />
+        <Route path="/dashboard" element={<DashboardWithSideNav />} />
+        <Route path="/customerform" element={<CustomerFormWithSideNav />} />
+        <Route path="/leads" element={<LeadsWithSideNav />} />
+        {/* Ensure that the selectedId is passed down to the LeadForm component */}
+        <Route
+          path="/leadform"
+          element={<LeadsFormWithSideNav selectedId={selectedId} />}
+        />
+      </Routes>
+    </Router>
+  );
+};
+
+const DashboardWithSideNav = () => <LayoutWithSideNav component={<Dashboard />} />;
+const LeadsWithSideNav = () => <LayoutWithSideNav component={<Leads />} />;
+const CustomerFormWithSideNav = () => <LayoutWithSideNav component={<CustomerDetail />} />;
+// Pass the selectedId prop to the LeadForm component
+const LeadsFormWithSideNav = ({ selectedId }) => (
+  <LayoutWithSideNav component={<LeadForm selectedId={selectedId} />} />
+);
+const LayoutWithSideNav = ({ component: Component }) => (
+  <div className="flex">
+    <SideNav />
+    <div className="flex-grow">{Component}</div>
+  </div>
+);
+
+export default App;
