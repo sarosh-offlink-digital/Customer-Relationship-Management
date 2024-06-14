@@ -8,12 +8,12 @@ const LeadForm = ({ selectedId }) => {
         <div className='p-4'>
             <Header />
             <div className='my-10'>
-                <div className='bg-blue-800 rounded-t-md p-4'>
-                    <h1 className='text-sm xl:text-xl text-white'>Add Customer</h1>
+                <div className='bg-gradient-to-r from-blue-700 to-blue-400 rounded-t-md p-4'>
+                    <h1 className='text-sm xl:text-xl text-white'>Lead #124</h1>
                 </div>
                 <div className='bg-white p-4 rounded-b-md py-10'>
                     <div>
-                        <h1 className='text-xl mb-2'>Customer Details</h1>
+                        <h1 className='text-xl mb-2'>Lead Details</h1>
                         <form action="">
                             <div className="flex flex-wrap gap-2">
                                 <label className="flex items-center bg-gray-50 text-black  input input-bordered gap-2 w-full md:w-auto flex-grow">
@@ -71,22 +71,8 @@ const LeadForm = ({ selectedId }) => {
                                     <input type="text" className="grow bg-transparent border-none focus:ring-0 focus:outline-none" placeholder="Brand" />
                                 </label>
                             </div>
-                            <div className="flex flex-wrap gap-2 my-5">
-                                <label className="flex items-center bg-gray-50  text-black input input-bordered gap-2 w-full md:w-auto flex-grow">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 opacity-70">
-                                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
-                                    </svg>
-                                    <input type="text" className="grow bg-transparent border-none focus:ring-0 focus:outline-none" placeholder="Lead URL" />
-                                </label>
-                                <label className="flex items-center bg-gray-50  text-black input input-bordered gap-2 w-full md:w-auto flex-grow">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 opacity-70">
-                                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
-                                    </svg>
-                                    <input type="text" className="grow bg-transparent border-none focus:ring-0 focus:outline-none" placeholder="IP" />
-                                </label>
-                            </div>
 
-                            <button type='submit' className='bg-blue-800 p-3 text-white rounded-md'>Submit</button>
+                            <button type='submit' className='bg-blue-800 p-3 my-5 text-white rounded-md'>Submit</button>
                         </form>
                     </div>
                 </div>

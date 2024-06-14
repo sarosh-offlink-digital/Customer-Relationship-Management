@@ -7,7 +7,7 @@ const CustomerDetail = () => {
        <div className='p-4'>
             <Header />
             <div className='my-10'>
-                <div className='bg-blue-800 rounded-t-md p-4'>
+                <div className='bg-gradient-to-r from-blue-700 to-blue-400 rounded-t-md p-4'>
                     <h1 className='text-sm xl:text-xl text-white'>Customer Information</h1>
                 </div>
                 <div className='bg-white p-4 rounded-b-md py-10'>
@@ -66,21 +66,6 @@ const CustomerDetail = () => {
                                     </svg>
                                     <h1 className="grow bg-transparent  border-none focus:ring-0 focus:outline-none" >Brand : Captain Design Agency</h1>
                                 </label>
-                        
-                          
-                                <label className="my-3 flex items-center bg-gray-50  text-black input input-bordered gap-2 w-full md:w-auto flex-grow">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 opacity-70">
-                                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
-                                    </svg>
-                                    <h1 className="grow bg-transparent  border-none focus:ring-0 focus:outline-none" >Lead Url : Lorem ipsum dolor sit amet, consectetur adipisicing</h1>
-                                </label>
-                                <label className="my-3 flex items-center bg-gray-50  text-black input input-bordered gap-2 w-full md:w-auto flex-grow">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 opacity-70">
-                                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
-                                    </svg>
-                                    <h1 className="grow bg-transparent  border-none focus:ring-0 focus:outline-none" >IP : 192.168.0.1</h1>
-                                </label>
-                         
                         </div>
                     </div>
                 </div>

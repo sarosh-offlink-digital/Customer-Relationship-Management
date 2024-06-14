@@ -1,22 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
 body {
+
+  background-color: rgb(240, 242, 245);
   margin: 0;
-  background-color: rgb(226 232 240);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-.loginbg {
-  /* Set background image */
+@media (min-width: 1024px) {
+  .loginbg {
+    /* Set background image */
   background-image: url('../public/assets/loginbg.png');
   /* Adjust background size and other properties as needed */
   background-size: cover;
@@ -26,6 +25,14 @@ code {
   width: 100%;
   height: 100%;
   /* Add more styles as needed */
+  }
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+.loginbg {
+  background-color: white;
 }
 /* .drawer-open{
   background-color: transparent;
@@ -33,4 +40,15 @@ code {
 
 .drawer{
   background-color: transparent;
+}
+.glassy-bg {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);          
+  -webkit-backdrop-filter: blur(10px);   
+  border: 1px solid rgba(0, 0, 0, 0.3); 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);  
+  
+}
+.sadsa{
+  color: rgb(60, 180, 60)
 }

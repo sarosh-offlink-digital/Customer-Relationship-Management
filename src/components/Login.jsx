@@ -9,8 +9,8 @@ const Login = () => {
         console.log(userPassword.current.value)
     };
     return (
-        <div className="flex items-center justify-start min-h-screen bg-purple-950 px-10 loginbg">
-            <div className=" bg-white px-8 rounded-2xl shadow-md w-full max-w-2xl py-16  mx-10">
+        <div className="flex items-center justify-start w-screen bg-white   min-h-screen lg:bg-purple-950 lg:px-10 loginbg">
+            <div className=" bg-white px-8 lg:rounded-2xl lg:shadow-md w-full max-w-2xl py-8  lg:mx-10">
                 <div className='flex justify-center'>
                     <img src={logo} alt='logo' className='w-32 mb-2' />
                 </div>

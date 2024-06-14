@@ -1,3 +1,8 @@
+
+body {
+ 
+  background-color: rgb(240, 242, 245);
+}
 .App {
   text-align: center;
 }
@@ -35,4 +40,8 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.sadsa{
+  color: rgb(180, 40, 40);
 }
