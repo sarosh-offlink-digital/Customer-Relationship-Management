@@ -43,7 +43,7 @@ const CustomersDataTable = () => {
             cell: row => (
                 <div className='flex flex-wrap'>
                     <i className="fa-regular fa-square-plus text-xl text-blue-500 cursor-pointer hover:text-blue-800"></i>
-                    <img src={projectMember1} alt="1" className='rounded-full mx-2 h-6 w-6' />
+                    <img src={projectMember1} alt="1" className='rounded-full mx-2 h-8 w-8' />
                 </div>
             )
         },

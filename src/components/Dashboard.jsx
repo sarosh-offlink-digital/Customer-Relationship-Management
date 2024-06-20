@@ -14,14 +14,14 @@ const Dashboard = () => {
         <div className="flex w-full">
             <div className="flex-1 p-4">
                 <Header />
-                <div className='flex flex-wrap justify-between items-center my-4'>
-                    <div className=' bg-gradient-to-r from-blue-700 to-blue-400 p-3 rounded-lg mb-2'>
+                <div className='flex flex-wrap justify-between items-center my-3'>
+                    <div className=' bg-gradient-to-r from-blue-700 to-blue-400 p-3 rounded-lg mb-1'>
                         <img src={dashboardlogo} alt="db" />
                         <h1 className='text-white text-base font-bold cursor-pointer'>Dashboard</h1>
                     </div>
                     <DateTimeDisplay />
                 </div>
-                <div className='flex gap-4 mt-4 lg:gap-10 justify-start text-center items-center'>
+                <div className='flex gap-4 mt-2 lg:gap-10 justify-start text-center items-center'>
                     <div className='bg-gradient-to-r from-blue-700 to-blue-400 flex flex-wrap justify-center lg:justify-between gap-1 lg:gap-3 items-center text-center hover:scale-105 hover:bg-blue-800 cursor-pointer lg:h-auto h-28 w-30  text-white  px-2 rounded-md py-4'>
                         <img src={totalproj} alt='projects' className='w-5 xl:w-9' />
                         <h2 className='text-sm xl:text-xl'>Total Projects</h2>
@@ -38,7 +38,7 @@ const Dashboard = () => {
                         <h1 className='text-sm xl:text-xl my-1 font-bold'>15</h1>
                     </div>
                 </div>
-                <div className='my-10'>
+                <div className='my-9'>
                     <div className='bg-gradient-to-r from-blue-800 via-blue-600 to-blue-400 rounded-t-md p-4'>
                         <h1 className='text-sm xl:text-xl text-white'>Overdue Tasks</h1>
                     </div>
