@@ -14,8 +14,8 @@ const SideNav = () => {
 
   const getLinkClasses = (path) => {
     return location.pathname === path
-      ? "flex justify-start p-4 mx-4 my-2 w-40 rounded-md text-white bg-blue-400 cursor-pointer hover:bg-blue-600 hover:text-white hover:scale-105"
-      : "flex justify-start p-4 mx-4 my-2 w-40 rounded-md text-white  cursor-pointer hover:bg-blue-600 hover:text-white hover:scale-105";
+      ? "flex justify-start items-center p-4 mx-4 my-2 w-40 rounded-md text-white bg-blue-400 cursor-pointer hover:bg-blue-600 hover:text-white hover:scale-105"
+      : "flex justify-start items-center p-4 mx-4 my-2 w-40 rounded-md text-white  cursor-pointer hover:bg-blue-600 hover:text-white hover:scale-105";
   };
 
   return (
@@ -51,8 +51,8 @@ const SideNav = () => {
           </div>
           <Link className={getLinkClasses("/dashboard")} to="/dashboard"><img src={dashboardlogo} alt="D" className='mr-6'/> Dashboard</Link>
           <Link className={getLinkClasses("/leads")} to="/leads"><img src={leadlogo} alt="D" className='mr-6'/>Leads</Link>
-          <Link className={getLinkClasses("/customers")} to="/customers"><img src={customerlogo} alt="D" className='mr-6 size-4'/>Customers</Link>
-          <Link className={getLinkClasses("/projects")} to="/projects"><img src={ticketlogo} alt="D" className='mr-6 size-4'/>Projects</Link>
+          <Link className={getLinkClasses("/customers")} to="/customers"><i class="fa-solid fa-user-group text-white mr-6"></i>Customers</Link>
+          <Link className={getLinkClasses("/projects")} to="/projects" ><i class="fa-solid fa-bars-progress  text-white text-lg mr-6"></i>Projects</Link>
           <Link className={getLinkClasses("/sale")} to="/sale"><img src={saleslogo} alt="D" className='mr-6'/>Sales</Link>
           <Link className={getLinkClasses("/tickets")} to="/tickets"><img src={ticketlogo} alt="D" className='mr-6 size-4'/> Ticket</Link>
         </div>

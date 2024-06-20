@@ -14,7 +14,8 @@ import Projects from './components/Projects';
 import Tasks from './components/Tasks';
 import UserProfile from './components/roles/UserProfile';
 import CustomerForm from './components/forms/CustomerForm';
-
+import NewProject from './components/forms/NewProject';
+import ProjectForm from './components/forms/ProjectForm';
 
 const App = () => {
   const [selectedId, setSelectedId] = useState(null);
@@ -39,7 +40,8 @@ const App = () => {
         <Route path="/tasks" element={<TasksWithSideNav />} />
         <Route path="/profile" element={<UserProfileWithSideNav />} />
         <Route path="/newcustomer" element={<NewCustomerFormWithSideNav />} />
-        
+        <Route path="/newproject" element={<NewProjectWithSideNav />} />
+        <Route path="/projectform" element={<ProjectFormWithSideNav />} />
  
         {/* Ensure that the selectedId is passed down to the LeadForm component */}
         <Route
@@ -59,6 +61,8 @@ const ProjectWithSideNav = () => <LayoutWithSideNav component={<Projects />} />;
 const TasksWithSideNav = () => <LayoutWithSideNav component={<Tasks />} />;
 const UserProfileWithSideNav = () => <LayoutWithSideNav component={<UserProfile />} />;
 const NewCustomerFormWithSideNav = () => <LayoutWithSideNav component={<CustomerForm />} />;
+const NewProjectWithSideNav = () => <LayoutWithSideNav component={<NewProject />} />;
+const ProjectFormWithSideNav = () => <LayoutWithSideNav component={<ProjectForm />} />;
 // Pass the selectedId prop to the LeadForm component
 const LeadsFormWithSideNav = ({ selectedId }) => (
   <LayoutWithSideNav component={<LeadForm selectedId={selectedId} />} />

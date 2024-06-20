@@ -66,30 +66,11 @@ const CustomersDataTable = () => {
       allowOverflow: true,
       button: true,
     },
-    // {
-    //   name: 'View',
-    //   cell: row => (
-    //     <Link
-    //       to={{
-    //         pathname: "/customerform",
-    //         state: { id: row.id }
-    //       }}
-    //       onClick={() => handleId(row.id)}
-    //       className='bg-blue-800 hover:bg-blue-500 hover:scale-105 text-white p-2 rounded-md'
-    //     >
-    //       <i className="fa-regular fa-eye"></i>
-    //     </Link>
-    //   ),
-    //   ignoreRowClick: true,
-    //   allowOverflow: true,
-    //   button: true,
-    // },
-
-    // Add more columns here
+   
   ];
 
   return (
-    <div className="container w-[350px] lg:w-auto mx-auto lg:p-4 relative">
+    <div className="container w-[370px] lg:w-auto mx-auto lg:p-4 relative">
       <input
         type="text"
         placeholder="Search Customers"

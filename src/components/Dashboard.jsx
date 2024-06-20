@@ -6,6 +6,7 @@ import totalproj from "../src/documents.png"
 import completed from "../src/check.png"
 import pending from "../src/pending.png"
 import dashboardlogo from '../src/dashboard.png';
+import { Link } from 'react-router-dom'
 const Dashboard = () => {
 
     return (
@@ -42,12 +43,11 @@ const Dashboard = () => {
                         <h1 className='text-sm xl:text-xl text-white'>Overdue Tasks</h1>
                     </div>
                     <div className='bg-white p-4 rounded-b-md py-10 border-2 border-t-0'>
-                        <div className='flex justify-between'>
-                            <h3>Title</h3>
-                            <h3>Due Date</h3>
-                        </div>
-                        <div className='flex justify-center'>
-                            <h3 className='font-semibold cursor-pointer '>No Open Tasks</h3>
+                        <div className='flex flex-wrap gap-2 justify-between'>
+                            <h3>Project Name: Test Project 2</h3>
+                            <h3>Due Date: 20-6-2024</h3>
+                            <h3>Brand: Captain Design Agency</h3>
+                            <Link to='/projects'><i class=" mx-1 fa-solid fa-eye cursor-pointer text-blue-500 hover:text-blue-800 hover:scale-105"></i></Link>
                         </div>
                     </div>
                 </div>

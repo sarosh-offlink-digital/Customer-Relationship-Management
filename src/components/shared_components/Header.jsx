@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const Header = ({us}) => {
 
     const [available, setAvailable] = useState('rgb(60, 180, 60)')
-    const [availableText, setAvailableText] = useState('Offline')
+    const [availableText, setAvailableText] = useState('Online')
 
     const handleAvailability = (color) => {
         switch (color) {

@@ -87,9 +87,8 @@ const MyDataTable = () => {
     // },
     // Add more columns here
   ];
-
   return (
-    <div className="container w-[350px] lg:w-auto mx-auto lg:p-4 relative">
+    <div className="container w-[370px] lg:w-auto mx-auto lg:p-4 relative">
        <input
         type="text"
         placeholder="Search Leads"
