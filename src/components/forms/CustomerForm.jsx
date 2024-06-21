@@ -3,8 +3,10 @@ import Header from '../shared_components/Header';
 const CustomerForm = () => {
     const [services, setServices] = useState([])
     const [itemsAdd, setItemsAdd] = useState('')
-    const [unitCost, setUnitCost] = useState(0)
     const [currency, setCurrency] = useState('')
+    const [unitCost, setUnitCost] = useState(0)
+    const [itemQty, setItemQty] = useState(1)
+    const [customItem, setCustomItem] = useState('')
     const [brandMsg, setBrandMsg] = useState('Please Select a Brand First (from Customer Details)')
     const [items, setItems] = useState([{ id: 1 }]);
     const handleServices = (serviceNumber) => {
@@ -68,10 +70,19 @@ const CustomerForm = () => {
     };
 
     const handleUnitPrice = (e) => {
-        setUnitCost(e.target.value)
+        let unitCost = parseFloat(e.target.value)
+        let quantity = itemQty
+        let total = unitCost*quantity
+        setUnitCost(total)
     }
     const handleCurrency = (e) =>{
         setCurrency(e.target.value)
+    }
+    const handleQty = (e) =>{
+        setItemQty(e.target.value)
+    }
+    const handleCustomItem = (e)=>{
+        setCustomItem(e.target.value)
     }
     return (
         <div className='p-4'>
@@ -170,13 +181,13 @@ const CustomerForm = () => {
                                         <div key={item.id} className="flex flex-wrap gap-2 my-3">
                                             <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full lg:w-auto">
                                                 <i className="fa-regular fa-square-plus"></i>
-                                                <input type="text" className="grow bg-transparent border-none focus:ring-0 focus:outline-none" placeholder="Add Custom Item" />
+                                                <input type="text" className="grow bg-transparent border-none focus:ring-0 focus:outline-none" placeholder="Add Custom Item" value={customItem} onChange={handleCustomItem}/>
                                             </label>
                                             <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full lg:w-[10%]">
-                                                <input type="number" className="grow bg-transparent border-none focus:ring-0 focus:outline-none" placeholder="Qty" />
+                                                <input type="number" className="grow bg-transparent border-none focus:ring-0 focus:outline-none" placeholder="Qty" value={itemQty} onChange={handleQty}/>
                                             </label>
                                             <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full lg:w-[20%]">
-                                                <input type="number" className="grow bg-transparent border-none focus:ring-0 focus:outline-none" placeholder="Unit Price" value={unitCost} onChange={handleUnitPrice} />
+                                                <input type="number" className="grow bg-transparent border-none focus:ring-0 focus:outline-none" placeholder="Unit Price"  onChange={handleUnitPrice} />
                                             </label>
                                             <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full lg:w-[10%]">
                                                 <input type="number" className="grow bg-transparent border-none focus:ring-0 focus:outline-none" placeholder="Tax" />
@@ -186,11 +197,16 @@ const CustomerForm = () => {
                                                 <div className='flex w-full justify-end my-6'>
                                                 <h1 className='font-bold'> Amount</h1>
                                                 </div>
+                                                <div className='flex w-full justify-end'>
+                                                <h1 className='text-black'><span className='font-semibold text-blue-800'>Item Name: </span>{customItem}</h1>
+                                                </div>
                                             <div className='flex w-full justify-end'>
                                                 <div>
+                                                  
                                                 <div className='flex justify-between items-center'>
-                                                <p className='text-xl mx-1'>{unitCost}</p>
-                                                    <p className='text-gray-500 '>{currency}</p>
+                                                <p className='text-xl mx-1 font-bold text-blue-800'>{unitCost}</p>
+                                                    <p className='text-gray-500 text-sm'>x {itemQty}</p>
+                                                    <p className='text-green-500 ml-6'>{currency}</p>
                                                 </div>
                                                 </div>
                                             </div>
