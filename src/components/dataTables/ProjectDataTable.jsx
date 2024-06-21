@@ -4,15 +4,15 @@ import { Link } from 'react-router-dom';
 import projectMember1 from '../../src/profilepic2.jpg';
 
 const data = [
-    { id: 1, projectName: 'Test Project 1', brand:"Captain Design Agency", projectMembers: "Swift.inc", deadline: '14-9-2024', completion: 0, status: "Not Started" },
+    { id: 1, projectName: 'Test Project 1', brand:"Captain Design Agency", projectMembers: "Swift.inc", deadline: '14-9-2024', completion: 100, status: "Finished" },
     { id: 2, projectName: 'Test Project 2', brand:"Captain Design Agency", projectMembers: "Classic Renovations", deadline: '20-6-2024', completion: 50, status: "Overdue" },
     { id: 3, projectName: 'Test Project 3', brand:"Captain Book Publishing", projectMembers: "Classic Co.", deadline: '17-9-2024', completion: 10, status: "Cancelled" },
     { id: 4, projectName: 'Test Project 4', brand:"Captain Design Agency", projectMembers: "MC Paper Co.", deadline: '19-9-2024', completion: 100, status: "Finished" },
     { id: 5, projectName: 'Test Project 5', brand:"Captain Design Agency", projectMembers: "Dunder Mifflin", deadline: '19-9-2024', completion: 35, status: "In Progress" },
-    { id: 6, projectName: 'Test Project 6', brand:"Captain Book Publishing", projectMembers: "Schrute Farms", deadline: '20-9-2024', completion: 14, status: "on hold" },
+    { id: 6, projectName: 'Test Project 6', brand:"Captain Book Publishing", projectMembers: "Schrute Farms", deadline: '20-9-2024', completion: 14, status: "On hold" },
     { id: 7, projectName: 'Test Project 7', brand:"Captain Book Publishing", projectMembers: "Schrute Farms", deadline: '26-9-2024', completion: 80, status: "In Progress" },
     { id: 8, projectName: 'Test Project 8', brand:"Captain Design Agency", projectMembers: "Schrute Farms", deadline: '1-10-2024', completion: 100, status: "Finished" },
-    { id: 9, projectName: 'Test Project 9', brand:"Captain Design Agency", projectMembers: "Schrute Farms", deadline: '5-10-2024', completion: 90, status: "In Progress" },
+    { id: 9, projectName: 'Test Project 9', brand:"Captain Design Agency", projectMembers: "Schrute Farms", deadline: '5-10-2024', completion: 86, status: "In Progress" },
     // Add more data here
 ];
 
@@ -94,7 +94,7 @@ const CustomersDataTable = () => {
             cell: row => (
                 <div className={`w-20 p-1 rounded-lg flex justify-center text-white ${row.status === 'Finished'
                     ? 'bg-teal-500'
-                    : row.status === 'on hold'
+                    : row.status === 'On hold'
                         ? 'bg-gray-500'
                         : row.status === 'Cancelled'
                             ? 'bg-rose-700'
