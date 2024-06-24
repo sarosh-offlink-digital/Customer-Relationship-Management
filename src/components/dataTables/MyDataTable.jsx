@@ -38,7 +38,7 @@ const MyDataTable = () => {
       return false; 
     })
   );
-
+  
   const columns = [
     { name: 'ID', selector: row => row.contact_form_id, sortable: true, width: '80px' },
     { name: 'Name', selector: row => row.contact_form_name, sortable: true, wrap: true },
