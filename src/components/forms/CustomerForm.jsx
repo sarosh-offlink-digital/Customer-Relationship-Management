@@ -201,12 +201,12 @@ const CustomerForm = () => {
                                                     className="grow bg-transparent border-none focus:ring-0 focus:outline-none"
                                                     placeholder="Add Custom Item"
                                                     value={item.customItem}
-                                                    onChange={(e) => handleInputChange(item.id, 'customItem', e.target.value)} 
+                                                    onChange={(e) => handleInputChange(item.id, 'customItem', e.target.value)}
                                                 />
                                             </label>
 
                                             <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full lg:w-[10%]">
-                                            <i class="fa-solid fa-list-ol text-blue-800"></i>
+                                                <i class="fa-solid fa-list-ol text-blue-800"></i>
                                                 <input
                                                     type="number"
                                                     className="grow bg-transparent border-none focus:ring-0 focus:outline-none"
@@ -216,7 +216,7 @@ const CustomerForm = () => {
                                                 />
                                             </label>
                                             <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full lg:w-[20%]">
-                                            <i class="fa-regular fa-money-bill-1 text-green-500"></i>
+                                                <i class="fa-regular fa-money-bill-1 text-green-500"></i>
                                                 <input
                                                     type="number"
                                                     className="grow bg-transparent border-none focus:ring-0 focus:outline-none"
@@ -226,7 +226,7 @@ const CustomerForm = () => {
                                                 />
                                             </label>
                                             <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full lg:w-[10%]">
-                                            <i class="fa-solid fa-percent text-orange-500"></i>
+                                                <i class="fa-solid fa-percent text-orange-500"></i>
                                                 <input
                                                     type="number"
                                                     className="grow bg-transparent border-none focus:ring-0 focus:outline-none"
@@ -255,17 +255,17 @@ const CustomerForm = () => {
                                                     <h1 className='text-black'><span className='font-semibold text-blue-800'>Item Name : </span>{item.customItem}</h1>
                                                 </div>
                                                 <div className='flex w-full lg:w-1/3 justify-start  '>
-                                                    <div>
+                                                    <div className=''>
                                                         <div className='flex justify-between items-center'>
                                                             <div className=''>
-                                                                
-                                                            <p className='text-gray-500 text-sm'> {item.itemQty} x</p>
+
+                                                                <p className='text-gray-500 text-sm'>Qty {item.itemQty} x</p>
 
                                                             </div>
-                                                            <p className='text-xl mx-1 font-bold text-blue-800'>{item.totalCost}</p>
-                                                            <p className='text-green-500 text-xl mx-2'>{currency}</p>
+                                                            <p className='text-xl mx-1 font-bold text-blue-800 '>{item.totalCost}</p>
+                                                            <p className='text-green-500 text-xl mx-2 '>{currency}</p>
                                                         </div>
-                                                            <p>tax: {item.itemTax}%</p>
+                                                        <p className='text-gray-500 '>tax: {item.itemTax}%</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -292,16 +292,16 @@ const CustomerForm = () => {
                                         </div>
                                     ))}
                                 </div>
-                                <div className=''>
-                                <h1 className='text-xl mb-2 mt-5 font-bold'>Total Amount</h1>
-                                    <div className='flex justify-start'>
-                                    <p className='text-green-500 text-xl mx-2'>{currency}</p>
-                                    <p className='text-xl mx-1'>{discountedTotalAmount}</p>
+                                <div className=' flex flex-col items-end'>
+                                    <h1 className='text-xl mb-2 mt-5 text-blue-800 font-bold'>Total Amount</h1>
+                                    <div className='flex justify-end'>
+                                        <p className='text-green-500 text-xl '>{currency}</p>
+                                        <p className='text-2xl font-bold text-green-600'>{discountedTotalAmount}</p>
                                     </div>
-                                   <label className=''>
-                                   <i class="fa-solid fa-tag"></i> Discount:
-                                    <input type="number" name="" id="" placeholder='discount' className='ml-2 w-1/2 border-2 rounded-md' value={discount} onChange={handleDiscount}/>
-                                   </label>
+                                    <label className=''>
+                                        Discount:
+                                        <input type="number" name="" id="" placeholder='discount' className='ml-2  border-2 rounded-md' value={discount} onChange={handleDiscount} />
+                                    </label>
                                 </div>
 
                             </div>
