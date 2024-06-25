@@ -4,11 +4,11 @@ import 'react-quill/dist/quill.snow.css'; // import styles
 import Header from '../shared_components/Header'
 
 const NewProject = () => {
-  
+
   const [editorContent, setEditorContent] = useState('');
-    const handleChange = (content) => {
-      setEditorContent(content);
-    };
+  const handleChange = (content) => {
+    setEditorContent(content);
+  };
   return (
     <div className='p-4'>
       <div className='mt-2'>
@@ -49,8 +49,8 @@ const NewProject = () => {
         </div>
         <div>
           <div className='my-5'>
-          <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full md:w-auto">
-          <i class="fa-solid fa-people-group text-amber-500"></i>
+            <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full md:w-auto">
+              <i class="fa-solid fa-people-group text-amber-500"></i>
               <select
                 className="grow bg-transparent border-none focus:ring-0 focus:outline-none">
                 <option value="" disabled selected hidden>Select Members</option>
@@ -62,11 +62,11 @@ const NewProject = () => {
         </div>
         <div className="flex flex-col lg:flex-row gap-2">
           <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full lg:w-[50%]">
-          <i class="fa-solid fa-hourglass-start"></i>
+            <i class="fa-solid fa-hourglass-start"></i>
             <input type="text" className="grow bg-transparent border-none focus:ring-0 focus:outline-none" placeholder="Start Date" />
           </label>
           <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full lg:w-[50%]">
-          <i class="fa-solid fa-hourglass-end"></i>
+            <i class="fa-solid fa-hourglass-end"></i>
             <input type="text" className="grow bg-transparent border-none focus:ring-0 focus:outline-none" placeholder="Dead Line" />
           </label>
           <div className='flex items-center flex-wrap w-full lg:w-[50%]'>
@@ -74,28 +74,33 @@ const NewProject = () => {
             <h1 className='text-sm'>Allow manual time logs?</h1>
           </div>
         </div>
-        <div className='my-5 w-full h-96 overflow-y-auto overflow-x-hidden border border-gray-300 rounded-lg p-2 '> 
-        <ReactQuill 
-        value={editorContent}
-        onChange={handleChange}
-        modules={NewProject.modules}
-        formats={NewProject.formats}
-        placeholder="Project Description..."
-        className="h-full"
-      />
+        <div className='my-5 w-full h-96 overflow-y-auto overflow-x-hidden border border-gray-300 rounded-lg p-2 '>
+          <ReactQuill
+            value={editorContent}
+            onChange={handleChange}
+            modules={NewProject.modules}
+            formats={NewProject.formats}
+            placeholder="Project Description..."
+            className="h-full"
+          />
         </div>
+        <button
+          type="button"
+          className="bg-blue-800 p-3 my-5 text-white rounded-md">
+          Save and Submit
+        </button>
       </div>
     </div >
   )
 }
 NewProject.modules = {
   toolbar: [
-    [{ 'header': '1'}, { 'header': '2'}, { 'font': [] }],
-    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+    [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
+    [{ 'list': 'ordered' }, { 'list': 'bullet' }],
     ['bold', 'italic', 'underline'],
     ['link', 'image'],
     [{ 'align': [] }],
-    ['clean']                                         
+    ['clean']
   ],
 };
 
