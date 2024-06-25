@@ -20,20 +20,16 @@ import ProjectForm from './components/forms/ProjectForm';
 const App = () => {
   const [selectedId, setSelectedId] = useState(null);
 
-
   return (
+    
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/users" element={<Users />} />
-        
-        <Route
-          path="/mydatatable"
-          element={<MyDataTable setSelectedId={setSelectedId} />}
-        />
+        <Route path="/mydatatable"  element={<MyDataTable setSelectedCustomer={setSelectedId}  />} />
         <Route path="/dashboard" element={<DashboardWithSideNav />} />
-        <Route path="/customerform" element={<CustomerFormWithSideNav />} />
+        <Route path="/customerform" element={<CustomerFormWithSideNav customer={selectedId} />} />
         <Route path="/customers" element={<CustomerWithSideNav />} />
         <Route path="/leads" element={<LeadsWithSideNav />} />
         <Route path="/projects" element={<ProjectWithSideNav />} />
@@ -42,12 +38,7 @@ const App = () => {
         <Route path="/newcustomer" element={<NewCustomerFormWithSideNav />} />
         <Route path="/newproject" element={<NewProjectWithSideNav />} />
         <Route path="/projectform" element={<ProjectFormWithSideNav />} />
- 
-        {/* Ensure that the selectedId is passed down to the LeadForm component */}
-        <Route
-          path="/leadform"
-          element={<LeadsFormWithSideNav selectedId={selectedId} />}
-        />
+        <Route path="/leadform" element={<LeadsFormWithSideNav selectedId={selectedId} />} />
       </Routes>
     </Router>
   );
@@ -63,12 +54,11 @@ const UserProfileWithSideNav = () => <LayoutWithSideNav component={<UserProfile 
 const NewCustomerFormWithSideNav = () => <LayoutWithSideNav component={<CustomerForm />} />;
 const NewProjectWithSideNav = () => <LayoutWithSideNav component={<NewProject />} />;
 const ProjectFormWithSideNav = () => <LayoutWithSideNav component={<ProjectForm />} />;
-// Pass the selectedId prop to the LeadForm component
-const LeadsFormWithSideNav = ({ selectedId }) => (
-  <LayoutWithSideNav component={<LeadForm selectedId={selectedId} />} />
-);
+const LeadsFormWithSideNav = () => <LayoutWithSideNav component={<LeadForm/>} />;
+
 const LayoutWithSideNav = ({ component: Component }) => (
   <div className="flex">
+    
     <SideNav />
     <div className="flex-grow">{Component}</div>
   </div>

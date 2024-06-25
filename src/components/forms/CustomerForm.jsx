@@ -5,9 +5,11 @@ const CustomerForm = () => {
     const [services, setServices] = useState([]);
     const [itemsAdd, setItemsAdd] = useState('');
     const [currency, setCurrency] = useState('');
+    const [description, setDescription] = useState('');
     const [discount, setDiscount] = useState(0);
+    const [paymentMethod, setPaymentMethod] = useState('')
     const [brandMsg, setBrandMsg] = useState('Please Select a Brand First (from Customer Details)');
-    const [items, setItems] = useState([{ id: 1, customItem: '', itemQty: 1, unitCost: 0, totalCost: 0 }]);
+    const [items, setItems] = useState([{ id: 1, customItem: '', itemQty: 1, unitCost: 0, totalCost: 0, itemDescription:'' }]);
 
     const handleServices = (serviceNumber) => {
         switch (serviceNumber) {
@@ -53,7 +55,7 @@ const CustomerForm = () => {
 
     const addItem = () => {
         if (items.length < 5) {
-            setItems([...items, { id: items.length + 1, customItem: '', itemQty: 1, unitCost: 0, totalCost: 0, itemTax: 0 }]);
+            setItems([...items, { id: items.length + 1, customItem: '', itemQty: 1, unitCost: 0, totalCost: 0, itemTax: 0, itemDescription:'' }]);
         } else {
             setItemsAdd('Max 5 items can be added');
         }
@@ -98,6 +100,9 @@ const CustomerForm = () => {
     const handleDiscount = (e) => {
         setDiscount(e.target.value);
     };
+    const handlePaymentMethod = (e) =>{
+        setPaymentMethod(e.target.value)
+    }
 
     const totalAmount = items.reduce((total, item) => total + item.totalCost, 0);
 
@@ -135,7 +140,7 @@ const CustomerForm = () => {
                                         <input type="number" className="grow bg-transparent border-none focus:ring-0 focus:outline-none" placeholder="Mobile" />
                                     </label>
                                     <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full lg:w-[48%]">
-                                        <i className="fa-solid fa-globe text-blue-500"></i>
+                                    <i class="fa-solid fa-layer-group text-cyan-400"></i>
                                         <select
                                             className="grow bg-transparent border-none focus:ring-0 focus:outline-none"
                                             onChange={handleBrandChange}>
@@ -159,10 +164,11 @@ const CustomerForm = () => {
                                     </label>
                                     <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full md:w-auto flex-grow">
                                         <i className="fa-regular fa-credit-card text-cyan-500"></i>
-                                        <select className="grow bg-transparent border-none focus:ring-0 focus:outline-none">
+                                        <select className="grow bg-transparent border-none focus:ring-0 focus:outline-none" onChange={handlePaymentMethod}>
                                             <option value="" disabled selected hidden>Payment Mode</option>
                                             <option value="Stripe">Stripe</option>
-                                            <option value="secondmethod">??</option>
+                                            <option value="Vice">Vice</option>
+                                            <option value="PayPal">PayPal</option>
                                         </select>
                                     </label>
                                     <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full md:w-auto flex-grow">
@@ -238,7 +244,7 @@ const CustomerForm = () => {
                                             <textarea
                                                 type="text"
                                                 className="grow bg-white py-2 w-full lg:w-[25%] text-black input input-bordered focus:ring-0 focus:outline-none"
-                                                placeholder="Description"
+                                                placeholder="Description" onChange={(e) => handleInputChange(item.id, 'itemDescription', e.target.value)}
                                             ></textarea>
                                             <button
                                                 type="button"
@@ -251,8 +257,9 @@ const CustomerForm = () => {
                                                 <h1 className='font-bold'> Item Details</h1>
                                             </div>
                                             <div className='flex flex-col w-full gap-2'>
-                                                <div className='flex w-full lg:w-1/3 justify-start border-2 overflow-auto p-3  rounded-md bg-gray-100 '>
+                                                <div className='flex flex-col w-full lg:w-1/3 justify-start border-2 overflow-auto p-3  rounded-md bg-gray-100 '>
                                                     <h1 className='text-black'><span className='font-semibold text-blue-800'>Item Name : </span>{item.customItem}</h1>
+                                                    <p className='font-semibold text-blue-800'>Description: <span className='text-black font-normal'>{item.itemDescription}</span> </p>
                                                 </div>
                                                 <div className='flex w-full lg:w-1/3 justify-start  '>
                                                     <div className=''>
@@ -293,13 +300,18 @@ const CustomerForm = () => {
                                     ))}
                                 </div>
                                 <div className=' flex flex-col items-end'>
-                                    <h1 className='text-xl mb-2 mt-5 text-blue-800 font-bold'>Total Amount</h1>
+                                    <h1 className='text-xl mb-2 mt-5 text-blue-800 font-bold'>Sub Total</h1>
                                     <div className='flex justify-end'>
-                                        <p className='text-green-500 text-xl '>{currency}</p>
-                                        <p className='text-2xl font-bold text-green-600'>{discountedTotalAmount}</p>
+                                        <p className='text-green-600 text-2xl '>{currency}</p>
+                                        <p className='text-2xl font-semibold text-green-600'>{discountedTotalAmount}</p>
                                     </div>
+                                    <div className=' items-center gap-2 'style={{ display: discount > 0 ? 'flex' : 'none' }}>
+                                        <i class="fa-solid fa-tags"></i>Discount
+                                        <p className='text-xl '>-{discount}</p>
+                                    </div>
+                                        <p className='text-sm text-blue-800'>Paid via: {paymentMethod}</p>
                                     <label className=''>
-                                        Discount:
+                                        Add Discount:
                                         <input type="number" name="" id="" placeholder='discount' className='ml-2  border-2 rounded-md' value={discount} onChange={handleDiscount} />
                                     </label>
                                 </div>
