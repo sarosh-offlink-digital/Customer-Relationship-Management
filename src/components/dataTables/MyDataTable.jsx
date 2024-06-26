@@ -172,7 +172,7 @@ const MyDataTable = () => {
               <div>
                 <div>
                   <div className='flex justify-start lg:justify-end'>
-                    <button className='bg-blue-800 rounded-lg px-2 py-3 text-white hover:bg-blue-500'> <i class="fa-solid fa-user-plus"></i> Customer</button>
+                    <button className='bg-blue-800 rounded-lg px-2 py-3 text-white hover:bg-blue-500 shadow-md'> <i class="fa-solid fa-user-plus"></i> Customer</button>
                   </div>
                   {/* <label className="my-3 flex items-center bg-gray-50 text-black  input input-bordered gap-2 w-full md:w-auto flex-grow">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 opacity-70">
@@ -181,36 +181,36 @@ const MyDataTable = () => {
                     <h1 className="grow bg-transparent  border-none focus:ring-0 focus:outline-none" >ID: {selectedCustomer.contact_form_id}</h1>
                   </label> */}
                   <div className=' flex flex-col lg:flex-row gap-2'>
-                    <label className="my-3 flex items-center bg-gray-50  text-black input input-bordered gap-2 w-full md:w-auto lg:w-[50%]">
+                    <label className="my-3 flex items-center bg-gray-50  text-black input input-bordered gap-2 w-full md:w-auto lg:w-[50%] shadow-md">
                       <i className="fa-solid fa-user text-blue-800"></i>
                       <h1 className="grow bg-transparent  border-none focus:ring-0 focus:outline-none" >Name: {selectedCustomer.contact_form_name}</h1>
                     </label>
-                    <label class="my-3 input input-bordered flex items-center bg-gray-50  text-black gap-2 w-full lg:w-[50%]">
+                    <label class="my-3 input input-bordered flex items-center bg-gray-50  text-black gap-2 w-full lg:w-[50%] shadow-md">
                       <i className="fa-solid fa-envelope text-orange-500"></i>
                       <h1 className="grow bg-transparent  border-none focus:ring-0 focus:outline-none" >Email: {selectedCustomer.contact_form_email} </h1>
                     </label>
                   </div>
                   <div className=' flex flex-col lg:flex-row gap-2'>
-                    <label class="my-3 flex items-center bg-gray-50  text-black input input-bordered gap-2 w-full md:w-auto lg:w-[50%] ">
+                    <label class="my-3 flex items-center bg-gray-50  text-black input input-bordered gap-2 w-full md:w-auto lg:w-[50%] shadow-md">
                       <i className="fa-solid fa-phone text-green-500"></i>
                       <h1 className="grow bg-transparent  border-none focus:ring-0 focus:outline-none" >Phone: {selectedCustomer.contact_form_phone} </h1>
                     </label>
-                    <label className="my-3 flex items-center bg-gray-50  text-black input input-bordered gap-2 w-full md:w-auto lg:w-[50%]">
+                    <label className="my-3 flex items-center bg-gray-50  text-black input input-bordered gap-2 w-full md:w-auto lg:w-[50%] shadow-md">
                       <i className="fa-solid fa-globe text-blue-500"></i>
                       <h1 className="grow bg-transparent  border-none focus:ring-0 focus:outline-none" >Service: {selectedCustomer.contact_form_service}</h1>
                     </label>
                   </div>
                   <div className=' flex flex-col lg:flex-row gap-2'>
-                    <label className="my-3 flex items-center bg-gray-50  text-black input input-bordered gap-2 w-full md:w-auto lg:w-[50%]">
+                    <label className="my-3 flex items-center bg-gray-50  text-black input input-bordered gap-2 w-full md:w-auto lg:w-[50%] shadow-md">
                       <i class="fa-solid fa-layer-group text-cyan-400"></i>
                       <h1 className="grow bg-transparent  border-none focus:ring-0 focus:outline-none" >Brand: {selectedCustomer.brand}</h1>
                     </label>
-                    <label className="my-3 flex items-center bg-gray-50  text-black input input-bordered gap-2 w-full md:w-auto lg:w-[50%]">
+                    <label className="my-3 flex items-center bg-gray-50  text-black input input-bordered gap-2 w-full md:w-auto lg:w-[50%] shadow-md">
                       <i class="fa-regular fa-calendar-days text-teal-400"></i>
                       <h1 className="grow bg-transparent  border-none focus:ring-0 focus:outline-none" >Created At: {selectedCustomer.contact_form_created_at}</h1>
                     </label>
                   </div>
-                  <div className="my-3 bg-gray-50  text-black border-2 rounded-lg w-full p-3">
+                  <div className="my-3 bg-gray-50  text-black border-2 rounded-lg w-full p-3 shadow-md">
                     <p className='mb-4'><i class="fa-solid fa-message text-blue-500"></i> Message: </p>
                     <p className="grow bg-transparent  border-none focus:ring-0 focus:outline-none"> {selectedCustomer.contact_form_message} </p>
                   </div>

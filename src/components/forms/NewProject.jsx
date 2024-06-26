@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; // import styles
 import Header from '../shared_components/Header'
+import FileUploader from '../shared_components/FileUploader';
 
 const NewProject = () => {
-
+  
   const [editorContent, setEditorContent] = useState('');
   const handleChange = (content) => {
     setEditorContent(content);
@@ -19,15 +20,15 @@ const NewProject = () => {
       </div>
       <div className='bg-white p-4 rounded-b-md py-10'>
         <div className="flex flex-col lg:flex-row gap-2">
-          <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full lg:w-[50%]">
+          <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full lg:w-[50%] shadow-md">
             <i class="fa-solid fa-bars-progress text-green-500"></i>
             <input type="text" className="grow bg-transparent border-none focus:ring-0 focus:outline-none" placeholder="Project Name" />
           </label>
           <div className='w-full lg:w-[50%]'>
-            <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full md:w-auto">
+            <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full md:w-auto shadow-md">
               <i className="fa-solid fa-user text-blue-800"></i>
               <select
-                className="grow bg-transparent border-none focus:ring-0 focus:outline-none">
+                className="grow bg-transparent border-none focus:ring-0 focus:outline-none ">
                 <option value="" disabled selected hidden>Select Customer</option>
                 <option value="Captain Design Agency">Alex Jones</option>
                 <option value="Captain Book Publishing">Sierra </option>
@@ -49,7 +50,7 @@ const NewProject = () => {
         </div>
         <div>
           <div className='my-5'>
-            <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full md:w-auto">
+            <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full md:w-auto shadow-md">
               <i class="fa-solid fa-people-group text-amber-500"></i>
               <select
                 className="grow bg-transparent border-none focus:ring-0 focus:outline-none">
@@ -61,11 +62,11 @@ const NewProject = () => {
           </div>
         </div>
         <div className="flex flex-col lg:flex-row gap-2">
-          <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full lg:w-[50%]">
+          <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full lg:w-[50%] shadow-md">
             <i class="fa-solid fa-hourglass-start"></i>
             <input type="text" className="grow bg-transparent border-none focus:ring-0 focus:outline-none" placeholder="Start Date" />
           </label>
-          <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full lg:w-[50%]">
+          <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full lg:w-[50%] shadow-md">
             <i class="fa-solid fa-hourglass-end"></i>
             <input type="text" className="grow bg-transparent border-none focus:ring-0 focus:outline-none" placeholder="Dead Line" />
           </label>
@@ -74,7 +75,7 @@ const NewProject = () => {
             <h1 className='text-sm'>Allow manual time logs?</h1>
           </div>
         </div>
-        <div className='my-5 w-full h-96 overflow-y-auto overflow-x-hidden border border-gray-300 rounded-lg p-2 '>
+        <div className='my-5 w-full h-96 overflow-y-auto overflow-x-hidden border border-gray-300 rounded-lg p-2 shadow-md'>
           <ReactQuill
             value={editorContent}
             onChange={handleChange}
@@ -84,31 +85,53 @@ const NewProject = () => {
             className="h-full"
           />
         </div>
+        
+        <div>
+          <select className='bg-blue-500 text-white p-4 rounded-lg' name="" id="">
+            <option hidden disabled selected>Select Status</option>
+            <option className='bg-gray-50 text-black ' value=""> Not Started</option>
+            <option className='bg-gray-50 text-black ' value=""> In progress</option>
+            <option className='bg-gray-50 text-black ' value=""> Finished</option>
+            <option className='bg-gray-50 text-black ' value=""> Overdue</option>
+            <option className='bg-gray-50 text-black ' value=""> On Hold</option>
+            <option className='bg-gray-50 text-black ' value=""> Cancelled</option>
+            
+          </select>
+        </div>
+        <div>
+          <FileUploader/>
+          
+        </div>
         <button
           type="button"
           className="bg-blue-800 p-3 my-5 text-white rounded-md">
           Save and Submit
         </button>
       </div>
-    </div >
+    </div>
   )
 }
 NewProject.modules = {
   toolbar: [
-    [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
-    [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-    ['bold', 'italic', 'underline'],
-    ['link', 'image'],
-    [{ 'align': [] }],
+    [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
+    [{size: []}],
+    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+    [{'list': 'ordered'}, {'list': 'bullet'}, 
+     {'indent': '-1'}, {'indent': '+1'}],
+    ['link', 'image', 'video'],
     ['clean']
   ],
-};
+  clipboard: {
+    // toggle to add extra line breaks when pasting HTML:
+    matchVisual: false,
+  }
+}
 
 NewProject.formats = [
-  'header', 'font',
-  'bold', 'italic', 'underline',
-  'list', 'bullet',
-  'link', 'image', 'align'
+  'header', 'font', 'size',
+  'bold', 'italic', 'underline', 'strike', 'blockquote',
+  'list', 'bullet', 'indent',
+  'link', 'image', 'video'
 ];
 
 export default NewProject

@@ -38,9 +38,19 @@ const Header = ({us}) => {
                 <div className='flex items-center gap-8'>
                     <div className='dropdown dropdown-end'>
                         <label tabIndex={0} className="btn btn-ghost btn-circle">
-                            <div className="indicator">
+                            {/* OLD BELL */}
+                            {/* <div className="indicator">
                                 <span className="indicator-item badge badge-success p-1">3</span>
                                 <i class="fa-solid fa-bell text-2xl text-white lg:text-blue-800"></i>
+                               
+                            </div> */}
+                            {/* NEW BELL */}
+                            <div className="indicator ">
+                                <i class="fa-solid fa-bell text-2xl text-white lg:text-blue-800"></i>
+                                <span class="relative flex h-3 w-3">
+                                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                    <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                                </span>
                                 {/* <img src={bellicon} alt='Bell Icon' className='' /> */}
                             </div>
                         </label>

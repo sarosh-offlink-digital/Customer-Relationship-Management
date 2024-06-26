@@ -1,28 +1,86 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Header from '../shared_components/Header';
+import * as htmlToImage from 'html-to-image';
+import { saveAs } from 'file-saver';
+import cdalogo from '../../src/cda.png'
+import cbplogo from '../../src/cbp.png'
+const CustomerForm = ({ id }) => {
 
-const CustomerForm = () => {
+
+
+
     const [services, setServices] = useState([]);
     const [itemsAdd, setItemsAdd] = useState('');
+    const [brandLogo, setBrandLogo] = useState(null)
     const [currency, setCurrency] = useState('');
     const [description, setDescription] = useState('');
+    const [customerDetail, setCustomerDetail] = useState(
+        {
+            customerName: '',
+            customerEmail: '',
+            customerMobile: null,
+            customerService: '',
+
+        }
+    )
     const [discount, setDiscount] = useState(0);
     const [paymentMethod, setPaymentMethod] = useState('')
     const [brandMsg, setBrandMsg] = useState('Please Select a Brand First (from Customer Details)');
-    const [items, setItems] = useState([{ id: 1, customItem: '', itemQty: 1, unitCost: 0, totalCost: 0, itemDescription:'' }]);
+    const [items, setItems] = useState([{ id: 1, customItem: '', itemQty: 1, unitCost: 0, totalCost: 0, itemDescription: '' }]);
 
+    const handleCustomerDetail = (field) => (e) => {
+        switch (field) {
+            case 'customerName':
+                setCustomerDetail({
+                    customerName: e.target.value,
+                    customerEmail: customerDetail.customerEmail,
+                    customerMobile: customerDetail.customerMobile,
+                    customerService: customerDetail.customerService
+                });
+                break;
+            case 'customerEmail':
+                setCustomerDetail({
+                    customerName: customerDetail.customerName,
+                    customerEmail: e.target.value,
+                    customerMobile: customerDetail.customerMobile,
+                    customerService: customerDetail.customerService
+                });
+                break;
+            case 'customerMobile':
+                setCustomerDetail({
+                    customerName: customerDetail.customerName,
+                    customerEmail: customerDetail.customerEmail,
+                    customerMobile: e.target.value,
+                    customerService: customerDetail.customerService
+                });
+                break;
+            case 'customerService':
+                setCustomerDetail({
+                    customerName: customerDetail.customerName,
+                    customerEmail: customerDetail.customerEmail,
+                    customerMobile: customerDetail.customerMobile,
+                    customerService: e.target.value,
+                });
+                break;
+            default:
+                break;
+        }
+    };
     const handleServices = (serviceNumber) => {
         switch (serviceNumber) {
             case 1:
+                setBrandLogo(cdalogo)
                 setServices([
                     'Web Development',
                     'Logo Design',
                     'Social Media Marketing',
                     'Branding',
                     'SEO Services',
+                    'Custom',
                 ]);
                 break;
             case 2:
+                setBrandLogo(cbplogo)
                 setServices([
                     'GhostWriting',
                     'Book Editing',
@@ -35,6 +93,7 @@ const CustomerForm = () => {
                     'Comic Book Writing',
                     'Fiction Writing',
                     'Audio Book',
+                    'Custom',
                 ]);
                 break;
             default:
@@ -55,7 +114,7 @@ const CustomerForm = () => {
 
     const addItem = () => {
         if (items.length < 5) {
-            setItems([...items, { id: items.length + 1, customItem: '', itemQty: 1, unitCost: 0, totalCost: 0, itemTax: 0, itemDescription:'' }]);
+            setItems([...items, { id: items.length + 1, customItem: '', itemQty: 1, unitCost: 0, totalCost: 0, itemTax: 0, itemDescription: '' }]);
         } else {
             setItemsAdd('Max 5 items can be added');
         }
@@ -100,7 +159,7 @@ const CustomerForm = () => {
     const handleDiscount = (e) => {
         setDiscount(e.target.value);
     };
-    const handlePaymentMethod = (e) =>{
+    const handlePaymentMethod = (e) => {
         setPaymentMethod(e.target.value)
     }
 
@@ -108,12 +167,27 @@ const CustomerForm = () => {
 
 
     const discountedTotalAmount = totalAmount - discount;
+    const nodeRef = useRef(null);
 
+    const captureAndSave = () => {
+        if (nodeRef.current) {
+            htmlToImage.toBlob(nodeRef.current)
+                .then(function (blob) {
+                    saveAs(blob, 'customer-invoice.png');
+
+                })
+                .catch(function (error) {
+                    console.error('Error capturing image:', error);
+                });
+        } else {
+            console.error(`Ref for element with id '${id}' is not available.`);
+        }
+    };
     return (
         <div className='p-4'>
             <Header />
             <div className='my-10'>
-                <div className='bg-gradient-to-r from-blue-700 to-blue-400 rounded-t-md p-4'>
+                <div className='bg-gradient-to-r from-blue-700 to-blue-400 rounded-t-md p-4 '>
                     <h1 className='text-sm xl:text-xl text-white '>Add Customer</h1>
                 </div>
                 <form action='' className='flex flex-col items-center lg:flex-row justify-start'>
@@ -122,25 +196,25 @@ const CustomerForm = () => {
                             <h1 className='text-xl mb-2 font-bold'>Customer Details</h1>
                             <div>
                                 <div className="flex flex-wrap gap-2">
-                                    <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full lg:w-[48%]">
+                                    <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full lg:w-[48%] shadow-md">
                                         <i className="fa-solid fa-user text-blue-800"></i>
-                                        <input type="text" className="grow bg-transparent border-none focus:ring-0 focus:outline-none" placeholder="Customer Name" />
+                                        <input type="text" className="grow bg-transparent border-none focus:ring-0 focus:outline-none" placeholder='Customer Name' value={customerDetail.customerName} onChange={handleCustomerDetail('customerName')} />
                                     </label>
                                     <div className='w-full lg:w-[48%]'>
-                                        <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full md:w-auto">
+                                        <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full md:w-auto shadow-md">
                                             <i className="fa-solid fa-envelope text-orange-500"></i>
-                                            <input type="text" className="grow bg-transparent border-none focus:ring-0 focus:outline-none" placeholder="Email" />
+                                            <input type="text" className="grow bg-transparent border-none focus:ring-0 focus:outline-none" placeholder='Customer Email' value={customerDetail.customerEmail} onChange={handleCustomerDetail('customerEmail')} />
                                         </label>
-                                        <p className='text-xs mx-2 text-gray-400'>Customer will login using this email</p>
+                                        <p className='text-xs mt-2 mx-2 text-gray-400'>Customer will login using this email</p>
                                     </div>
                                 </div>
                                 <div className="flex flex-wrap gap-2 my-6">
-                                    <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full lg:w-[48%]">
+                                    <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full lg:w-[48%] shadow-md">
                                         <i className="fa-solid fa-phone text-green-500"></i>
-                                        <input type="number" className="grow bg-transparent border-none focus:ring-0 focus:outline-none" placeholder="Mobile" />
+                                        <input type="number" className="grow bg-transparent border-none focus:ring-0 focus:outline-none" placeholder='Customer Contact' value={customerDetail.customerMobile} onChange={handleCustomerDetail('customerMobile')} />
                                     </label>
-                                    <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full lg:w-[48%]">
-                                    <i class="fa-solid fa-layer-group text-cyan-400"></i>
+                                    <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full lg:w-[48%] shadow-md">
+                                        <i class="fa-solid fa-layer-group text-cyan-400"></i>
                                         <select
                                             className="grow bg-transparent border-none focus:ring-0 focus:outline-none"
                                             onChange={handleBrandChange}>
@@ -157,23 +231,23 @@ const CustomerForm = () => {
                             <h1 className='text-xl mb-2 mt-5 font-bold'>Add Invoice</h1>
                             <div>
                                 <div className="flex flex-wrap gap-2">
-                                    <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full lg:w-auto flex-grow">
+                                    <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full lg:w-auto flex-grow shadow-md">
                                         <i className="fa-solid fa-file-invoice-dollar text-teal-500"></i>
                                         <p className='border-r-2 px-2 '>INV#000</p>
-                                        <input type="text" className="grow bg-transparent border-none focus:ring-0 focus:outline-none" placeholder="Invoice" />
+                                        <input type="text" className="grow bg-transparent border-none focus:ring-0 focus:outline-none" value="00000" />
                                     </label>
-                                    <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full md:w-auto flex-grow">
+                                    <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full md:w-auto flex-grow shadow-md">
                                         <i className="fa-regular fa-credit-card text-cyan-500"></i>
                                         <select className="grow bg-transparent border-none focus:ring-0 focus:outline-none" onChange={handlePaymentMethod}>
                                             <option value="" disabled selected hidden>Payment Mode</option>
                                             <option value="Stripe">Stripe</option>
-                                            <option value="Vice">Vice</option>
+                                            <option value="Wise">Wise</option>
                                             <option value="PayPal">PayPal</option>
                                         </select>
                                     </label>
-                                    <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full md:w-auto flex-grow">
+                                    <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full md:w-auto flex-grow shadow-md">
                                         <i className="fa-solid fa-coins text-yellow-500"></i>
-                                        <select className="grow bg-transparent border-none focus:ring-0 focus:outline-none" onChange={handleCurrency}>
+                                        <select className="grow bg-transparent border-none focus:ring-0 focus:outline-none" onChange={handleCurrency} >
                                             <option value="" disabled selected hidden>Currency</option>
                                             <option value="$">$ USD</option>
                                             <option value="£">£ GBP</option>
@@ -185,33 +259,33 @@ const CustomerForm = () => {
                                 </div>
                                 <div className="flex flex-wrap gap-2 my-6">
                                     <div className='flex-grow'>
-                                        <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full lg:w-[28%]">
+                                        <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full lg:w-[28%] shadow-md">
                                             <i className="fa-regular fa-square-plus text-blue-800"></i>
-                                            <select className="grow bg-transparent border-none focus:ring-0 focus:outline-none">
+                                            <select className="grow bg-transparent border-none focus:ring-0 focus:outline-none" onChange={handleCustomerDetail('customerService')}>
                                                 <option value="" disabled selected hidden>Add item</option>
                                                 {services.map((service, index) => (
                                                     <option key={index} value={service}>{service}</option>
                                                 ))}
                                             </select>
                                         </label>
-                                        <p className='text-xs mx-2 text-gray-400'>{brandMsg}</p>
+                                        <p className='text-xs mt-2 mx-2 text-gray-400'>{brandMsg}</p>
                                     </div>
                                 </div>
                                 <div>
                                     {items.map(item => (
                                         <div key={item.id} className="flex flex-wrap gap-2 my-3">
-                                            <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full lg:w-auto">
+                                            <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full lg:w-auto shadow-md">
                                                 <i className="fa-regular fa-square-plus text-blue-800"></i>
                                                 <input
                                                     type="text"
                                                     className="grow bg-transparent border-none focus:ring-0 focus:outline-none"
-                                                    placeholder="Add Custom Item"
-                                                    value={item.customItem}
+                                                    placeholder={item.id > 1 ? 'Add Custom item' : 'Select Service'}
+                                                    value={item.id > 1 ? item.customItem : customerDetail.customerService}
                                                     onChange={(e) => handleInputChange(item.id, 'customItem', e.target.value)}
                                                 />
                                             </label>
 
-                                            <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full lg:w-[10%]">
+                                            <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full lg:w-[10%] shadow-md">
                                                 <i class="fa-solid fa-list-ol text-blue-800"></i>
                                                 <input
                                                     type="number"
@@ -221,7 +295,7 @@ const CustomerForm = () => {
                                                     onChange={(e) => handleInputChange(item.id, 'itemQty', parseInt(e.target.value))}
                                                 />
                                             </label>
-                                            <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full lg:w-[20%]">
+                                            <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full lg:w-[20%] shadow-md">
                                                 <i class="fa-regular fa-money-bill-1 text-green-500"></i>
                                                 <input
                                                     type="number"
@@ -231,7 +305,7 @@ const CustomerForm = () => {
                                                     onChange={(e) => handleInputChange(item.id, 'unitCost', parseFloat(e.target.value))}
                                                 />
                                             </label>
-                                            <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full lg:w-[10%]">
+                                            <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full lg:w-[10%] shadow-md">
                                                 <i class="fa-solid fa-percent text-orange-500"></i>
                                                 <input
                                                     type="number"
@@ -243,12 +317,12 @@ const CustomerForm = () => {
                                             </label>
                                             <textarea
                                                 type="text"
-                                                className="grow bg-white py-2 w-full lg:w-[25%] text-black input input-bordered focus:ring-0 focus:outline-none"
+                                                className="grow bg-white py-2 w-full lg:w-[25%] text-black input input-bordered focus:ring-0 focus:outline-none shadow-md"
                                                 placeholder="Description" onChange={(e) => handleInputChange(item.id, 'itemDescription', e.target.value)}
                                             ></textarea>
                                             <button
                                                 type="button"
-                                                className='rounded-lg border-2 border-blue-800 text-blue-800 text-xl font-bold px-4'
+                                                className='rounded-lg border-2 border-blue-800 text-blue-800 text-xl font-bold px-4 shadow-md'
                                                 onClick={() => removeItem(item.id)}
                                             >
                                                 x
@@ -256,9 +330,10 @@ const CustomerForm = () => {
                                             <div className='flex w-full justify-start my-6'>
                                                 <h1 className='font-bold'> Item Details</h1>
                                             </div>
-                                            <div className='flex flex-col w-full gap-2'>
-                                                <div className='flex flex-col w-full lg:w-1/3 justify-start border-2 overflow-auto p-3  rounded-md bg-gray-100 '>
-                                                    <h1 className='text-black'><span className='font-semibold text-blue-800'>Item Name : </span>{item.customItem}</h1>
+                                            <div className='flex flex-col w-full gap-2 '>
+                                                <div className='flex flex-col w-full lg:w-1/3 justify-start border-2 overflow-auto p-3  rounded-md bg-gray-100 shadow-md'>
+                                                    <h1 className='text-black'><span className='font-semibold  text-blue-800'>Item Name : </span>{item.id > 1 ? item.customItem : customerDetail.customerService}</h1>
+
                                                     <p className='font-semibold text-blue-800'>Description: <span className='text-black font-normal'>{item.itemDescription}</span> </p>
                                                 </div>
                                                 <div className='flex w-full lg:w-1/3 justify-start  '>
@@ -282,47 +357,69 @@ const CustomerForm = () => {
                                 <div className='text-orange-500 text-sm'>{itemsAdd}</div>
                                 <button
                                     type="button"
-                                    className="border-2 text-blue-800 border-blue-800 p-3 my-5 rounded-md"
+                                    className="border-2 text-blue-800 border-blue-800 p-3 my-5 shadow-md  rounded-md"
                                     onClick={addItem}
                                 >
                                     <i className="fa-regular fa-square-plus"></i> Add Item
                                 </button>
-                                <div className='bg-gray-200 w-full h-[2px] my-6'></div>
                             </div>
-                            <div className='flex justify-between flex-wrap'>
-                                <div>
-                                    <h1 className='text-xl mb-2 mt-5 font-bold text-blue-800'>Total Items</h1>
-                                    <h1 className='text-blue-800'>Items: </h1>
-                                    {items.map(item => (
-                                        <div key={item.id}>
-                                            <h1><span className='text-blue-800'>{item.id} :</span> {item.customItem}</h1>
+                            <div className='bg-gray-200 w-full h-[2px] my-6 '></div>
+                            <div id={id} ref={nodeRef} className='bg-white w-full lg:py-4 lg:px-10'>
+                                <div className='my-8'>
+                                    <div className='flex items-center justify-between my-10'>
+                                        <h1 className='lg:text-center my-2 text-2xl font-semibold text-blue-800'>Invoice# <span className='font-normal text-black '>0120</span></h1>
+                                        <img src={brandLogo} className='h-14 w-auto' alt="" />
+                                    </div>
+                                    <h1 className='text-xl mb-2 font-bold text-blue-800'>Customer Details</h1>
+                                    <div className='flex justify-start gap-6 flex-wrap'>
+                                        <p className='text-blue-800 font-semibold'><i className="fa-solid fa-user text-blue-800"></i> Name: <span className='text-gray-500 font-normal'>{customerDetail.customerName}</span></p>
+                                        <p className='text-blue-800 font-semibold'> <i className="fa-solid fa-envelope text-orange-500"></i> Email: <span className='text-gray-500 font-normal'>{customerDetail.customerEmail}</span></p>
+                                        <p className='text-blue-800 font-semibold'><i className="fa-solid fa-phone text-green-500"></i> Contact: <span className='text-gray-500 font-normal'>{customerDetail.customerMobile}</span></p>
+                                    </div>
+                                </div>
+                                <div className='border-b-2 border-dashed my-5'></div>
+                                <div className='flex justify-between flex-wrap'>
+                                    <div>
+                                        <h1 className='text-xl mb-2 mt-5 font-bold text-blue-800'>Total Items</h1>
+                                        <h1 className='text-blue-800'>Items: </h1>
+                                        {customerDetail.customerService}
+                                        {items.map(item => (
+                                            <div key={item.id}>
+                                                <h1>{item.customItem}</h1>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <div className='flex flex-col items-end'>
+                                        <h1 className='text-xl mb-2 mt-5 text-blue-800 font-bold'>Sub Total</h1>
+                                        <div className='flex justify-end'>
+                                            <p className='text-green-600 text-2xl'>{currency}</p>
+                                            <p className='text-2xl font-semibold text-green-600'>{discountedTotalAmount}</p>
                                         </div>
-                                    ))}
-                                </div>
-                                <div className=' flex flex-col items-end'>
-                                    <h1 className='text-xl mb-2 mt-5 text-blue-800 font-bold'>Sub Total</h1>
-                                    <div className='flex justify-end'>
-                                        <p className='text-green-600 text-2xl '>{currency}</p>
-                                        <p className='text-2xl font-semibold text-green-600'>{discountedTotalAmount}</p>
-                                    </div>
-                                    <div className=' items-center gap-2 'style={{ display: discount > 0 ? 'flex' : 'none' }}>
-                                        <i class="fa-solid fa-tags"></i>Discount
-                                        <p className='text-xl '>-{discount}</p>
-                                    </div>
+                                        <div className='items-center gap-2' style={{ display: discount > 0 ? 'flex' : 'none' }}>
+                                            <i className="fa-solid fa-tags"></i>Discount
+                                            <p className='text-xl'>-{discount}</p>
+                                        </div>
                                         <p className='text-sm text-blue-800'>Paid via: {paymentMethod}</p>
-                                    <label className=''>
-                                        Add Discount:
-                                        <input type="number" name="" id="" placeholder='discount' className='ml-2  border-2 rounded-md' value={discount} onChange={handleDiscount} />
-                                    </label>
+                                    </div>
                                 </div>
+                                <div className='border-b-2 border-dashed my-5'></div>
+                            </div>
+                            <label className='flex justify-end px-10'>
+                                Add Discount:
+                                <input type="number" name="" id="" placeholder='discount' className='ml-2 border-2 rounded-md' value={discount} onChange={handleDiscount} />
+                            </label>
+
+                            <div className='flex justify-between px-10'>
+
+                                <button
+                                    type="button"
+                                    className="bg-blue-800 p-3 my-5 text-white rounded-md">
+                                    Save and Submit
+                                </button>
+                                {/* <button type="button" onClick={captureAndSave}><i class="fa-solid fa-download"></i></button> */}
+                                {/* export button */}
 
                             </div>
-
-                            <button
-                                type="button"
-                                className="bg-blue-800 p-3 my-5 text-white rounded-md">
-                                Save and Submit
-                            </button>
                         </div>
                     </div>
                 </form>

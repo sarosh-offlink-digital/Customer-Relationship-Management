@@ -15,11 +15,11 @@ const Dashboard = () => {
             <div className="flex-1 p-4">
                 <Header />
                 <div className='flex flex-wrap justify-between items-center my-3'>
-                    <div className=' bg-gradient-to-r from-blue-700 to-blue-400 p-3 rounded-lg mb-1'>
+                    <div className=' bg-gradient-to-r from-blue-700 to-blue-400 p-3 rounded-lg mb-1 '>
                         <img src={dashboardlogo} alt="db" />
                         <h1 className='text-white text-base font-bold cursor-pointer'>Dashboard</h1>
                     </div>
-                    <DateTimeDisplay />
+                    <DateTimeDisplay/>
                 </div>
                 <div className='flex gap-4 mt-2 lg:gap-10 justify-start text-center items-center'>
                     <div className='bg-gradient-to-r from-blue-700 to-blue-400 flex flex-wrap justify-center lg:justify-between gap-1 lg:gap-3 items-center text-center hover:scale-105 hover:bg-blue-800 cursor-pointer lg:h-auto h-28 w-30  text-white  px-2 rounded-md py-4'>
