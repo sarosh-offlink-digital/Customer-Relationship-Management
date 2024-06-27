@@ -416,7 +416,7 @@ const CustomerForm = ({ id }) => {
                                     className="bg-blue-800 p-3 my-5 text-white rounded-md">
                                     Save and Submit
                                 </button>
-                                {/* <button type="button" onClick={captureAndSave}><i class="fa-solid fa-download"></i></button> */}
+                                <button type="button" onClick={captureAndSave}><i class="fa-solid fa-download"></i></button>
                                 {/* export button */}
 
                             </div>
