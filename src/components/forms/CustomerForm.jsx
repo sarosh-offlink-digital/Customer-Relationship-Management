@@ -404,7 +404,7 @@ const CustomerForm = ({ id }) => {
                                                     {/* <img src={additemicon} alt="item" className='w-6 h-6' /> */}
                                                     <h1 className='text-blue-500'>{item.customItem}</h1>
                                                 </div>
-                                                <div className='flex gap-3'>
+                                                <div className='flex gap-3 w-96 break-words'>
                                                     {/* <img src={descicon} alt="" className='w-6 h-6' /> */}
                                                     <h1 className='italic text-gray-400'>Description: {item.itemDescription}</h1>
                                                 </div>
@@ -444,7 +444,7 @@ const CustomerForm = ({ id }) => {
                                     className="bg-blue-800 p-3 my-5 text-white rounded-md">
                                     Save and Submit
                                 </button>
-                                <button type="button" onClick={captureAndSave} className='text-blue-500 font-semibold'><i class="fa-solid fa-file-pdf text-red-500 text-xl"></i> Export</button>
+                                <button type="button" onClick={captureAndSave} className='text-blue-500 font-semibold hidden lg:block'  ><i class="fa-solid fa-file-pdf text-red-500 text-xl"></i> Export</button>
                                 {/* export button */}
 
                             </div>
