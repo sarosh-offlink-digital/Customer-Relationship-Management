@@ -1,15 +1,51 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Header from '../shared_components/Header'
 import member1 from '../../src/profilepic.jpg'
 import member2 from '../../src/profilepic2.jpg'
-const ProjectForm = () => {
+import { Chart } from 'react-google-charts';
 
+
+const ProjectForm = () => {
+  const gstcRef = useRef(null);
   const [displayTabs, setDisplayTabs] = useState('Overview')
   const handleRendering = (tabs) => {
     setDisplayTabs(tabs)
   }
-  console.log(displayTabs)
+  const data = [
+    [
+      { type: 'string', label: 'Task ID' },
+      { type: 'string', label: 'Task Name' },
+      { type: 'string', label: 'Resource' },
+      { type: 'date', label: 'Start Date' },
+      { type: 'date', label: 'End Date' },
+      { type: 'number', label: 'Duration' },
+      { type: 'number', label: 'Percent Complete' },
+      { type: 'string', label: 'Dependencies' },
+    ],
+    ['Task 1', 'Task 1', 'Resource 1', new Date(2024, 6, 1), new Date(2024, 6, 5), null, 20, null],
+    ['Task 2', 'Task 2', 'Resource 2', new Date(2024, 6, 6), new Date(2024, 6, 10), null, 10, 'Task 1'],
+    ['Task 3', 'Task 3', 'Resource 2', new Date(2024, 6, 6), new Date(2024, 6, 10), null, 5, 'Task 2'],
+    ['Task 4', 'Task 4', 'Resource 2', new Date(2024, 6, 6), new Date(2024, 6, 10), null, 60, 'Task 3'],
+  ];
 
+  const options = {
+    height: 400,
+    gantt: {
+      trackHeight: 50,
+      palette: [
+        {
+          "color": "#d6d6d6",
+          "dark": "#2a31bf",
+          "light": "#53cfb0"
+        },
+        {
+          "color": "#d6d6d6",
+          "dark": "#2a31bf",
+          "light": "#53cfb0"
+        }
+      ]
+    },
+  };
   return (
     <div className='p-4'>
       <div className='mt-2'>
@@ -30,13 +66,12 @@ const ProjectForm = () => {
         </div>
         {displayTabs === 'Overview' &&
           (
-            <div className='my-10'>
-              <div className='mx-5'>
+            <div className='my-10 mx-5'>
+              <div className=''>
                 <h1 className='text-xl my-6 mb-2 font-semibold'><i class="fa-solid fa-bars-progress mr-5 text-blue-500"></i>Project Details:</h1>
                 <div className='my-6'>
                   <p className='text-gray-500'>Make this website on wordpress Make this website on wordpress Make this website on wordpress Make this website on wordpress</p>
                   <p className='text-gray-500'>Make this website on wordpress Make this website on wordpress Make this website on wordpress Make this website on wordpress</p>
-
                 </div>
                 <div>
                   <h1 className='text-xl mt-10 mb-2 font-semibold'><i class="fa-solid fa-clipboard mr-5 text-green-500"></i>Project Notes:</h1>
@@ -73,11 +108,11 @@ const ProjectForm = () => {
                       <div className='border-t-0 flex justify-between flex-wrap border-2 p-4'>
                         <div >
                           <div className='flex justify-start gap-2'>
-                          <img src={member1} className='h-8 w-8 rounded-full' alt="" />
-                          <img src={member2} className='h-8 w-8 rounded-full' alt="" />
-                          <img src={member1} className='h-8 w-8 rounded-full' alt="" />
-                          <img src={member2} className='h-8 w-8 rounded-full' alt="" />
-                          
+                            <img src={member1} className='h-8 w-8 rounded-full' alt="" />
+                            <img src={member2} className='h-8 w-8 rounded-full' alt="" />
+                            <img src={member1} className='h-8 w-8 rounded-full' alt="" />
+                            <img src={member2} className='h-8 w-8 rounded-full' alt="" />
+
                           </div>
                           <button className='mt-5 bg-blue-800 text-white p-2 rounded-lg my-5'><i class="fa-solid fa-circle-plus"></i> Add more</button>
                         </div>
@@ -95,8 +130,6 @@ const ProjectForm = () => {
                         <p className='text-gray-500'>No active Timer</p>
                       </div>
                     </div>
-
-
                   </div>
                 </div>
               </div>
@@ -104,7 +137,11 @@ const ProjectForm = () => {
           )}
         {displayTabs === 'Members' &&
           (
-            <div className='my-5'>Members</div>
+            <div className='my-10 mx-5'>
+              <div>
+                <h1 className='text-xl my-6 mb-2 font-semibold'><i class="fa-solid fa-bars-progress mr-5 text-blue-500"></i>Members Details:</h1>
+              </div>
+            </div>
           )}
         {displayTabs === 'Tasks' &&
           (
@@ -120,7 +157,15 @@ const ProjectForm = () => {
           )}
         {displayTabs === 'Chart' &&
           (
-            <div className='my-5'>Chart</div>
+            <div className='my-5'>Chart
+              <Chart
+                chartType="Gantt"
+                width="auto"
+                height="400px"
+                data={data}
+                options={options}
+              />
+            </div>
           )}
         {displayTabs === 'Notes' &&
           (
