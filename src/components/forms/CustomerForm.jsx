@@ -1,19 +1,23 @@
 import React, { useRef, useState } from 'react';
 import Header from '../shared_components/Header';
 import * as htmlToImage from 'html-to-image';
-import { saveAs } from 'file-saver';
+// import { saveAs } from 'file-saver';
+import jsPDF from 'jspdf';
 import cdalogo from '../../src/cda.png'
 import cbplogo from '../../src/cbp.png'
+import customericon from '../../src/customericon.png'
+import emailicon from '../../src/emailicon.png'
+import phoneicon from '../../src/telephone.png'
+import additemicon from '../../src/add-item.png'
+import descicon from '../../src/description.png'
+import discounticon from '../../src/discount.png'
 const CustomerForm = ({ id }) => {
 
-
-
-
+    const nodeRef = useRef(null);
     const [services, setServices] = useState([]);
     const [itemsAdd, setItemsAdd] = useState('');
-    const [brandLogo, setBrandLogo] = useState(null)
+    const [brandLogo, setBrandLogo] = useState(cdalogo)
     const [currency, setCurrency] = useState('');
-    const [description, setDescription] = useState('');
     const [customerDetail, setCustomerDetail] = useState(
         {
             customerName: '',
@@ -133,15 +137,10 @@ const CustomerForm = ({ id }) => {
                 let updatedItem = { ...item, [field]: value };
 
                 if (field === 'unitCost' || field === 'itemQty' || field === 'itemTax') {
-                    if (item.itemTax > 0) {
-                        let taxPercentage = updatedItem.itemTax / 100;
-                        let subtotal = updatedItem.unitCost * updatedItem.itemQty;
-                        let taxAmount = subtotal * taxPercentage;
-                        updatedItem.totalCost = subtotal + taxAmount;
-                    } else {
-                        let subtotal = updatedItem.unitCost * updatedItem.itemQty;
-                        updatedItem.totalCost = subtotal;
-                    }
+                    let taxPercentage = parseFloat(updatedItem.itemTax) / 100 || 0;
+                    let subtotal = parseFloat(updatedItem.unitCost) * parseFloat(updatedItem.itemQty) || 0;
+                    let taxAmount = subtotal * taxPercentage;
+                    updatedItem.totalCost = subtotal + taxAmount;
                 }
 
                 return updatedItem;
@@ -151,6 +150,7 @@ const CustomerForm = ({ id }) => {
 
         setItems(newItems);
     };
+
 
     const handleCurrency = (e) => {
         setCurrency(e.target.value);
@@ -167,22 +167,25 @@ const CustomerForm = ({ id }) => {
 
 
     const discountedTotalAmount = totalAmount - discount;
-    const nodeRef = useRef(null);
 
-    const captureAndSave = () => {
-        if (nodeRef.current) {
-            htmlToImage.toBlob(nodeRef.current)
-                .then(function (blob) {
-                    saveAs(blob, 'customer-invoice.png');
 
-                })
-                .catch(function (error) {
-                    console.error('Error capturing image:', error);
-                });
-        } else {
-            console.error(`Ref for element with id '${id}' is not available.`);
+    const captureAndSave = async () => {
+        try {
+            const dataUrl = await htmlToImage.toPng(nodeRef.current);
+
+            // saveAs(dataUrl, 'customer-invoice.png');
+
+            const pdf = new jsPDF();
+            const imgWidth = pdf.internal.pageSize.getWidth();
+            const imgHeight = nodeRef.current.clientHeight * imgWidth / nodeRef.current.clientWidth;
+
+            pdf.addImage(dataUrl, 'PNG', 0, 0, imgWidth, imgHeight);
+            pdf.save('customer-invoice.pdf');
+        } catch (error) {
+            console.error('Error capturing image:', error);
         }
     };
+
     return (
         <div className='p-4'>
             <Header />
@@ -231,10 +234,10 @@ const CustomerForm = ({ id }) => {
                             <h1 className='text-xl mb-2 mt-5 font-bold'>Add Invoice</h1>
                             <div>
                                 <div className="flex flex-wrap gap-2">
-                                    <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full lg:w-auto flex-grow shadow-md">
+                                    <label className="flex items-center bg-gray-100 text-black input input-bordered gap-2 w-full lg:w-auto flex-grow shadow-md">
                                         <i className="fa-solid fa-file-invoice-dollar text-teal-500"></i>
                                         <p className='border-r-2 px-2 '>INV#000</p>
-                                        <input type="text" className="grow bg-transparent border-none focus:ring-0 focus:outline-none" value="00000" />
+                                        <h1 className="grow bg-transparent border-none focus:ring-0 focus:outline-none"> 0120</h1>
                                     </label>
                                     <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full md:w-auto flex-grow shadow-md">
                                         <i className="fa-regular fa-credit-card text-cyan-500"></i>
@@ -358,34 +361,53 @@ const CustomerForm = ({ id }) => {
                                 <button
                                     type="button"
                                     className="border-2 text-blue-800 border-blue-800 p-3 my-5 shadow-md  rounded-md"
-                                    onClick={addItem}
-                                >
+                                    onClick={addItem}>
                                     <i className="fa-regular fa-square-plus"></i> Add Item
                                 </button>
                             </div>
                             <div className='bg-gray-200 w-full h-[2px] my-6 '></div>
+
+
+
+                            {/* INVOICE DIV S */}
                             <div id={id} ref={nodeRef} className='bg-white w-full lg:py-4 lg:px-10'>
                                 <div className='my-8'>
                                     <div className='flex items-center justify-between my-10'>
                                         <h1 className='lg:text-center my-2 text-2xl font-semibold text-blue-800'>Invoice# <span className='font-normal text-black '>0120</span></h1>
-                                        <img src={brandLogo} className='h-14 w-auto' alt="" />
+                                        <img src={brandLogo} className='h-16 w-auto' alt="" />
                                     </div>
                                     <h1 className='text-xl mb-2 font-bold text-blue-800'>Customer Details</h1>
                                     <div className='flex justify-start gap-6 flex-wrap'>
-                                        <p className='text-blue-800 font-semibold'><i className="fa-solid fa-user text-blue-800"></i> Name: <span className='text-gray-500 font-normal'>{customerDetail.customerName}</span></p>
-                                        <p className='text-blue-800 font-semibold'> <i className="fa-solid fa-envelope text-orange-500"></i> Email: <span className='text-gray-500 font-normal'>{customerDetail.customerEmail}</span></p>
-                                        <p className='text-blue-800 font-semibold'><i className="fa-solid fa-phone text-green-500"></i> Contact: <span className='text-gray-500 font-normal'>{customerDetail.customerMobile}</span></p>
+                                        <div className='flex gap-1'>
+                                            <img src={customericon} alt="Customer" className='w-6 h-6' />
+                                            <p className='text-blue-800 font-semibold'> Name: <span className='text-gray-500 font-normal'>{customerDetail.customerName}</span></p>
+                                        </div>
+                                        <div className='flex gap-1'>
+                                            <img src={emailicon} alt="Email" className='w-6 h-6' />
+                                            <p className='text-blue-800 font-semibold'>  Email: <span className='text-gray-500 font-normal'>{customerDetail.customerEmail}</span></p>
+                                        </div>
+                                        <div className='flex gap-1' >
+                                            <img src={phoneicon} alt="Email" className='w-6 h-6' />
+                                            <p className='text-blue-800 font-semibold'> Contact: <span className='text-gray-500 font-normal'>{customerDetail.customerMobile}</span></p>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className='border-b-2 border-dashed my-5'></div>
                                 <div className='flex justify-between flex-wrap'>
                                     <div>
-                                        <h1 className='text-xl mb-2 mt-5 font-bold text-blue-800'>Total Items</h1>
-                                        <h1 className='text-blue-800'>Items: </h1>
-                                        {customerDetail.customerService}
+                                        <h1 className='text-xl mb-2 mt-5 font-bold text-blue-800'>Total Items:</h1>
+                                        {/* <h1 className='text-blue-800 font-semibold text-xl'>Items: </h1> */}
+                                        <h1 className='text-blue-500'>{customerDetail.customerService}</h1>
                                         {items.map(item => (
                                             <div key={item.id}>
-                                                <h1>{item.customItem}</h1>
+                                                <div className='flex gap-3'>
+                                                    {/* <img src={additemicon} alt="item" className='w-6 h-6' /> */}
+                                                    <h1 className='text-blue-500'>{item.customItem}</h1>
+                                                </div>
+                                                <div className='flex gap-3'>
+                                                    {/* <img src={descicon} alt="" className='w-6 h-6' /> */}
+                                                    <h1 className='italic text-gray-400'>Description: {item.itemDescription}</h1>
+                                                </div>
                                             </div>
                                         ))}
                                     </div>
@@ -396,14 +418,20 @@ const CustomerForm = ({ id }) => {
                                             <p className='text-2xl font-semibold text-green-600'>{discountedTotalAmount}</p>
                                         </div>
                                         <div className='items-center gap-2' style={{ display: discount > 0 ? 'flex' : 'none' }}>
-                                            <i className="fa-solid fa-tags"></i>Discount
+                                            <div className='flex gap-2'>
+                                                <img src={discounticon} alt="Discount" className='w-6 h-6' />
+                                                <h1>Discount</h1>
+                                            </div>
                                             <p className='text-xl'>-{discount}</p>
                                         </div>
                                         <p className='text-sm text-blue-800'>Paid via: {paymentMethod}</p>
                                     </div>
                                 </div>
                                 <div className='border-b-2 border-dashed my-5'></div>
+                                {/* <div className='w-1/2 h-2 bg-orange-400 my-2'></div>
+                                <div className='w-1/2 h-2 bg-blue-800'></div> */}
                             </div>
+                            {/* INVOICE DIV E */}
                             <label className='flex justify-end px-10'>
                                 Add Discount:
                                 <input type="number" name="" id="" placeholder='discount' className='ml-2 border-2 rounded-md' value={discount} onChange={handleDiscount} />
@@ -416,7 +444,7 @@ const CustomerForm = ({ id }) => {
                                     className="bg-blue-800 p-3 my-5 text-white rounded-md">
                                     Save and Submit
                                 </button>
-                                <button type="button" onClick={captureAndSave}><i class="fa-solid fa-download"></i></button>
+                                <button type="button" onClick={captureAndSave} className='text-blue-500 font-semibold'><i class="fa-solid fa-file-pdf text-red-500 text-xl"></i> Export</button>
                                 {/* export button */}
 
                             </div>

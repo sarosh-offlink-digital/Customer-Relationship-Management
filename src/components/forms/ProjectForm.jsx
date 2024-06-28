@@ -43,7 +43,7 @@ const ProjectForm = () => {
                   <div className='flex justify-center flex-col mt-6 gap-6'>
                     {/* box 1 */}
                     <div className='break-words'>
-                      <h1 className='border-2  rounded-t-md py-2 text-blue-800 font-semibold text-xl bg-gray-100'><i class="fa-solid fa-list mx-5 text-teal-500"></i>Customer Details</h1>
+                      <h1 className='border-2  rounded-t-md py-2 text-white font-semibold text-xl bg-blue-800'><i class="fa-solid fa-list mx-5 text-teal-500"></i>Customer Details</h1>
                       <div className='border-t-0  border-2 p-4'>
                         <div className='flex gap-4 flex-wrap'>
                           <div className='flex gap-4'>
@@ -59,24 +59,27 @@ const ProjectForm = () => {
                     </div>
                     {/* box 2 */}
                     <div className='break-words'>
-                      <h1 className='border-2  rounded-t-md py-2 text-blue-800 font-semibold text-xl bg-gray-100'><i class="fa-solid fa-stopwatch mx-5 text-rose-500"></i>Active Timer</h1>
+                      <h1 className='border-2  rounded-t-md py-2 text-white font-semibold text-xl bg-blue-800'><i class="fa-solid fa-stopwatch mx-5 text-rose-500"></i>Active Timer</h1>
                       <div className='border-t-0  border-2 p-4'>
                         <p className='text-gray-500'>No active Timer</p>
                       </div>
                     </div>
                     {/* box 3 */}
                     <div className='break-words'>
-                      <div className='flex justify-between items-center  bg-gray-100 border-2  rounded-t-md'>
-                        <h1 className=' py-2 text-blue-800 font-semibold text-xl '><i class="fa-solid fa-user-group text-indigo-500 mx-5"></i>Members</h1>
-                        <h1 className='mx-6 rounded-full bg-blue-800 text-white font-semi-bold px-3 py-1'>2</h1>
+                      <div className='flex justify-between items-center  bg-blue-800 border-2  rounded-t-md'>
+                        <h1 className=' py-2 text-white font-semibold text-xl '><i class="fa-solid fa-user-group text-indigo-500 mx-5"></i>Members</h1>
+                        <h1 className='mx-6 rounded-full bg-white text-blue-800 font-bold px-3 py-1'>4</h1>
                       </div>
                       <div className='border-t-0 flex justify-between flex-wrap border-2 p-4'>
                         <div >
-                          <div className='flex justify-start gap-4'>
+                          <div className='flex justify-start gap-2'>
                           <img src={member1} className='h-8 w-8 rounded-full' alt="" />
                           <img src={member2} className='h-8 w-8 rounded-full' alt="" />
+                          <img src={member1} className='h-8 w-8 rounded-full' alt="" />
+                          <img src={member2} className='h-8 w-8 rounded-full' alt="" />
+                          
                           </div>
-                          <button className='mt-5 bg-blue-800 text-white p-2 rounded-lg my-5'><i class="fa-solid fa-circle-plus"></i> Members</button>
+                          <button className='mt-5 bg-blue-800 text-white p-2 rounded-lg my-5'><i class="fa-solid fa-circle-plus"></i> Add more</button>
                         </div>
                         <div className='bg-gray-100 py-2 px-5 rounded-lg w-full lg:w-auto border-2'>
                           <h1 className='border-b-2'><span className='text-xl text-orange-500 '>0 </span >Open Tasks</h1>
@@ -87,7 +90,7 @@ const ProjectForm = () => {
                     </div>
                     {/* box 4 */}
                     <div className='break-words'>
-                      <h1 className='border-2  rounded-t-md py-2 text-blue-800 font-semibold text-xl bg-gray-100'><i class="fa-solid fa-timeline mx-5 text-lime-500"></i>Activity Timeline</h1>
+                      <h1 className='border-2  rounded-t-md py-2 text-white font-semibold text-xl bg-blue-800'><i class="fa-solid fa-timeline mx-5 text-lime-500"></i>Activity Timeline</h1>
                       <div className='border-t-0  border-2 p-4'>
                         <p className='text-gray-500'>No active Timer</p>
                       </div>
