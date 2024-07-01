@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css'; // import styles
+import 'react-quill/dist/quill.snow.css';
 import Header from '../shared_components/Header'
 import FileUploader from '../shared_components/FileUploader';
 
