@@ -50,7 +50,6 @@ const CustomersDataTable = () => {
   const handleCustomerClick = (customer) => {
     setSelectedCustomer(customer);
   };
-
   const columns = [
     { name: 'ID', selector: row => row.contact_form_id, sortable: true, width: '80px' },
     { name: 'Name', selector: row => row.contact_form_name, sortable: true, wrap: true },
@@ -59,7 +58,6 @@ const CustomersDataTable = () => {
     { name: 'Service', selector: row => row.contact_form_service, sortable: true, wrap: true },
     { name: 'Brand', selector: row => row.brand, sortable: true, wrap: true },
     { name: 'Created At', selector: row => row.contact_form_created_at, sortable: true, wrap: true },
-
     {
       name: 'Actions',
       cell: row => (

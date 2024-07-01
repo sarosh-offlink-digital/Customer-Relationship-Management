@@ -66,7 +66,7 @@ const Projectmembers = () => {
     ];
 
     return (
-        <div className="container w-[370px] lg:w-auto mx-auto lg:p-4 relative">
+        <div className="container w-[310px] lg:w-auto mx-auto lg:p-4 relative">
             <input
                 type="text"
                 placeholder="Search Members"

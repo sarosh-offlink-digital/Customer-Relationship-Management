@@ -12,8 +12,6 @@ import ReactQuill from 'react-quill';
 
 const ProjectForm = () => {
 
-
-
   const [editorContent, setEditorContent] = useState('');
   const handleChange = (content) => {
     setEditorContent(content);
@@ -39,7 +37,6 @@ const ProjectForm = () => {
     ['Task 3', 'Task 3', 'Resource 2', new Date(2024, 6, 6), new Date(2024, 6, 10), null, 5, 'Task 2', '#0000FF'],
     ['Task 4', 'Task 4', 'Resource 2', new Date(2024, 6, 6), new Date(2024, 6, 10), null, 60, 'Task 3', '#FFFF00'],
   ];
-
   const options = {
     height: 400,
     gantt: {
@@ -186,7 +183,7 @@ const ProjectForm = () => {
           (
             <div className='my-5'>
               <div>
-                <button className="p-4 text-white bg-blue-800 hover:bg-blue-500 cursor-pointer rounded-lg" onClick={() => document.getElementById('my_modal_3').showModal()}>open Discussion</button>
+                <button className="p-4 text-white bg-blue-800 hover:bg-blue-500 cursor-pointer rounded-lg" onClick={() => document.getElementById('my_modal_3').showModal()}><i class="fa-solid fa-circle-plus mx-2"></i> Discussion</button>
                 <dialog id="my_modal_3" className="modal">
                   <div className="modal-box bg-white p-10">
                     <form method="dialog">
@@ -205,11 +202,10 @@ const ProjectForm = () => {
                       />
                       <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                     </form>
-                      <button className="p-4 text-white bg-blue-800 hover:bg-blue-500 cursor-pointer mt-10 rounded-lg">Submit</button>
+                    <button className="p-4 text-white bg-blue-800 hover:bg-blue-500 cursor-pointer mt-10 rounded-lg">Submit</button>
                   </div>
                 </dialog>
               </div>
-
             </div>
           )}
         {displayTabs === 'Chart' &&
@@ -251,7 +247,6 @@ ProjectForm.modules = {
     matchVisual: false,
   }
 }
-
 ProjectForm.formats = [
   'header', 'font', 'size',
   'bold', 'italic', 'underline', 'strike', 'blockquote',
