@@ -7,15 +7,13 @@ import member4 from '../../src/profilepic4.jpg'
 import { Chart } from 'react-google-charts';
 import Projectmembers from '../../projectcomponents/Projectmembers';
 import 'react-quill/dist/quill.snow.css';
-import ReactQuill from 'react-quill';
+import ProjectDiscussion from '../../projectcomponents/ProjectDiscussion'
+import ProjectFile from '../../projectcomponents/ProjectFile'
 
 
 const ProjectForm = () => {
 
-  const [editorContent, setEditorContent] = useState('');
-  const handleChange = (content) => {
-    setEditorContent(content);
-  };
+  
   const [displayTabs, setDisplayTabs] = useState('Overview')
   const handleRendering = (tabs) => {
     setDisplayTabs(tabs)
@@ -177,35 +175,14 @@ const ProjectForm = () => {
           )}
         {displayTabs === 'Files' &&
           (
-            <div className='my-5'>Files</div>
+            <div className='my-5'>Files
+            <ProjectFile/>
+            </div>
           )}
         {displayTabs === 'Discussion' &&
           (
             <div className='my-5'>
-              <div>
-                <button className="p-4 text-white bg-blue-800 hover:bg-blue-500 cursor-pointer rounded-lg" onClick={() => document.getElementById('my_modal_3').showModal()}><i class="fa-solid fa-circle-plus mx-2"></i> Discussion</button>
-                <dialog id="my_modal_3" className="modal">
-                  <div className="modal-box bg-white p-10">
-                    <form method="dialog">
-                      <h1 className=' text-sm'>Title</h1>
-                      <input type="text"
-                        placeholder='Add Title Here'
-                        className="flex items-center bg-white text-black input input-bordered gap-2 w-full shadow-md mb-10" />
-                      <h1 className='mt-7 text-sm'>Description</h1>
-                      <ReactQuill
-                        value={editorContent}
-                        onChange={handleChange}
-                        modules={ProjectForm.modules}
-                        formats={ProjectForm.formats}
-                        placeholder="Discussion..."
-                        className="h-full"
-                      />
-                      <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-                    </form>
-                    <button className="p-4 text-white bg-blue-800 hover:bg-blue-500 cursor-pointer mt-10 rounded-lg">Submit</button>
-                  </div>
-                </dialog>
-              </div>
+             <ProjectDiscussion/>
             </div>
           )}
         {displayTabs === 'Chart' &&
@@ -232,26 +209,6 @@ const ProjectForm = () => {
     </div>
   )
 }
-ProjectForm.modules = {
-  toolbar: [
-    [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
-    [{ size: [] }],
-    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-    [{ 'list': 'ordered' }, { 'list': 'bullet' },
-    { 'indent': '-1' }, { 'indent': '+1' }],
-    ['link', 'image', 'video'],
-    ['clean']
-  ],
-  clipboard: {
-    // toggle to add extra line breaks when pasting HTML:
-    matchVisual: false,
-  }
-}
-ProjectForm.formats = [
-  'header', 'font', 'size',
-  'bold', 'italic', 'underline', 'strike', 'blockquote',
-  'list', 'bullet', 'indent',
-  'link', 'image', 'video'
-];
+
 
 export default ProjectForm
