@@ -47,7 +47,7 @@ const Dashboard = () => {
                             <h3>Project Name: Test Project 2</h3>
                             <h3>Due Date: 20-6-2024</h3>
                             <h3>Brand: Captain Design Agency</h3>
-                            <Link to='/projects'><i class=" mx-1 fa-solid fa-eye cursor-pointer text-blue-500 hover:text-blue-800 hover:scale-105"></i></Link>
+                            <Link to='/projects' data-tip='View' className='tooltip tooltip-info'><i class=" mx-1 fa-solid fa-eye cursor-pointer text-blue-500 hover:text-blue-800 hover:scale-105"></i></Link>
                         </div>
                     </div>
                 </div>

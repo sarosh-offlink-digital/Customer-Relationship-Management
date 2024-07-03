@@ -71,8 +71,8 @@ const CustomersDataTable = () => {
           </Link> */}
 
           {/* Button to show customer details */}
-          <button
-            className='bg-blue-500 hover:bg-blue-800 hover:scale-105 text-white p-2 rounded-md'
+          <button data-tip="View & Edit"
+            className='tooltip tooltip-info bg-blue-500 hover:bg-blue-800 hover:scale-105 text-white p-2 rounded-md'
             onClick={() => handleCustomerClick(row)}
           >
             {/* <i className="fa-regular fa-eye"></i> */}
@@ -96,7 +96,7 @@ const CustomersDataTable = () => {
         
         className="border focus:border-blue-400 text-sm outline-transparent border-gray-300 w-36 lg:w-auto rounded-md px-1 py-1 mb-4 absolute z-30 right-2 top-3 lg:right-8 lg:top-7"
       />
-      <Link to='/newcustomer'><i class="fa-solid fa-circle-plus absolute z-30 text-white lg:left-32 lg:top-9 top-5 left-28 hover:scale-110"></i></Link>
+      <Link to='/newcustomer' data-tip="Add new Customers " className='tooltip tooltip-right tooltip-info  absolute z-30 text-white lg:left-32 lg:top-8 top-4 left-28 hover:scale-110'><i  class="fa-solid fa-circle-plus "></i></Link>
       <DataTable
         title="Customers"
         columns={columns}

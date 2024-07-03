@@ -41,8 +41,8 @@ const CustomersDataTable = () => {
             name: 'Project Members',
             sortable: true,
             cell: row => (
-                <div className='flex flex-wrap'>
-                    <i className="fa-regular fa-square-plus text-xl text-blue-500 cursor-pointer hover:text-blue-800"></i>
+                <div className='flex flex-wrap tooltip tooltip-info' data-tip='Add new member'>
+                    <i  className=" fa-regular fa-square-plus text-xl text-blue-500 cursor-pointer hover:text-blue-800 "></i>
                     <img src={projectMember1} alt="1" className='rounded-full mx-2 h-8 w-8' />
                 </div>
             )
@@ -120,7 +120,8 @@ const CustomersDataTable = () => {
                             state: { id: row.id }
                         }}
                         onClick={() => handleId(row.id)}
-                        className='bg-blue-500 hover:bg-blue-800 hover:scale-105 text-white p-2 rounded-md mx-2'
+                        data-tip="View & Edit"
+                        className='tooltip tooltip-info bg-blue-500 hover:bg-blue-800 hover:scale-105 text-white p-2 rounded-md mx-2'
                     >
                         <i className="fa-regular fa-pen-to-square"></i>
                     </Link>
@@ -151,7 +152,7 @@ const CustomersDataTable = () => {
                 onChange={handleSearchChange}
                 className="border focus:border-blue-400 text-sm outline-transparent border-gray-300 w-36 lg:w-auto rounded-md px-1 py-1 mb-4 absolute z-30 right-2 top-3 lg:right-8 lg:top-7"
             />
-            <Link to='/newproject'><i className="fa-solid fa-circle-plus absolute z-30 text-white lg:left-32 lg:top-9 top-5 left-28 hover:scale-110"></i></Link>
+            <Link to='/newproject' data-tip='Add new project ' className='tooltip tooltip-info tooltip tooltip-info-right  absolute z-30 text-white lg:left-32 lg:top-8 top-4 left-28 hover:scale-110'><i className="fa-solid fa-circle-plus "></i></Link>
 
             <DataTable
                 title="Projects"

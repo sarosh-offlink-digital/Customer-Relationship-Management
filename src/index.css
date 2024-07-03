@@ -46,10 +46,6 @@ code {
 .loginbg {
   background-color: white;
 }
-/* .drawer-open{
-  background-color: transparent;
-} */
-
 .drawer{
   background-color: transparent;
 }
@@ -58,9 +54,20 @@ code {
   backdrop-filter: blur(10px);          
   -webkit-backdrop-filter: blur(10px);   
   border: 1px solid rgba(0, 0, 0, 0.3); 
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);  
-  
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);   
 }
-.sadsa{
-  color: rgb(60, 180, 60)
+.custom-option {
+  padding: 50px;
+  background-color: #1d4ed8; /* Tailwind bg-blue-600 */
+  color: white;
+  border: none;
+}
+.custom-option:hover {
+  background-color: #1a2438; /* Tailwind hover:bg-blue-700 */
+}
+option {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 20px; 
 }

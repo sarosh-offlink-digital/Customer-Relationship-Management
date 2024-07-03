@@ -49,10 +49,7 @@ const Projects = () => {
                         <h2 className='text-sm xl:text-xl'>On Hold</h2>
                         <h1 className='text-sm xl:text-xl lg:my-1 font-bold'>150</h1>
                     </div>
-                    
-                    
-                    
-                    
+
                     <div className='bg-gradient-to-r from-rose-700 to-rose-400  flex flex-col lg:flex-row  justify-center lg:justify-between gap-1 lg:gap-3 items-center text-center hover:scale-105 hover:bg-red-700 cursor-pointer lg:h-auto h-28 w-36 lg:w-auto text-white  px-2 rounded-md py-4'>
                         <i class="fa-solid fa-circle-xmark"></i>
                         <h2 className='text-sm xl:text-xl'>Cancelled</h2>

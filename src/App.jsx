@@ -16,6 +16,8 @@ import UserProfile from './components/roles/UserProfile';
 import CustomerForm from './components/forms/CustomerForm';
 import NewProject from './components/forms/NewProject';
 import ProjectForm from './components/forms/ProjectForm';
+import Invoices from './components/Invoices';
+import Payments from './components/Payments';
 
 const App = () => {
   const [selectedId, setSelectedId] = useState(null);
@@ -33,6 +35,9 @@ const App = () => {
         <Route path="/customers" element={<CustomerWithSideNav />} />
         <Route path="/leads" element={<LeadsWithSideNav />} />
         <Route path="/projects" element={<ProjectWithSideNav />} />
+        <Route path="/payments" element={<PaymentsWithSideNav />} />
+        <Route path="/invoices" element={<InvoicesWithSideNav />} />
+
         <Route path="/tasks" element={<TasksWithSideNav />} />
         <Route path="/profile" element={<UserProfileWithSideNav />} />
         <Route path="/newcustomer" element={<NewCustomerFormWithSideNav />} />
@@ -55,6 +60,8 @@ const NewCustomerFormWithSideNav = () => <LayoutWithSideNav component={<Customer
 const NewProjectWithSideNav = () => <LayoutWithSideNav component={<NewProject />} />;
 const ProjectFormWithSideNav = () => <LayoutWithSideNav component={<ProjectForm />} />;
 const LeadsFormWithSideNav = () => <LayoutWithSideNav component={<LeadForm/>} />;
+const PaymentsWithSideNav = () => <LayoutWithSideNav component={<Payments/>} />;
+const InvoicesWithSideNav = () => <LayoutWithSideNav component={<Invoices/>} />;
 
 const LayoutWithSideNav = ({ component: Component }) => (
   <div className="flex">

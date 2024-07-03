@@ -324,8 +324,8 @@ const CustomerForm = ({ id }) => {
                                                 placeholder="Description" onChange={(e) => handleInputChange(item.id, 'itemDescription', e.target.value)}
                                             ></textarea>
                                             <button
-                                                type="button"
-                                                className='rounded-lg border-2 border-blue-800 text-blue-800 text-xl font-bold px-4 shadow-md'
+                                                type="button" data-tip='Remove'
+                                                className='tooltip tooltip-top rounded-lg border-2 border-blue-800 text-blue-800 text-xl font-bold px-4 shadow-md'
                                                 onClick={() => removeItem(item.id)}
                                             >
                                                 x
@@ -360,7 +360,8 @@ const CustomerForm = ({ id }) => {
                                 <div className='text-orange-500 text-sm'>{itemsAdd}</div>
                                 <button
                                     type="button"
-                                    className="border-2 text-blue-800 border-blue-800 p-3 my-5 shadow-md  rounded-md"
+                                    data-tip='Add item'
+                                    className="tooltip border-2 text-blue-800 border-blue-800 p-3 my-5 shadow-md  rounded-md"
                                     onClick={addItem}>
                                     <i className="fa-regular fa-square-plus"></i> Add Item
                                 </button>

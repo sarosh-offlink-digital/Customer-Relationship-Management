@@ -13,7 +13,7 @@ import ProjectFile from '../../projectcomponents/ProjectFile'
 
 const ProjectForm = () => {
 
-  
+
   const [displayTabs, setDisplayTabs] = useState('Overview')
   const handleRendering = (tabs) => {
     setDisplayTabs(tabs)
@@ -128,8 +128,8 @@ const ProjectForm = () => {
                     <div className='break-words'>
                       <div className='flex justify-between items-center  bg-blue-800 border-2 relative  rounded-t-md'>
                         <h1 className=' py-2 text-white font-semibold text-xl '><i class="fa-solid fa-user-group text-purple-300 mx-5"></i>Members</h1>
-                        <div ><i class="fa-solid fa-circle-plus absolute z-30 text-white lg:left-40 lg:top-4 top-4 left-40 hover:scale-110 cursor-pointer"></i></div>
-                        <h1 className='mx-6 rounded-full bg-white text-blue-800 font-bold px-3 py-1'>4</h1>
+                        <div className=''><i class="fa-solid fa-circle-plus absolute z-30 text-white lg:left-40 lg:top-4 top-4 left-40 hover:scale-110 cursor-pointer"></i></div>
+                        <h1 className='mx-6 rounded-full bg-white text-blue-800 font-bold px-3 py-1 tooltip tooltip-info' data-tip='Total Members'>4</h1>
                       </div>
                       <div className='border-t-0 flex justify-between flex-wrap border-2 p-4'>
                         <div >
@@ -138,7 +138,6 @@ const ProjectForm = () => {
                             <img src={member2} className='h-8 w-8 rounded-full' alt="" />
                             <img src={member3} className='h-8 w-8 rounded-full' alt="" />
                             <img src={member4} className='h-8 w-8 rounded-full' alt="" />
-
                           </div>
                         </div>
                         <div className='bg-gray-100 py-2 px-5 rounded-lg w-full lg:w-auto border-2'>
@@ -176,13 +175,13 @@ const ProjectForm = () => {
         {displayTabs === 'Files' &&
           (
             <div className='my-5'>Files
-            <ProjectFile/>
+              <ProjectFile />
             </div>
           )}
         {displayTabs === 'Discussion' &&
           (
             <div className='my-5'>
-             <ProjectDiscussion/>
+              <ProjectDiscussion/>
             </div>
           )}
         {displayTabs === 'Chart' &&

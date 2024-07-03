@@ -45,8 +45,10 @@ const Header = ({us}) => {
                                
                             </div> */}
                             {/* NEW BELL */}
-                            <div className="indicator ">
-                                <i class="fa-solid fa-bell text-2xl text-white lg:text-blue-800"></i>
+                            <div className="indicator "  >
+                                <div className='tooltip tooltip-bottom tooltip-info'data-tip='Notifications'> 
+                                <i class="fa-solid fa-bell text-2xl text-white lg:text-blue-800 "></i>
+                                </div>
                                 <span class="relative flex h-3 w-3">
                                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                                     <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
@@ -60,8 +62,8 @@ const Header = ({us}) => {
                             <li className='p-2 '>Project 2 Reached Deadline</li>
                         </ul>
                     </div>
-                    <div className='dropdown dropdown-end'>
-                        <label tabIndex={1} className="btn btn-ghost btn-circle avatar">
+                    <div className='dropdown dropdown-end ' >
+                        <label tabIndex={1} className="btn btn-ghost btn-circle avatar tooltip tooltip-info tooltip-bottom"data-tip='View Profile'>
                             <div className="w-12 rounded-full mt-1 lg:mt-0">
                                 <img src={profileimg} alt='Profile' className='relative' />
                                 <div className='absolute right-0 top-0 z-48 rounded-full w-3 h-3' style={{ backgroundColor: available }}></div>

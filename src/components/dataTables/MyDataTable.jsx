@@ -73,8 +73,8 @@ const MyDataTable = () => {
           </Link> */}
 
           {/* Button to show customer details */}
-          <button
-            className='bg-blue-500 hover:bg-blue-800 hover:scale-105 text-white p-2 rounded-md'
+          <button data-tip='View & Edit'
+            className='tooltip tooltip-info bg-blue-500 hover:bg-blue-800 hover:scale-105 text-white p-2 rounded-md'
             onClick={() => handleCustomerClick(row)}
           >
             {/* <i className="fa-regular fa-eye"></i> */}
@@ -172,7 +172,7 @@ const MyDataTable = () => {
               <div>
                 <div>
                   <div className='flex justify-start lg:justify-end'>
-                    <button className='bg-blue-800 rounded-lg px-2 py-3 text-white hover:bg-blue-500 shadow-md'> <i class="fa-solid fa-user-plus"></i> Customer</button>
+                    <button data-tip='Convert to Customers' className='tooltip tooltip-left tooltip-info bg-blue-800 rounded-lg px-2 py-3 text-white hover:bg-blue-500 shadow-md'> <i class="fa-solid fa-user-plus"></i> Customer</button>
                   </div>
                   {/* <label className="my-3 flex items-center bg-gray-50 text-black  input input-bordered gap-2 w-full md:w-auto flex-grow">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 opacity-70">

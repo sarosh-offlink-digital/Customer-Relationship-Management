@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import logo2 from '../../src/logo2.png';
 import dashboardlogo from '../../src/dashboard.png';
 import leadlogo from '../../src/leads.png';
@@ -9,6 +9,12 @@ import projectlogo from '../../src/project.png';
 import tasklogo from '../../src/task.png';
 import ticketlogo from '../../src/ticket.png';
 const SideNav = () => {
+  const navigate = useNavigate();
+
+  const handleSelectChange = (event) => {
+    const selectedValue = event.target.value;
+    navigate(selectedValue);
+  };
 
   const location = useLocation();
 
@@ -37,28 +43,46 @@ const SideNav = () => {
     // </div>
     <div className="lg:drawer-open min-h-screen  lg:w-52 bg-gradient-to-b from-blue-900 to-blue-700">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle relative z-50" />
-        <label htmlFor="my-drawer-2" className="lg:hidden"><i class="fa-solid fa-bars text-2xl absolute left-6 top-8 mx-2 text-white"></i></label>
+      <label htmlFor="my-drawer-2" className="lg:hidden"><i class="fa-solid fa-bars text-2xl absolute left-6 top-8 mx-2 text-white"></i></label>
       <div className="drawer-side z-50">
         <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
         <div className="menu w-52 lg:w-80 min-h-full bg-gradient-to-b from-blue-900 via-blue-500 to-blue-700 text-base-content">
           {/* Sidebar content here */}
           <div className='w-48 mt-5 text-center'>
-          <h1 className="p-4 lg:px-0 lg:py-3  lg:m-0 text-center text-sm  text-white lg:text-sm lg:text-center font-bold">Customer Relationship Management</h1>
+            <h1 className="p-4 lg:px-0 lg:py-3  lg:m-0 text-center text-sm  text-white lg:text-sm lg:text-center font-bold">Customer Relationship Management</h1>
 
           </div>
           <div className='flex justify-start'>
             <img src={logo2} className='ml-16 lg:ml-12 size-20 lg:size-20 mb-6' alt="logo" />
           </div>
-          <Link className={getLinkClasses("/dashboard")} to="/dashboard"><img src={dashboardlogo} alt="D" className='mr-6'/> Dashboard</Link>
-          <Link className={getLinkClasses("/leads")} to="/leads"><img src={leadlogo} alt="D" className='mr-6'/>Leads</Link>
+          <Link className={getLinkClasses("/dashboard")} to="/dashboard"><img src={dashboardlogo} alt="D" className='mr-6' /> Dashboard</Link>
+          <Link className={getLinkClasses("/leads")} to="/leads"><img src={leadlogo} alt="D" className='mr-6' />Leads</Link>
           <Link className={getLinkClasses("/customers")} to="/customers"><i class="fa-solid fa-user-group text-white mr-6"></i>Customers</Link>
           <Link className={getLinkClasses("/projects")} to="/projects" ><i class="fa-solid fa-bars-progress  text-white text-lg mr-6"></i>Projects</Link>
-          <Link className={getLinkClasses("/sale")} to="/sale"><img src={saleslogo} alt="D" className='mr-6'/>Sales</Link>
-          <Link className={getLinkClasses("/tickets")} to="/tickets"><img src={ticketlogo} alt="D" className='mr-6 size-4'/> Ticket</Link>
+          <div className='flex items-center realtive hover:bg-blue-600 rounded-md'>
+            <i class="fa-solid fa-dollar-sign absolute left-10 text-white text-xl"></i>
+            {/* <select
+              className='flex justify-start items-center p-4 ml-14 my-2 w-32 rounded-md text-white bg-transparent cursor-pointer hover:bg-blue-600  hover:scale-105'
+              name=""
+              id=""
+              onChange={handleSelectChange}>
+              <option hidden disabled selected><i class="fa-solid fa-dollar-sign"></i> Sales</option>
+              <option className='' value="/invoices" style={{ backgroundColor: '#1d4ed8', borderRadius: "20px" }}>Invoice</option>
+              <option className='' value="/payments" style={{ backgroundColor: '#1d4ed8', borderRadius: "20px" }}>Payments</option>
+            </select> */}
+            <div className="dropdown">
+              <div tabIndex={0} role="button" className="flex justify-start items-center p-4 ml-14 my-2 w-32 rounded-md text-white bg-transparent cursor-pointer hover:bg-blue-600  hover:scale-105">Sales</div>
+              <ul tabIndex={0} className=" dropdown-content menu bg-transparent rounded-lg z-[1] w-48 p-2">
+                <li className='z-50 bg-blue-500'> <Link className={getLinkClasses("/invoices")} to="/invoices" > <i class="fa-solid fa-file-invoice-dollar text-lg text-white mr-2"></i>Invoices</Link></li>
+                <li className='z-50 bg-blue-500'> <Link className={getLinkClasses("/payments")} to="/payments" > <i class="fa-solid fa-credit-card text-white text-lg mr-2"></i>Payments</Link></li>
+              </ul>
+            </div>
+            <i class="fa-solid fa-caret-down text-white absolute left-32"></i>
+          </div>
+          <Link className={getLinkClasses("/tickets")} to="/tickets"><img src={ticketlogo} alt="D" className='mr-6 size-4' /> Ticket</Link>
         </div>
       </div>
     </div>
-
   );
 };
 
