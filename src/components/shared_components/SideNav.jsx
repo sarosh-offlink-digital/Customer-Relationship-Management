@@ -58,7 +58,7 @@ const SideNav = () => {
           <Link className={getLinkClasses("/dashboard")} to="/dashboard"><img src={dashboardlogo} alt="D" className='mr-6' /> Dashboard</Link>
           <Link className={getLinkClasses("/leads")} to="/leads"><img src={leadlogo} alt="D" className='mr-6' />Leads</Link>
           <Link className={getLinkClasses("/customers")} to="/customers"><i class="fa-solid fa-user-group text-white mr-6"></i>Customers</Link>
-          <Link className={getLinkClasses("/projects")} to="/projects" ><i class="fa-solid fa-bars-progress  text-white text-lg mr-6"></i>Projects</Link>
+        
           <div className='flex items-center realtive hover:bg-blue-600 rounded-md'>
             <i class="fa-solid fa-dollar-sign absolute left-10 text-white text-xl"></i>
             {/* <select
@@ -79,6 +79,7 @@ const SideNav = () => {
             </div>
             <i class="fa-solid fa-caret-down text-white absolute left-32"></i>
           </div>
+          <Link className={getLinkClasses("/projects")} to="/projects" ><i class="fa-solid fa-bars-progress  text-white text-lg mr-6"></i>Projects</Link>
           <Link className={getLinkClasses("/tickets")} to="/tickets"><img src={ticketlogo} alt="D" className='mr-6 size-4' /> Ticket</Link>
         </div>
       </div>
