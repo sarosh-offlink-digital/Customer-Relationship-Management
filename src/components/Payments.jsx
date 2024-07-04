@@ -105,6 +105,9 @@ const Payments = ({ id }) => {
             console.error('Error capturing image:', error);
         }
     };
+    const handleSelectChange = (e) => {
+        setSearchTerm(e.target.value);
+    };
     return (
         <div>
             <div className='p-4'>
@@ -116,6 +119,50 @@ const Payments = ({ id }) => {
                     <h1 className='text-white text-base font-bold cursor-pointer'>Payments</h1>
                 </div>
             </div>
+            <div>
+                    <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+                        <div className="modal-box  bg-white p-0 pb-32">
+                            {/* modal content s */}
+                            <div className="">
+                                <div className='rounded-t-lg relative'>
+                                    <h1 className='bg-gradient-to-r from-blue-800 via-blue-600 to-blue-400 text-white rounded-t-lg px-4 py-2 text-xl'><i class="fa-solid fa-filter text-sm mx-2"></i>Filter</h1>
+                                    <div className="modal-action">
+                                        <form method="dialog">
+                                            {/* if there is a button in form, it will close the modal */}
+                                            <button className=" text-white absolute right-3 top-2 tooltip tooltip-left tooltip-info" data-tip="Close"><i class="fa-solid fa-circle-xmark text-xl"></i></button>
+                                        </form>
+                                    </div>
+                                    <select className='border-2 py-2 m-2 rounded-lg cursor-pointer px-2 w-36' name="filter" id="filter" onChange={handleSelectChange}>
+                                        <option value="">All Names</option>
+                                        {apidata.map((row) => (
+                                            <option className='w-52' key={row.id} value={row.contact_form_name}>
+                                                {row.contact_form_name}
+                                            </option>
+                                        ))}
+                                    </select>
+                                    <select className='border-2 py-2 m-2 rounded-lg cursor-pointer px-2 w-36' name="filter" id="filter" onChange={handleSelectChange}>
+                                        <option value="">All Emails</option>
+                                        {apidata.map((row) => (
+                                            <option key={row.id} value={row.contact_form_email}>
+                                                {row.contact_form_email}
+                                            </option>
+                                        ))}
+                                    </select>
+                                    <select className='border-2 py-2 m-2 rounded-lg cursor-pointer px-2 w-36' name="filter" id="filter" onChange={handleSelectChange}>
+                                        <option value="">All Services</option>
+                                        {apidata.map((row) => (
+                                            <option key={row.id} value={row.contact_form_service}>
+                                                {row.contact_form_service}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                            </div>
+                            {/* modal content e */}
+
+                        </div>
+                    </dialog>
+                </div>
             <div className="container w-[370px] lg:w-auto mx-auto lg:p-4 relative">
                 <input
                     type="text"
@@ -125,6 +172,10 @@ const Payments = ({ id }) => {
 
                     className="border focus:border-blue-400 text-sm outline-transparent border-gray-300 w-36 lg:w-auto rounded-md px-1 py-1 mb-4 absolute z-30 right-2 top-3 lg:right-8 lg:top-7"
                 />
+                <div>
+                        <button className="absolute z-30 text-white lg:left-6 lg:top-8 top-4 left-3 hover:scale-110 cursor-pointer tooltip tooltip-info" data-tip='Filter' onClick={() => document.getElementById('my_modal_5').showModal()}><i class="fa-solid fa-filter"></i></button>
+
+                    </div>
                 {/* <Link to='/newcustomer'><i class="fa-solid fa-circle-plus absolute z-30 text-white lg:left-32 lg:top-9 top-5 left-28 hover:scale-110"></i></Link> */}
                 <DataTable
                     title="Payments"
@@ -147,6 +198,7 @@ const Payments = ({ id }) => {
                                 color: 'white',
                                 borderTopLeftRadius: "10px",
                                 borderTopRightRadius: "10px",
+                                paddingLeft: '35px'
                             },
                         },
                         headRow: {
