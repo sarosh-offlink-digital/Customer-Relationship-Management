@@ -3,10 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import logo2 from '../../src/logo2.png';
 import dashboardlogo from '../../src/dashboard.png';
 import leadlogo from '../../src/leads.png';
-import customerlogo from '../../src/customer.png';
-import saleslogo from '../../src/sale.png';
-import projectlogo from '../../src/project.png';
-import tasklogo from '../../src/task.png';
+
 import ticketlogo from '../../src/ticket.png';
 const SideNav = () => {
   const navigate = useNavigate();
@@ -15,7 +12,7 @@ const SideNav = () => {
     const selectedValue = event.target.value;
     navigate(selectedValue);
   };
-
+  
   const location = useLocation();
 
   const getLinkClasses = (path) => {
@@ -23,7 +20,6 @@ const SideNav = () => {
       ? "flex justify-start items-center p-4 mx-4 my-2 w-40 rounded-md text-white bg-blue-400 cursor-pointer hover:bg-blue-600 hover:text-white hover:scale-105"
       : "flex justify-start items-center p-4 mx-4 my-2 w-40 rounded-md text-white  cursor-pointer hover:bg-blue-600 hover:text-white hover:scale-105";
   };
-
   return (
     // <div className=''>
 
@@ -50,7 +46,6 @@ const SideNav = () => {
           {/* Sidebar content here */}
           <div className='w-48 mt-5 text-center'>
             <h1 className="p-4 lg:px-0 lg:py-3  lg:m-0 text-center text-sm  text-white lg:text-sm lg:text-center font-bold">Customer Relationship Management</h1>
-
           </div>
           <div className='flex justify-start'>
             <img src={logo2} className='ml-16 lg:ml-12 size-20 lg:size-20 mb-6' alt="logo" />
@@ -58,7 +53,6 @@ const SideNav = () => {
           <Link className={getLinkClasses("/dashboard")} to="/dashboard"><img src={dashboardlogo} alt="D" className='mr-6' /> Dashboard</Link>
           <Link className={getLinkClasses("/leads")} to="/leads"><img src={leadlogo} alt="D" className='mr-6' />Leads</Link>
           <Link className={getLinkClasses("/customers")} to="/customers"><i class="fa-solid fa-user-group text-white mr-6"></i>Customers</Link>
-        
           <div className='flex items-center realtive hover:bg-blue-600 rounded-md'>
             <i class="fa-solid fa-dollar-sign absolute left-10 text-white text-xl"></i>
             {/* <select

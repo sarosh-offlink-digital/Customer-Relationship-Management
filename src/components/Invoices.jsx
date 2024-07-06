@@ -16,14 +16,14 @@ const Invoices = ({ id }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('https://captaindesignagency.com/LeadApi');
+                const response = await fetch('http://localhost:5000/customers');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
                 const result = await response.json();
                 const updatedData = result.map(item => ({
                     ...item,
-                    brand: response.url === 'https://captaindesignagency.com/LeadApi' ? 'Captain Design Agency' : 'Captain Book Publishing'
+                    brand: response.url === 'http://localhost:5000/customers' ? 'Captain Design Agency' : 'Captain Book Publishing'
                 }));
                 setApiData(updatedData);
                 setLoading(false);

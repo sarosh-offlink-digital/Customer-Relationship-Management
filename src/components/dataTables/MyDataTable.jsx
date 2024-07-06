@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import DataTable from 'react-data-table-component';
 import { Link } from 'react-router-dom';
-
+import hoorayAnimation from '../../src/hooray.gif'
 const MyDataTable = () => {
   const [apidata, setApiData] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -54,6 +54,24 @@ const MyDataTable = () => {
     setSearchTerm(e.target.value);
   };
 
+  const convertToCustomer = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/customers', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(selectedCustomer),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to convert lead to customer');
+      }
+    } catch (error) {
+      console.error('Error converting lead to customer:', error.message);
+    }
+  };
+
   const columns = [
     { name: 'ID', selector: row => row.contact_form_id, sortable: true, width: '80px' },
     { name: 'Name', selector: row => row.contact_form_name, sortable: true, wrap: true },
@@ -62,7 +80,6 @@ const MyDataTable = () => {
     { name: 'Service', selector: row => row.contact_form_service, sortable: true, wrap: true },
     { name: 'Brand', selector: row => row.brand, sortable: true, wrap: true },
     { name: 'Created At', selector: row => row.contact_form_created_at, sortable: true, wrap: true },
-
     {
       name: 'Actions',
       cell: row => (
@@ -223,8 +240,30 @@ const MyDataTable = () => {
                 <div>
                   <div>
                     <div className='flex justify-start lg:justify-end'>
-                      <button data-tip='Convert to Customers' className='tooltip tooltip-left tooltip-info bg-blue-800 rounded-lg px-2 py-3 text-white hover:bg-blue-500 shadow-md'> <i class="fa-solid fa-user-plus"></i> Customer</button>
+                      <button
+                        onClick={() => {
+                          convertToCustomer();
+                          document.getElementById('my_modal_2').showModal();
+                        }}
+                        data-tip='Convert to Customers'
+                        className='tooltip tooltip-left tooltip-info bg-blue-800 rounded-lg px-2 py-3 text-white hover:bg-blue-500 shadow-md'>
+                        <i className="fa-solid fa-user-plus"></i>
+                        Customer
+                      </button>
+
                     </div>
+                    <dialog id="my_modal_2" className="modal">
+                      <div className="modal-box bg-white">
+                        <div className='flex justify-center items-center'>
+                          <img src={hoorayAnimation} className='h-14 w-14' alt="" />
+                        <h3 className="font-bold text-xl text-blue-800">Customer <span className='text-blue-500'>Added!</span> </h3>
+                        </div>
+                        <p className="py-4 text-center text-sm text-gray-400">Close this and go to Customers Tab</p>
+                      </div>
+                      <form method="dialog" className="modal-backdrop">
+                        <button>close</button>
+                      </form>
+                    </dialog>
                     {/* <label className="my-3 flex items-center bg-gray-50 text-black  input input-bordered gap-2 w-full md:w-auto flex-grow">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 opacity-70">
                       <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
