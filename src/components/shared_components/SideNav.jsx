@@ -75,6 +75,9 @@ const SideNav = () => {
           </div>
           <Link className={getLinkClasses("/projects")} to="/projects" ><i class="fa-solid fa-bars-progress  text-white text-lg mr-6"></i>Projects</Link>
           <Link className={getLinkClasses("/tickets")} to="/tickets"><img src={ticketlogo} alt="D" className='mr-6 size-4' /> Ticket</Link>
+          <Link className={getLinkClasses("/users")} to="/users"><i class="fa-solid fa-user-gear text-white mr-6"></i>Users</Link>
+          <Link className={getLinkClasses("/settings")} to="/settings"><i class="fa-solid fa-gears text-white mr-6"></i>Settings</Link>
+          <Link className={getLinkClasses("/faqs")} to="/faqs"><i class="fa-solid fa-clipboard-question text-white mr-6"></i>User Faqs</Link>
         </div>
       </div>
     </div>

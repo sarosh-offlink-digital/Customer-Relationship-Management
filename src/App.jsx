@@ -21,6 +21,11 @@ import Payments from './components/Payments';
 
 const App = () => {
   const [selectedId, setSelectedId] = useState(null);
+  const[leadsData, setLeadsData] = useState('')
+
+  const handleLeadsData = (data) => {
+    setLeadsData(data);
+  };
 
   return (
     

@@ -2,12 +2,16 @@ import React, { useEffect, useState } from 'react';
 import DataTable from 'react-data-table-component';
 import { Link } from 'react-router-dom';
 import hoorayAnimation from '../../src/hooray.gif'
-const MyDataTable = () => {
+
+
+
+const MyDataTable = ({ sendLeadsData, sendConvertedCustomer }) => {
   const [apidata, setApiData] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedCustomer, setSelectedCustomer] = useState(null);
+  const [convertedCustomer, setConvertedCustomer] = useState(0)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,6 +28,7 @@ const MyDataTable = () => {
           brand: response.url === 'https://captaindesignagency.com/LeadApi' ? 'Captain Design Agency' : 'Captain Book Publishing'
         }));
         setApiData(updatedData);
+        sendLeadsData(updatedData)
         setLoading(false);
       } catch (error) {
         setError(error);
@@ -32,7 +37,7 @@ const MyDataTable = () => {
     };
 
     fetchData();
-  }, []);
+  },);
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
@@ -55,6 +60,7 @@ const MyDataTable = () => {
   };
 
   const convertToCustomer = async () => {
+
     try {
       const response = await fetch('http://localhost:5000/customers', {
         method: 'POST',
@@ -63,7 +69,8 @@ const MyDataTable = () => {
         },
         body: JSON.stringify(selectedCustomer),
       });
-
+      setConvertedCustomer(convertedCustomer + 1)
+      sendConvertedCustomer(convertedCustomer + 1)
       if (!response.ok) {
         throw new Error('Failed to convert lead to customer');
       }
@@ -110,48 +117,50 @@ const MyDataTable = () => {
 
   return (
     <div>
-      <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
-        <div className="modal-box  bg-white p-0 pb-32">
-          {/* modal content s */}
-          <div className="">
-            <div className='rounded-t-lg relative'>
-              <h1 className='bg-gradient-to-r from-blue-800 via-blue-600 to-blue-400 text-white rounded-t-lg px-4 py-2 text-xl'><i class="fa-solid fa-filter text-sm mx-2"></i>Filter</h1>
-              <div className="modal-action">
-                <form method="dialog">
-                  {/* if there is a button in form, it will close the modal */}
-                  <button className=" text-white absolute right-3 top-2 tooltip tooltip-left tooltip-info" data-tip="Close"><i class="fa-solid fa-circle-xmark text-xl"></i></button>
-                </form>
+      <div className='flex justify-center items-center'>
+        <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+          <div className="modal-box  bg-white p-0 pb-32">
+            {/* modal content s */}
+            <div className="">
+              <div className='rounded-t-lg relative'>
+                <h1 className='bg-gradient-to-r from-blue-800 via-blue-600 to-blue-400 text-white rounded-t-lg px-4 py-2 text-xl'><i class="fa-solid fa-filter text-sm mx-2"></i>Filter</h1>
+                <div className="modal-action">
+                  <form method="dialog">
+                    {/* if there is a button in form, it will close the modal */}
+                    <button className=" text-white absolute right-3 top-2 tooltip tooltip-left tooltip-info" data-tip="Close"><i class="fa-solid fa-circle-xmark text-xl"></i></button>
+                  </form>
+                </div>
+                <select className='border-2 py-2 m-2 rounded-lg cursor-pointer px-2 w-36 ' name="filter" id="filter" onChange={handleSelectChange}>
+                  <option value="">All Names</option>
+                  {apidata.map((row) => (
+                    <option className='w-52' key={row.id} value={row.contact_form_name}>
+                      {row.contact_form_name}
+                    </option>
+                  ))}
+                </select>
+                <select className='border-2 py-2 m-2 rounded-lg cursor-pointer px-2 w-36' name="filter" id="filter" onChange={handleSelectChange}>
+                  <option value="">All Emails</option>
+                  {apidata.map((row) => (
+                    <option key={row.id} value={row.contact_form_email}>
+                      {row.contact_form_email}
+                    </option>
+                  ))}
+                </select>
+                <select className='border-2 py-2 m-2 rounded-lg cursor-pointer px-2 w-36' name="filter" id="filter" onChange={handleSelectChange}>
+                  <option value="">All Services</option>
+                  {apidata.map((row) => (
+                    <option key={row.id} value={row.contact_form_service}>
+                      {row.contact_form_service}
+                    </option>
+                  ))}
+                </select>
               </div>
-              <select className='border-2 py-2 m-2 rounded-lg cursor-pointer px-2 w-36 ' name="filter" id="filter" onChange={handleSelectChange}>
-                <option value="">All Names</option>
-                {apidata.map((row) => (
-                  <option className='w-52' key={row.id} value={row.contact_form_name}>
-                    {row.contact_form_name}
-                  </option>
-                ))}
-              </select>
-              <select className='border-2 py-2 m-2 rounded-lg cursor-pointer px-2 w-36' name="filter" id="filter" onChange={handleSelectChange}>
-                <option value="">All Emails</option>
-                {apidata.map((row) => (
-                  <option key={row.id} value={row.contact_form_email}>
-                    {row.contact_form_email}
-                  </option>
-                ))}
-              </select>
-              <select className='border-2 py-2 m-2 rounded-lg cursor-pointer px-2 w-36' name="filter" id="filter" onChange={handleSelectChange}>
-                <option value="">All Services</option>
-                {apidata.map((row) => (
-                  <option key={row.id} value={row.contact_form_service}>
-                    {row.contact_form_service}
-                  </option>
-                ))}
-              </select>
             </div>
-          </div>
-          {/* modal content e */}
+            {/* modal content e */}
 
-        </div>
-      </dialog>
+          </div>
+        </dialog>
+      </div>
       <div className="container w-[370px] lg:w-auto mx-auto lg:p-4 relative">
         <input
           type="text"
@@ -256,7 +265,7 @@ const MyDataTable = () => {
                       <div className="modal-box bg-white">
                         <div className='flex justify-center items-center'>
                           <img src={hoorayAnimation} className='h-14 w-14' alt="" />
-                        <h3 className="font-bold text-xl text-blue-800">Customer <span className='text-blue-500'>Added!</span> </h3>
+                          <h3 className="font-bold text-xl text-blue-800">Customer <span className='text-blue-500'>Added!</span> </h3>
                         </div>
                         <p className="py-4 text-center text-sm text-gray-400">Close this and go to Customers Tab</p>
                       </div>
