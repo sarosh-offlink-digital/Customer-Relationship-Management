@@ -78,10 +78,10 @@ const CustomersDataTable = ({ onFetchData }) => {
 
           {/* Button to show customer details */}
 
-          <div className="dropdown dropdown-end">
-            <div tabIndex={0} role="button" className=" bg-blue-500 hover:bg-blue-800 hover:scale-105 text-white p-2 rounded-md"><i class="fa-solid fa-circle-chevron-down"></i></div>
+          <div className="dropdown dropdown-left">
+            <div tabIndex={0} role="button" data-tip="View & Edit" className="tooltip tooltip-info bg-blue-500 hover:bg-blue-800 hover:scale-105  text-white p-2 rounded-md"><i class="fa-solid fa-circle-chevron-down"></i></div>
 
-            <ul tabIndex={0} className="flex dropdown-content gap-2 bg-base-100 rounded-box z-[1] p-2 shadow">
+            <ul tabIndex={0} className="flex dropdown-content gap-2 bg-base-100 rounded-box z-[1] mr-2 p-2 shadow">
               <li>
                 <button data-tip="View"
                   className='tooltip tooltip-info bg-blue-500 hover:bg-blue-800 hover:scale-105 text-white p-2 rounded-md'
@@ -121,6 +121,7 @@ const CustomersDataTable = ({ onFetchData }) => {
     <div>
       {display === 'dataTable' && (
         <>
+        
           <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
             <div className="modal-box  bg-white p-0 pb-32">
               <div className="">

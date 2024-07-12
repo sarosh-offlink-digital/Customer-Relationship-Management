@@ -80,8 +80,40 @@ const MyDataTable = ({ leadsData, sendConvertedCustomer }) => {
   }
   return (
     <div>
+
       {display === 'dataTable' && (
         <>
+        {/* test filter new */}
+          {/* <div className="dropdown dropdown-right">
+            <div tabIndex={0} role="button" className="btn m-1"><i class="fa-solid fa-filter text-sm mx-2"></i></div>
+            <ul tabIndex={0} className="flex gap-2 dropdown-content bg-transparent z-[1]">
+              <li><select className='border-2  m-2 rounded-lg cursor-pointer  w-36 ' name="filter" id="filter" onChange={handleSelectChange}>
+                <option value="">All Names</option>
+                {leadsData.map((row) => (
+                  <option className='w-52' key={row.id} value={row.contact_form_name}>
+                    {row.contact_form_name}
+                  </option>
+                ))}
+              </select></li>
+              <li> <select className='border-2 m-2 rounded-lg cursor-pointer w-36' name="filter" id="filter" onChange={handleSelectChange}>
+                <option value="">All Emails</option>
+                {leadsData.map((row) => (
+                  <option key={row.id} value={row.contact_form_email}>
+                    {row.contact_form_email}
+                  </option>
+                ))}
+              </select></li>
+              <li> <select className='border-2  m-2 rounded-lg cursor-pointer w-36' name="filter" id="filter" onChange={handleSelectChange}>
+                <option value="">All Services</option>
+                {leadsData.map((row) => (
+                  <option key={row.id} value={row.contact_form_service}>
+                    {row.contact_form_service}
+                  </option>
+                ))}
+              </select></li>
+            </ul>
+          </div> */}
+          {/* test filter new end */}
           <div className='flex justify-center items-center'>
             <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
               <div className="modal-box  bg-white p-0 pb-32">
@@ -202,96 +234,96 @@ const MyDataTable = ({ leadsData, sendConvertedCustomer }) => {
         </>
       )}
 
-{display === 'form' && selectedCustomer && (
-  <div className="mt-5">
-    {/* <p>ID: {selectedCustomer.contact_form_id}</p>
+      {display === 'form' && selectedCustomer && (
+        <div className="mt-5">
+          {/* <p>ID: {selectedCustomer.contact_form_id}</p>
     <p>Name: {selectedCustomer.contact_form_name}</p>
     <p>Email: {selectedCustomer.contact_form_email}</p>
     <p>Phone: {selectedCustomer.contact_form_phone}</p>
     <p>Service: {selectedCustomer.contact_form_service}</p>
     <p>Brand: {selectedCustomer.brand}</p>
     <p>Created At: {selectedCustomer.contact_form_created_at}</p> */}
-    <div className='my-10'>
-      <div className='bg-gradient-to-r from-blue-700 to-blue-400 rounded-t-md p-4'>
-        <h1 className='text-sm xl:text-xl text-white'>Lead Information #{selectedCustomer.contact_form_id}</h1>
-      </div>
-      <div className='bg-white p-4 rounded-b-md py-10'>
-        <div>
-          <div>
-            <div className='flex justify-start lg:justify-end'>
-              <button
-                onClick={() => {
-                  convertToCustomer();
-                  document.getElementById('my_modal_2').showModal();
-                }}
-                data-tip='Convert to Customers'
-                className='tooltip tooltip-left tooltip-info bg-blue-800 rounded-lg px-2 py-3 text-white hover:bg-blue-500 shadow-md'>
-                <i className="fa-solid fa-user-plus"></i>
-                Customer
-              </button>
-
+          <div className='my-10'>
+            <div className='bg-gradient-to-r from-blue-700 to-blue-400 rounded-t-md p-4'>
+              <h1 className='text-sm xl:text-xl text-white'>Lead Information #{selectedCustomer.contact_form_id}</h1>
             </div>
-            <dialog id="my_modal_2" className="modal">
-              <div className="modal-box bg-white">
-                <div className='flex justify-center items-center'>
-                  <img src={hoorayAnimation} className='h-14 w-14' alt="" />
-                  <h3 className="font-bold text-xl text-blue-800">Customer <span className='text-blue-500'>Added!</span> </h3>
-                </div>
-                <p className="py-4 text-center text-sm text-gray-400">Close this and go to Customers Tab</p>
-              </div>
-              <form method="dialog" className="modal-backdrop">
-                <button>close</button>
-              </form>
-            </dialog>
-            {/* <label className="my-3 flex items-center bg-gray-50 text-black  input input-bordered gap-2 w-full md:w-auto flex-grow">
+            <div className='bg-white p-4 rounded-b-md py-10'>
+              <div>
+                <div>
+                  <div className='flex justify-start lg:justify-end'>
+                    <button
+                      onClick={() => {
+                        convertToCustomer();
+                        document.getElementById('my_modal_2').showModal();
+                      }}
+                      data-tip='Convert to Customers'
+                      className='tooltip tooltip-left tooltip-info bg-blue-800 rounded-lg px-2 py-3 text-white hover:bg-blue-500 shadow-md'>
+                      <i className="fa-solid fa-user-plus"></i>
+                      Customer
+                    </button>
+
+                  </div>
+                  <dialog id="my_modal_2" className="modal">
+                    <div className="modal-box bg-white">
+                      <div className='flex justify-center items-center'>
+                        <img src={hoorayAnimation} className='h-14 w-14' alt="" />
+                        <h3 className="font-bold text-xl text-blue-800">Customer <span className='text-blue-500'>Added!</span> </h3>
+                      </div>
+                      <p className="py-4 text-center text-sm text-gray-400">Close this and go to Customers Tab</p>
+                    </div>
+                    <form method="dialog" className="modal-backdrop">
+                      <button>close</button>
+                    </form>
+                  </dialog>
+                  {/* <label className="my-3 flex items-center bg-gray-50 text-black  input input-bordered gap-2 w-full md:w-auto flex-grow">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 opacity-70">
                 <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
               </svg>
               <h1 className="grow bg-transparent  border-none focus:ring-0 focus:outline-none" >ID: {selectedCustomer.contact_form_id}</h1>
             </label> */}
-            <div>
-              <div className=' flex flex-col lg:flex-row gap-2'>
-                <label className="my-3 flex items-center bg-gray-50  text-black input input-bordered gap-2 w-full md:w-auto lg:w-[50%] shadow-md">
-                  <i className="fa-solid fa-user text-blue-800"></i>
-                  <h1 className="grow bg-transparent  border-none focus:ring-0 focus:outline-none" >Name: {selectedCustomer.contact_form_name}</h1>
-                </label>
-                <label class="my-3 input input-bordered flex items-center bg-gray-50  text-black gap-2 w-full lg:w-[50%] shadow-md">
-                  <i className="fa-solid fa-envelope text-orange-500"></i>
-                  <h1 className="grow bg-transparent  border-none focus:ring-0 focus:outline-none" >Email: {selectedCustomer.contact_form_email} </h1>
-                </label>
-              </div>
-              <div className=' flex flex-col lg:flex-row gap-2'>
-                <label class="my-3 flex items-center bg-gray-50  text-black input input-bordered gap-2 w-full md:w-auto lg:w-[50%] shadow-md">
-                  <i className="fa-solid fa-phone text-green-500"></i>
-                  <h1 className="grow bg-transparent  border-none focus:ring-0 focus:outline-none" >Phone: {selectedCustomer.contact_form_phone} </h1>
-                </label>
-                <label className="my-3 flex items-center bg-gray-50  text-black input input-bordered gap-2 w-full md:w-auto lg:w-[50%] shadow-md">
-                  <i className="fa-solid fa-globe text-blue-500"></i>
-                  <h1 className="grow bg-transparent  border-none focus:ring-0 focus:outline-none" >Service: {selectedCustomer.contact_form_service}</h1>
-                </label>
-              </div>
-              <div className=' flex flex-col lg:flex-row gap-2'>
-                <label className="my-3 flex items-center bg-gray-50  text-black input input-bordered gap-2 w-full md:w-auto lg:w-[50%] shadow-md">
-                  <i class="fa-solid fa-layer-group text-cyan-400"></i>
-                  <h1 className="grow bg-transparent  border-none focus:ring-0 focus:outline-none" >Brand: {selectedCustomer.brand}</h1>
-                </label>
-                <label className="my-3 flex items-center bg-gray-50  text-black input input-bordered gap-2 w-full md:w-auto lg:w-[50%] shadow-md">
-                  <i class="fa-regular fa-calendar-days text-teal-400"></i>
-                  <h1 className="grow bg-transparent  border-none focus:ring-0 focus:outline-none" >Created At: {selectedCustomer.contact_form_created_at}</h1>
-                </label>
-              </div>
-              <div className="my-3 bg-gray-50  text-black border-2 rounded-lg w-full p-3 shadow-md">
-                <p className='mb-4'><i class="fa-solid fa-message text-blue-500"></i> Message: </p>
-                <p className="grow bg-transparent  border-none focus:ring-0 focus:outline-none"> {selectedCustomer.contact_form_message} </p>
+                  <div>
+                    <div className=' flex flex-col lg:flex-row gap-2'>
+                      <label className="my-3 flex items-center bg-gray-50  text-black input input-bordered gap-2 w-full md:w-auto lg:w-[50%] shadow-md">
+                        <i className="fa-solid fa-user text-blue-800"></i>
+                        <h1 className="grow bg-transparent  border-none focus:ring-0 focus:outline-none" >Name: {selectedCustomer.contact_form_name}</h1>
+                      </label>
+                      <label class="my-3 input input-bordered flex items-center bg-gray-50  text-black gap-2 w-full lg:w-[50%] shadow-md">
+                        <i className="fa-solid fa-envelope text-orange-500"></i>
+                        <h1 className="grow bg-transparent  border-none focus:ring-0 focus:outline-none" >Email: {selectedCustomer.contact_form_email} </h1>
+                      </label>
+                    </div>
+                    <div className=' flex flex-col lg:flex-row gap-2'>
+                      <label class="my-3 flex items-center bg-gray-50  text-black input input-bordered gap-2 w-full md:w-auto lg:w-[50%] shadow-md">
+                        <i className="fa-solid fa-phone text-green-500"></i>
+                        <h1 className="grow bg-transparent  border-none focus:ring-0 focus:outline-none" >Phone: {selectedCustomer.contact_form_phone} </h1>
+                      </label>
+                      <label className="my-3 flex items-center bg-gray-50  text-black input input-bordered gap-2 w-full md:w-auto lg:w-[50%] shadow-md">
+                        <i className="fa-solid fa-globe text-blue-500"></i>
+                        <h1 className="grow bg-transparent  border-none focus:ring-0 focus:outline-none" >Service: {selectedCustomer.contact_form_service}</h1>
+                      </label>
+                    </div>
+                    <div className=' flex flex-col lg:flex-row gap-2'>
+                      <label className="my-3 flex items-center bg-gray-50  text-black input input-bordered gap-2 w-full md:w-auto lg:w-[50%] shadow-md">
+                        <i class="fa-solid fa-layer-group text-cyan-400"></i>
+                        <h1 className="grow bg-transparent  border-none focus:ring-0 focus:outline-none" >Brand: {selectedCustomer.brand}</h1>
+                      </label>
+                      <label className="my-3 flex items-center bg-gray-50  text-black input input-bordered gap-2 w-full md:w-auto lg:w-[50%] shadow-md">
+                        <i class="fa-regular fa-calendar-days text-teal-400"></i>
+                        <h1 className="grow bg-transparent  border-none focus:ring-0 focus:outline-none" >Created At: {selectedCustomer.contact_form_created_at}</h1>
+                      </label>
+                    </div>
+                    <div className="my-3 bg-gray-50  text-black border-2 rounded-lg w-full p-3 shadow-md">
+                      <p className='mb-4'><i class="fa-solid fa-message text-blue-500"></i> Message: </p>
+                      <p className="grow bg-transparent  border-none focus:ring-0 focus:outline-none"> {selectedCustomer.contact_form_message} </p>
+                    </div>
+                  </div>
+                  <button className='bg-blue-800 p-3 my-5 text-white rounded-md' onClick={() => handleDisplay('dataTable')}><i class="fa-solid fa-caret-left mx-2"></i>Back</button>
+                </div>
               </div>
             </div>
-            <button className='bg-blue-800 p-3 my-5 text-white rounded-md' onClick={() => handleDisplay('dataTable')}><i class="fa-solid fa-caret-left mx-2"></i>Back</button>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-)}
+      )}
     </div>
   );
 };

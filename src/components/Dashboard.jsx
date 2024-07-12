@@ -32,33 +32,33 @@ const Dashboard = ({ leadsData, customerData }) => {
                     </div>
 
                     <div className='flex gap-2 mt-2  flex-wrap lg:gap-3 justify-start text-center items-center'>
-                        <div className='border-2 shadow-lg border-blue-800 border-l-[12px]  flex flex-wrap justify-center lg:justify-between gap-1 lg:gap-2 items-center text-center hover:scale-105  cursor-pointer lg:h-auto h-28 w-30  text-blue-800  px-2 rounded-md py-4'>
+                        <div className='border-2 shadow-lg border-blue-800 border-l-[12px]  flex flex-wrap justify-between lg:justify-between gap-1 lg:gap-2 items-center text-center hover:scale-105  cursor-pointer lg:h-16 h-16 w-full lg:w-auto  text-blue-800  px-2 rounded-md py-4'>
                             <i class="fa-solid fa-bars-progress text-2xl"></i>
                             <h2 className='text-sm lg:text-base'>Total Projects</h2>
                             <h1 className='text-sm lg:text-base my-1 font-bold'>225</h1>
                         </div>
-                        <div className='border-2 shadow-lg border-teal-500 border-l-[12px]  flex  flex-wrap justify-center lg:justify-between gap-1 lg:gap-2 items-center text-center hover:scale-105  cursor-pointer lg:h-auto h-28 w-30  text-teal-500  px-2 rounded-md py-4'>
+                        <div className='border-2 shadow-lg border-teal-500 border-l-[12px]  flex  flex-wrap justify-between lg:justify-between gap-1 lg:gap-2 items-center text-center hover:scale-105  cursor-pointer lg:h-16 h-16 w-full lg:w-auto  text-teal-500  px-2 rounded-md py-4'>
                             <i class="fa-regular fa-square-check text-2xl"></i>
                             <h2 className='text-sm lg:text-base'>Completed Tasks</h2>
                             <h1 className='text-sm lg:text-base my-1 font-bold'>28</h1>
                         </div>
-                        <div className='border-2 shadow-lg border-orange-600 border-l-[12px]  flex  flex-wrap justify-center lg:justify-between gap-1 lg:gap-2 items-center text-center hover:scale-105  cursor-pointer lg:h-auto h-28 w-30  text-orange-600  px-2 rounded-md py-4'>
+                        <div className='border-2 shadow-lg border-orange-600 border-l-[12px]  flex  flex-wrap justify-between lg:justify-between gap-1 lg:gap-2 items-center text-center hover:scale-105  cursor-pointer lg:h-16 h-16 w-full lg:w-auto  text-orange-600  px-2 rounded-md py-4'>
                         <i class="fa-solid fa-clock-rotate-left text-2xl"></i>
                             <h2 className='text-sm lg:text-base'>Pending Tasks</h2>
                             <h1 className='text-sm lg:text-base my-1 font-bold'>15</h1>
                         </div>
 
-                        <div className=' border-2 shadow-lg border-stone-500 border-l-[12px]  flex  flex-wrap justify-center lg:justify-between gap-1 lg:gap-2 items-center text-center hover:scale-105  cursor-pointer lg:h-auto h-28 w-30  text-stone-500  px-2 rounded-md py-4'>
+                        <div className=' border-2 shadow-lg border-stone-500 border-l-[12px]  flex  flex-wrap justify-between lg:justify-between gap-1 lg:gap-2 items-center text-center hover:scale-105  cursor-pointer lg:h-16 h-16 w-full lg:w-auto  text-stone-500  px-2 rounded-md py-4'>
                             <i class="fa-solid fa-circle-user text-2xl"></i>
                             <h2 className='text-sm lg:text-base'>Total Leads</h2>
                             <h1 className='text-sm lg:text-base my-1 font-bold'>{latestContactFormId}</h1>
                         </div>
-                        <div className='border-2 shadow-lg border-sky-600 border-l-[12px]  flex  flex-wrap justify-center lg:justify-between gap-1 lg:gap-2 items-center text-center hover:scale-105  cursor-pointer lg:h-auto h-28 w-30  text-sky-600  px-2 rounded-md py-4'>
+                        <div className='border-2 shadow-lg border-sky-600 border-l-[12px]  flex  flex-wrap justify-between lg:justify-between gap-1 lg:gap-2 items-center text-center hover:scale-105  cursor-pointer lg:h-16 h-16 w-full lg:w-auto  text-sky-600  px-2 rounded-md py-4'>
                             <i class="fa-solid fa-users text-2xl"></i>
                             <h2 className='text-sm lg:text-base'>Total Customers</h2>
                             <h1 className='text-sm lg:text-base my-1 font-bold'>{latestContactFormIdCustomers}</h1>
                         </div>
-                        <div className=' border-2 shadow-lg border-indigo-500 border-l-[12px] flex  flex-wrap justify-center lg:justify-between gap-1 lg:gap-2 items-center text-center hover:scale-105  cursor-pointer lg:h-auto h-28 w-30  text-indigo-500  px-2 rounded-md py-4'>
+                        <div className=' border-2 shadow-lg border-indigo-500 border-l-[12px] flex  flex-wrap justify-between lg:justify-between gap-1 lg:gap-2 items-center text-center hover:scale-105  cursor-pointer lg:h-16 h-16 w-full lg:w-auto  text-indigo-500  px-2 rounded-md py-4'>
                             <i class="fa-solid fa-people-group text-2xl"></i>
                             <h2 className='text-sm lg:text-base'>Active Users</h2>
                             <h1 className='text-sm lg:text-base my-1 font-bold'>1</h1>
