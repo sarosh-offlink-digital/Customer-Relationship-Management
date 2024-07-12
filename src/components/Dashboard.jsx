@@ -1,11 +1,6 @@
-import React from 'react'
-import SideNav from './shared_components/SideNav'
-
+import React, { useEffect, useState } from 'react'
 import Header from './shared_components/Header'
 import DateTimeDisplay from './shared_components/DateTimeDisplay'
-import totalproj from "../src/documents.png"
-import completed from "../src/check.png"
-import pending from "../src/pending.png"
 import dashboardlogo from '../src/dashboard.png';
 import { Link } from 'react-router-dom'
 import LineChartDB from './Charts/LineChartDB'
@@ -13,10 +8,16 @@ import BarChartDB from './Charts/BarChartDB'
 import DoughnutChart from './Charts/DoughnutChart'
 import PieChartDB from './Charts/PieChartDB'
 
-
-
-const Dashboard = () => {
-
+const Dashboard = ({ leadsData, customerData }) => {
+    const [leadsDataDB, setLeadsDataDB] = useState(leadsData);
+    const [customerDataDB, setcustomerDataDB] = useState(customerData);
+    useEffect(() => {
+      setLeadsDataDB(leadsData);
+      setcustomerDataDB(customerData)
+    }, [leadsData, customerData]);
+  
+    const latestContactFormId = leadsDataDB.length;
+    const latestContactFormIdCustomers = customerDataDB.length;
     return (
         <div>
             <div className="flex w-full">
@@ -30,62 +31,62 @@ const Dashboard = () => {
                         <DateTimeDisplay />
                     </div>
 
-                    <div className='flex gap-2 mt-2 flex-wrap lg:gap-5 justify-start text-center items-center'>
-                        <div className='bg-gradient-to-r from-blue-700 to-blue-400 flex flex-wrap justify-center lg:justify-between gap-1 lg:gap-3 items-center text-center hover:scale-105 hover:bg-blue-800 cursor-pointer lg:h-auto h-28 w-30  text-white  px-2 rounded-md py-4'>
-                            <img src={totalproj} alt='projects' className='w-5 xl:w-9' />
-                            <h2 className='text-sm xl:text-xl'>Total Projects</h2>
-                            <h1 className='text-sm xl:text-xl my-1 font-bold'>225</h1>
+                    <div className='flex gap-2 mt-2  flex-wrap lg:gap-3 justify-start text-center items-center'>
+                        <div className='border-2 shadow-lg border-blue-800 border-l-[12px]  flex flex-wrap justify-center lg:justify-between gap-1 lg:gap-2 items-center text-center hover:scale-105  cursor-pointer lg:h-auto h-28 w-30  text-blue-800  px-2 rounded-md py-4'>
+                            <i class="fa-solid fa-bars-progress text-2xl"></i>
+                            <h2 className='text-sm lg:text-base'>Total Projects</h2>
+                            <h1 className='text-sm lg:text-base my-1 font-bold'>225</h1>
                         </div>
-                        <div className='bg-gradient-to-r from-teal-700 to-teal-400 flex  flex-wrap justify-center lg:justify-between gap-1 lg:gap-3 items-center text-center hover:scale-105 hover:bg-green-600 cursor-pointer lg:h-auto h-28 w-30  text-white  px-2 rounded-md py-4'>
-                            <img src={completed} alt='projects' className='w-5 xl:w-9' />
-                            <h2 className='text-sm xl:text-xl'>Completed Tasks</h2>
-                            <h1 className='text-sm xl:text-xl my-1 font-bold'>28</h1>
+                        <div className='border-2 shadow-lg border-teal-500 border-l-[12px]  flex  flex-wrap justify-center lg:justify-between gap-1 lg:gap-2 items-center text-center hover:scale-105  cursor-pointer lg:h-auto h-28 w-30  text-teal-500  px-2 rounded-md py-4'>
+                            <i class="fa-regular fa-square-check text-2xl"></i>
+                            <h2 className='text-sm lg:text-base'>Completed Tasks</h2>
+                            <h1 className='text-sm lg:text-base my-1 font-bold'>28</h1>
                         </div>
-                        <div className='bg-gradient-to-r from-orange-700 to-orange-400 flex  flex-wrap justify-center lg:justify-between gap-1 lg:gap-3 items-center text-center hover:scale-105 hover:bg-red-700 cursor-pointer lg:h-auto h-28 w-30  text-white  px-2 rounded-md py-4'>
-                            <img src={pending} alt='projects' className='w-5 xl:w-9' />
-                            <h2 className='text-sm xl:text-xl'>Pending Tasks</h2>
-                            <h1 className='text-sm xl:text-xl my-1 font-bold'>15</h1>
-                        </div>
-                        <div className='bg-gradient-to-r from-purple-700 to-purple-400 flex  flex-wrap justify-center lg:justify-between gap-1 lg:gap-3 items-center text-center hover:scale-105 hover:bg-red-700 cursor-pointer lg:h-auto h-28 w-30  text-white  px-2 rounded-md py-4'>
-                            <i class="fa-solid fa-people-group"></i>
-                            <h2 className='text-sm xl:text-xl'>Active Users</h2>
-                            <h1 className='text-sm xl:text-xl my-1 font-bold'>1</h1>
-                        </div>
-                        <div className='bg-gradient-to-r from-cyan-700 to-cyan-400 flex  flex-wrap justify-center lg:justify-between gap-1 lg:gap-3 items-center text-center hover:scale-105 hover:bg-red-700 cursor-pointer lg:h-auto h-28 w-30  text-white  px-2 rounded-md py-4'>
-                            <i class="fa-solid fa-users"></i>
-                            <h2 className='text-sm xl:text-xl'>Total Customers</h2>
-                            <h1 className='text-sm xl:text-xl my-1 font-bold'>6</h1>
-                        </div>
-                        <div className='bg-gradient-to-r from-yellow-700 to-yellow-500   flex  flex-wrap justify-center lg:justify-between gap-1 lg:gap-3 items-center text-center hover:scale-105 hover:bg-red-700 cursor-pointer lg:h-auto h-28 w-30  text-white  px-2 rounded-md py-4'>
-                            <i class="fa-solid fa-coins"></i>
-                            <h2 className='text-sm xl:text-xl'>Pending Payments</h2>
-                            <h1 className='text-sm xl:text-xl my-1 font-bold'>6</h1>
+                        <div className='border-2 shadow-lg border-orange-600 border-l-[12px]  flex  flex-wrap justify-center lg:justify-between gap-1 lg:gap-2 items-center text-center hover:scale-105  cursor-pointer lg:h-auto h-28 w-30  text-orange-600  px-2 rounded-md py-4'>
+                        <i class="fa-solid fa-clock-rotate-left text-2xl"></i>
+                            <h2 className='text-sm lg:text-base'>Pending Tasks</h2>
+                            <h1 className='text-sm lg:text-base my-1 font-bold'>15</h1>
                         </div>
 
+                        <div className=' border-2 shadow-lg border-stone-500 border-l-[12px]  flex  flex-wrap justify-center lg:justify-between gap-1 lg:gap-2 items-center text-center hover:scale-105  cursor-pointer lg:h-auto h-28 w-30  text-stone-500  px-2 rounded-md py-4'>
+                            <i class="fa-solid fa-circle-user text-2xl"></i>
+                            <h2 className='text-sm lg:text-base'>Total Leads</h2>
+                            <h1 className='text-sm lg:text-base my-1 font-bold'>{latestContactFormId}</h1>
+                        </div>
+                        <div className='border-2 shadow-lg border-sky-600 border-l-[12px]  flex  flex-wrap justify-center lg:justify-between gap-1 lg:gap-2 items-center text-center hover:scale-105  cursor-pointer lg:h-auto h-28 w-30  text-sky-600  px-2 rounded-md py-4'>
+                            <i class="fa-solid fa-users text-2xl"></i>
+                            <h2 className='text-sm lg:text-base'>Total Customers</h2>
+                            <h1 className='text-sm lg:text-base my-1 font-bold'>{latestContactFormIdCustomers}</h1>
+                        </div>
+                        <div className=' border-2 shadow-lg border-indigo-500 border-l-[12px] flex  flex-wrap justify-center lg:justify-between gap-1 lg:gap-2 items-center text-center hover:scale-105  cursor-pointer lg:h-auto h-28 w-30  text-indigo-500  px-2 rounded-md py-4'>
+                            <i class="fa-solid fa-people-group text-2xl"></i>
+                            <h2 className='text-sm lg:text-base'>Active Users</h2>
+                            <h1 className='text-sm lg:text-base my-1 font-bold'>1</h1>
+                        </div>
                     </div>
                     <div className='flex gap-4 justify-center flex-wrap'>
-                        <div className='w-[48%] my-6 '>
+                        <div className='lg:w-[48%] my-6 '>
                             <div className='border-2 bg-gray-100 rounded-lg shadow-lg'>
-                                <LineChartDB />
+                                <LineChartDB  leadsDataDB={leadsDataDB} customerDataDB={customerDataDB}/>
                             </div>
                         </div>
-                        <div className='w-[48%] my-6 '>
+                        <div className='lg:w-[48%] my-6 '>
                             <div className='border-2 bg-gray-100 rounded-lg shadow-lg'>
-                                <BarChartDB />
+                                <BarChartDB leadsDataDB={leadsDataDB} customerDataDB={customerDataDB}/>
                             </div>
                         </div>
-                        <div className='w-[48%] my-2 '>
-                            <div className='flex justify-center border-2 bg-gray-100 rounded-lg shadow-md'>
+                      
+                        <div className='lg:w-[48%]  '>
+                            <div className='flex justify-center border-2 bg-gray-100 rounded-lg shadow-lg'>
                                 <DoughnutChart />
                             </div>
                         </div>
-                        <div className='w-[48%] my-2 '>
-                            <div className='flex justify-center border-2 bg-gray-100 rounded-lg shadow-md'>
+                        <div className='lg:w-[48%]  '>
+                            <div className='flex justify-center border-2 bg-gray-100 rounded-lg shadow-lg'>
                                 <PieChartDB />
                             </div>
                         </div>
                     </div>
-
                     <div className='my-9'>
                         <div className='bg-gradient-to-r from-blue-800 via-blue-600 to-blue-400 rounded-t-md p-4'>
                             <h1 className='text-sm xl:text-xl text-white'>Overdue Tasks</h1>
@@ -128,12 +129,16 @@ const Dashboard = () => {
                                 </div>
                             </div>
                         </div>
+                           
                     </div>
+                
 
+
+                {/* leads div */}
+                
                 </div>
             </div>
         </div>
-
     )
 }
 

@@ -23,24 +23,20 @@ ChartJS.register(
 
 const DoughnutChartData = {
     labels: [
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
+        'Data 1',
+        'Data 2',
+        'Data 3',
     ],
     datasets: [
-        {
-            label: 'Converted Leads',
-            data: [5, 4, 8, 4],
-            borderColor: 'rgb(75, 192, 192)',
-            backgroundColor: 'rgba(98, 204, 170, 1)'
-        },
+     
         {
             label: 'Leads',
-            data: [5, 10, 25, 30,],
-            borderColor: 'rgb(50, 78, 168)',
-            backgroundColor: 'rgba(36, 128, 98, 1)'
+            data: [5, 10, 25,],
+            backgroundColor: [
+                'rgba(227, 225, 225, 1)',
+                'rgba(87, 189, 138, 1)',  
+                'rgba(36, 128, 98, 1)',
+            ],
         },
     ]
 }
@@ -49,8 +45,10 @@ const options = {};
 
 const DoughnutChart = () => {
     return (
-        <div style={{ height: '400px' }}>
-            <Doughnut options={options} data={DoughnutChartData} />
+        <div className="mx-auto max-w-lg md:max-w-xl lg:max-w-2xl">
+            <div className="relative aspect-w-1 aspect-h-1">
+                <Doughnut options={options} data={DoughnutChartData} />
+            </div>
         </div>
     )
 }

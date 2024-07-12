@@ -1,55 +1,55 @@
-import React from 'react'
-import { Pie } from 'react-chartjs-2'
+import React from 'react';
+import { Pie } from 'react-chartjs-2';
 import {
     Chart as ChartJS,
     CategoryScale,
     LinearScale,
-    BarElement,
+    ArcElement,
+    Legend,
     Title,
     Tooltip,
-    ArcElement,
-    Legend
-} from 'chart.js'
+} from 'chart.js';
 
 ChartJS.register(
     CategoryScale,
     LinearScale,
-    BarElement,
+    ArcElement,
+    Legend,
     Title,
     Tooltip,
-    ArcElement,
-    Legend
-)
+);
 
 const DoughnutChartData = {
-    labels: [
-        'Payment Paid',
-        'Payment Unpaid',
-        
-    ],
+    labels: ['Payment Paid', 'Payment Unpaid'],
     datasets: [
         {
             label: 'Customers',
-            data: [15, 4,],
+            data: [15, 4],
             backgroundColor: [
-                'rgba(151, 75, 201, 1)',
-                'rgba(227, 225, 225, 1)',  
+                'rgba(103, 65, 209, 1)',
+                'rgba(227, 225, 225, 1)',
             ],
-            
-            
         },
-    ]
-}
+    ],
+};
 
-const options = {};
+const options = {
+    plugins: {
+        legend: {
+            position: 'bottom',
+            align: 'start',
+        },
+    },
+};
+
 const PieChartDB = () => {
-  return (
-    <div>
-      <div style={{ height: '400px' }}>
-            <Pie options={options} data={DoughnutChartData} />
+    return (
+        <div className="mx-auto max-w-lg md:max-w-xl lg:max-w-2xl">
+            <div className="relative aspect-w-1 aspect-h-1">
+                <Pie options={options} data={DoughnutChartData} />
+            </div>
         </div>
-    </div>
-  )
-}
+    );
+};
 
-export default PieChartDB
+export default PieChartDB;

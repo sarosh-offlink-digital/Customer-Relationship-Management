@@ -33,7 +33,7 @@ const DateTimeDisplay = () => {
   }, []);
 
   return (
-    <div className='my-2 flex justify-center lg:flex lg:flex-col p-4 lg:py-3 lg:px-11 rounded-md bg-black' style={{backgroundImage: `url(${greetingBg})`, backgroundSize: 'cover'}}>
+    <div className='my-2 flex justify-center lg:flex lg:flex-col p-4 lg:py-1 lg:px-11 rounded-md bg-black' style={{backgroundImage: `url(${greetingBg})`, backgroundSize: 'cover'}}>
       <h1 className='mr-24 lg:mr-0 font-bold text-white p-1'>{greeting}</h1>
       <p className='text-white p-1 font-semibold mr-2 lg:mr-0'>{currentDateTime.toLocaleString()}</p>
     </div>

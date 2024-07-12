@@ -11,6 +11,7 @@ import phoneicon from '../../src/telephone.png'
 import additemicon from '../../src/add-item.png'
 import descicon from '../../src/description.png'
 import discounticon from '../../src/discount.png'
+import { Link } from 'react-router-dom';
 const CustomerForm = ({ id }) => {
 
     const nodeRef = useRef(null);
@@ -237,7 +238,7 @@ const CustomerForm = ({ id }) => {
                                     <label className="flex items-center bg-gray-100 text-black input input-bordered gap-2 w-full lg:w-auto flex-grow shadow-md">
                                         <i className="fa-solid fa-file-invoice-dollar text-teal-500"></i>
                                         <p className='border-r-2 px-2 '>INV#000</p>
-                                        <h1 className="grow bg-transparent border-none focus:ring-0 focus:outline-none"> 0120</h1>
+                                        <h1 className="grow bg-transparent border-none focus:ring-0 focus:outline-none"> 0001</h1>
                                     </label>
                                     <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full md:w-auto flex-grow shadow-md">
                                         <i className="fa-regular fa-credit-card text-cyan-500"></i>
@@ -262,22 +263,23 @@ const CustomerForm = ({ id }) => {
                                 </div>
                                 <div className="flex flex-wrap gap-2 my-6">
                                     <div className='flex-grow'>
-                                        <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full lg:w-[28%] shadow-md">
-                                            <i className="fa-regular fa-square-plus text-blue-800"></i>
-                                            <select className="grow bg-transparent border-none focus:ring-0 focus:outline-none" onChange={handleCustomerDetail('customerService')}>
-                                                <option value="" disabled selected hidden>Add item</option>
-                                                {services.map((service, index) => (
-                                                    <option key={index} value={service}>{service}</option>
-                                                ))}
-                                            </select>
-                                        </label>
+
                                         <p className='text-xs mt-2 mx-2 text-gray-400'>{brandMsg}</p>
                                     </div>
                                 </div>
                                 <div>
                                     {items.map(item => (
                                         <div key={item.id} className="flex flex-wrap gap-2 my-3">
-                                            <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full lg:w-auto shadow-md">
+                                            <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full lg:w-[28%] shadow-md">
+                                                <i className="fa-regular fa-square-plus text-blue-800"></i>
+                                                <select className="grow bg-transparent border-none focus:ring-0 focus:outline-none" onChange={handleCustomerDetail('customerService')}>
+                                                    <option value="" disabled selected hidden>Add Product</option>
+                                                    {services.map((service, index) => (
+                                                        <option key={index} value={service}>{service}</option>
+                                                    ))}
+                                                </select>
+                                            </label>
+                                            {/* <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full lg:w-auto shadow-md">
                                                 <i className="fa-regular fa-square-plus text-blue-800"></i>
                                                 <input
                                                     type="text"
@@ -286,8 +288,15 @@ const CustomerForm = ({ id }) => {
                                                     value={item.id > 1 ? item.customItem : customerDetail.customerService}
                                                     onChange={(e) => handleInputChange(item.id, 'customItem', e.target.value)}
                                                 />
+                                            </label> */}
+                                            <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full lg:w-auto shadow-md">
+                                                <i className="fa-regular fa-square-plus text-blue-800"></i>
+                                                <input
+                                                    type="text"
+                                                    className="grow bg-transparent border-none focus:ring-0 focus:outline-none"
+                                                    placeholder='Add Service'
+                                                />
                                             </label>
-
                                             <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full lg:w-[10%] shadow-md">
                                                 <i class="fa-solid fa-list-ol text-blue-800"></i>
                                                 <input
@@ -330,28 +339,36 @@ const CustomerForm = ({ id }) => {
                                             >
                                                 x
                                             </button>
-                                            <div className='flex w-full justify-start my-6'>
+                                            {/* <div className='flex w-full justify-start my-6'>
                                                 <h1 className='font-bold'> Item Details</h1>
-                                            </div>
+                                            </div> */}
                                             <div className='flex flex-col w-full gap-2 '>
-                                                <div className='flex flex-col w-full lg:w-1/3 justify-start border-2 overflow-auto p-3  rounded-md bg-gray-100 shadow-md'>
+                                                {/* <div className='flex flex-col w-full lg:w-1/3 justify-start border-2 overflow-auto p-3  rounded-md bg-gray-100 shadow-md'>
                                                     <h1 className='text-black'><span className='font-semibold  text-blue-800'>Item Name : </span>{item.id > 1 ? item.customItem : customerDetail.customerService}</h1>
 
                                                     <p className='font-semibold text-blue-800'>Description: <span className='text-black font-normal'>{item.itemDescription}</span> </p>
-                                                </div>
-                                                <div className='flex w-full lg:w-1/3 justify-start  '>
-                                                    <div className=''>
-                                                        <div className='flex justify-between items-center'>
-                                                            <div className=''>
-
-                                                                <p className='text-gray-500 text-sm'>Qty {item.itemQty} x</p>
+                                                </div> */}
+                                                <div className='flex w-full justify-end mt-5 '>
+                                                    <div className='flex justify-end items-center'>
+                                                        <div>
+                                                            <div className='flex justify-between '>
+                                                                <p className='text-base text-gray-500 '>Qty = </p>
+                                                                <p className='text-base text-gray-500'> {item.itemQty} </p>
+                                                            </div>
+                                                            <div className='flex justify-between'>
+                                                                <p className=' text-base text-gray-500'>tax =  </p>
+                                                                <p className=' text-base text-gray-500'> {item.itemTax}% </p>
+                                                            </div>
+                                                            <div className='w-full border-b-2 '>
 
                                                             </div>
-                                                            <p className='text-xl mx-1 font-bold text-blue-800 '>{item.totalCost}</p>
-                                                            <p className='text-green-500 text-xl mx-2 '>{currency}</p>
+                                                            <div className='flex'>
+                                                                <p className='text-lg mx-1 font-bold text-blue-800 '>Amount = {item.totalCost}</p>
+                                                                <p className='text-green-500 text-lg mx-2 '>{currency}</p>
+                                                            </div>
                                                         </div>
-                                                        <p className='text-gray-500 '>tax: {item.itemTax}%</p>
                                                     </div>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -377,8 +394,8 @@ const CustomerForm = ({ id }) => {
                                         <h1 className='lg:text-center my-2 text-2xl font-semibold text-blue-800'>Invoice# <span className='font-normal text-black '>0120</span></h1>
                                         <img src={brandLogo} className='h-16 w-auto' alt="" />
                                     </div>
-                                    <h1 className='text-xl mb-2 font-bold text-blue-800'>Customer Details</h1>
-                                    <div className='flex justify-start gap-6 flex-wrap'>
+                                    {/* <h1 className='text-xl mb-2 font-bold text-blue-800'>Customer Details</h1> */}
+                                    {/* <div className='flex justify-start gap-6 flex-wrap'>
                                         <div className='flex gap-1'>
                                             <img src={customericon} alt="Customer" className='w-6 h-6' />
                                             <p className='text-blue-800 font-semibold'> Name: <span className='text-gray-500 font-normal'>{customerDetail.customerName}</span></p>
@@ -391,7 +408,7 @@ const CustomerForm = ({ id }) => {
                                             <img src={phoneicon} alt="Email" className='w-6 h-6' />
                                             <p className='text-blue-800 font-semibold'> Contact: <span className='text-gray-500 font-normal'>{customerDetail.customerMobile}</span></p>
                                         </div>
-                                    </div>
+                                    </div> */}
                                 </div>
                                 <div className='border-b-2 border-dashed my-5'></div>
                                 <div className='flex justify-between flex-wrap'>
@@ -439,13 +456,20 @@ const CustomerForm = ({ id }) => {
                             </label>
 
                             <div className='flex justify-between px-10'>
-
+                                <Link
+                                    to='/customers'
+                                    type="Link"
+                                    className="bg-blue-800 p-3 my-5 text-white rounded-md">
+                                    <i class="fa-solid fa-caret-left mx-2"></i>Back
+                                </Link>
                                 <button
                                     type="button"
                                     className="bg-blue-800 p-3 my-5 text-white rounded-md">
                                     Save and Submit
                                 </button>
-                                <button type="button" onClick={captureAndSave} className='text-blue-500 font-semibold hidden lg:block'  ><i class="fa-solid fa-file-pdf text-red-500 text-xl"></i> Export</button>
+
+
+                                {/* <button type="button" onClick={captureAndSave} className='text-blue-500 font-semibold hidden lg:block'  ><i class="fa-solid fa-file-pdf text-red-500 text-xl"></i> Export</button> */}
                                 {/* export button */}
 
                             </div>

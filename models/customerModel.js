@@ -15,7 +15,7 @@ const customerSchema = mongoose.Schema(
             required: [true, "please enter email"]
         },
         contact_form_phone : {
-            type: Number,
+            type: String,
             required: [true, "please enter conact no "]
         },
         contact_form_service : {
@@ -24,7 +24,7 @@ const customerSchema = mongoose.Schema(
         },
         contact_form_message : {
             type: String,
-        }
+        },
     },
     {
         timestamps: true
