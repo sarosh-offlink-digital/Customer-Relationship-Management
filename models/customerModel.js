@@ -25,6 +25,24 @@ const customerSchema = mongoose.Schema(
         contact_form_message : {
             type: String,
         },
+        contact_form_payment_status : {
+            type: String,
+        },
+        contact_form_payment : {
+            type: Number,
+        },
+        contact_form_payment_currency : {
+            type: String,
+        },
+        contact_form_payment_mode : {
+            type: String,
+        },
+        contact_form_product : {
+            type: String,
+        },
+        contact_form_product_service : {
+            type: String,
+        },
     },
     {
         timestamps: true
