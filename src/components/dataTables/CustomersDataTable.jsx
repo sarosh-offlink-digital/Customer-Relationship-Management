@@ -127,7 +127,6 @@ const CustomersDataTable = ({ onFetchData }) => {
   const totalAmount = items.reduce((total, item) => total + item.totalCost, 0);
 
 
-  const discountedTotalAmount = totalAmount - discount;
 
 
 
@@ -159,37 +158,47 @@ const CustomersDataTable = ({ onFetchData }) => {
 
     fetchData();
   },);
+  const discountedTotalAmount = totalAmount - discount;
 
   // API DATA CHANDES AND EDITS
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-
+  
+    // Create the data object to send
+    const data = {
+      ...selectedCustomer,
+      contact_form_payment: discountedTotalAmount, 
+    };
+    console.log('Data to be sent:', data);
     try {
       const response = await fetch(`http://localhost:5000/customer/${selectedCustomer._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(selectedCustomer),
+        body: JSON.stringify(data),
       });
-
-      console.log('Response status:', response.status); // Log response status
-
+  
+      console.log('Response status:', response.status); 
+  
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-
+  
       const updatedCustomer = await response.json();
-      console.log('Updated Customer:', updatedCustomer); // Log updated customer data
-
-      // Update state or perform any necessary actions
-      setApiData(apidata.map((customer) => (customer.id === updatedCustomer.id ? updatedCustomer : customer)));
+      console.log('Updated Customer:', updatedCustomer); 
+  
+     
+      setApiData(apidata.map((customer) =>
+        customer._id === updatedCustomer._id ? updatedCustomer : customer
+      ));
       setDisplay('dataTable');
     } catch (error) {
-      console.error('Error submitting form:', error); // Log detailed error message
+      console.error('Error submitting form:', error);
       setError(error);
     }
   };
+  
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
@@ -459,11 +468,15 @@ const CustomersDataTable = ({ onFetchData }) => {
                     </label>
                     <label class="my-3 input input-bordered flex items-center bg-gray-50  text-black gap-2 w-full lg:w-[50%]">
                       <i class="fa-solid fa-coins text-yellow-500"></i>
-                      <h1 className="grow bg-transparent  border-none focus:ring-0 focus:outline-none" >Payment: {selectedCustomer.contact_form_payment_currency} </h1>
+                      <h1 className="grow bg-transparent  border-none focus:ring-0 focus:outline-none" >Payment: {selectedCustomer.contact_form_payment_currency} {selectedCustomer.contact_form_payment} </h1>
                     </label>
                     <label class="my-3 input input-bordered flex items-center bg-gray-50  text-black gap-2 w-full lg:w-[50%]">
                       <i class="fa-solid fa-credit-card text-cyan-500"></i>
                       <h1 className="grow bg-transparent  border-none focus:ring-0 focus:outline-none" >Payment Mode: {selectedCustomer.contact_form_payment_mode}</h1>
+                    </label>
+                    <label class="my-3 input input-bordered flex items-center bg-gray-50  text-black gap-2 w-full lg:w-[50%]">
+                      <i class="fa-solid fa-credit-card text-cyan-500"></i>
+                      <h1 className="grow bg-transparent  border-none focus:ring-0 focus:outline-none" >Payment Status: {selectedCustomer.contact_form_payment_status}</h1>
                     </label>
                   </div>
                   <button className='bg-blue-800 p-3 my-5 text-white rounded-md' onClick={() => handleDisplay('dataTable')}><i class="fa-solid fa-caret-left mx-2"></i>Back</button>
@@ -574,7 +587,7 @@ const CustomersDataTable = ({ onFetchData }) => {
                               className="grow bg-transparent border-none focus:ring-0 focus:outline-none"
                               onChange={handleCombinedChange}
                               name="contact_form_payment_mode"
-                              value={selectedCustomer.contact_form_payment_mode  || ''} 
+                              value={selectedCustomer.contact_form_payment_mode || ''}
                             >
                               <option value="" disabled hidden>Payment Mode</option>
                               <option value="Stripe">Stripe</option>
@@ -585,9 +598,9 @@ const CustomersDataTable = ({ onFetchData }) => {
                           <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full md:w-auto flex-grow shadow-md"
                           >
                             <i className="fa-solid fa-coins text-yellow-500"></i>
-                            <select className="grow bg-transparent border-none focus:ring-0 focus:outline-none" onChange={handleCombinedChange} 
-                             name='contact_form_payment_currency'
-                            value={selectedCustomer.contact_form_payment_currency  || ''} >
+                            <select className="grow bg-transparent border-none focus:ring-0 focus:outline-none" onChange={handleCombinedChange}
+                              name='contact_form_payment_currency'
+                              value={selectedCustomer.contact_form_payment_currency || ''} >
                               <option value="" disabled selected hidden>Currency</option>
                               <option value="$">$ USD</option>
                               <option value="£">£ GBP</option>
@@ -732,21 +745,32 @@ const CustomersDataTable = ({ onFetchData }) => {
                             <h1 className='lg:text-center my-2 text-2xl font-semibold text-blue-800'>Invoice# <span className='font-normal text-black '>0120</span></h1>
                             <img src={brandLogo} className='h-16 w-auto' alt="" />
                           </div>
+                          <label className="flex items-center bg-white text-black input input-bordered gap-2 w-full lg:w-[28%] shadow-md">
+                                <i className="fa-regular fa-square-plus text-blue-800"></i>
+                                <select className="grow bg-transparent border-none focus:ring-0 focus:outline-none"
+                                onChange={handleCombinedChange}
+                                name='contact_form_payment_status'>
+                                  <option selected disabled hidden value="">Payment Status</option>
+                                  <option value="Unpaid">Unpaid</option>
+                                  <option value="Paid">Paid</option>
+                                  
+                                </select>
+                              </label>
                           {/* <h1 className='text-xl mb-2 font-bold text-blue-800'>Customer Details</h1> */}
                           {/* <div className='flex justify-start gap-6 flex-wrap'>
-                                        <div className='flex gap-1'>
-                                            <img src={customericon} alt="Customer" className='w-6 h-6' />
-                                            <p className='text-blue-800 font-semibold'> Name: <span className='text-gray-500 font-normal'>{customerDetail.customerName}</span></p>
-                                        </div>
-                                        <div className='flex gap-1'>
-                                            <img src={emailicon} alt="Email" className='w-6 h-6' />
-                                            <p className='text-blue-800 font-semibold'>  Email: <span className='text-gray-500 font-normal'>{customerDetail.customerEmail}</span></p>
-                                        </div>
-                                        <div className='flex gap-1' >
-                                            <img src={phoneicon} alt="Email" className='w-6 h-6' />
-                                            <p className='text-blue-800 font-semibold'> Contact: <span className='text-gray-500 font-normal'>{customerDetail.customerMobile}</span></p>
-                                        </div>
-                                    </div> */}
+                                          <div className='flex gap-1'>
+                                              <img src={customericon} alt="Customer" className='w-6 h-6' />
+                                              <p className='text-blue-800 font-semibold'> Name: <span className='text-gray-500 font-normal'>{customerDetail.customerName}</span></p>
+                                          </div>
+                                          <div className='flex gap-1'>
+                                              <img src={emailicon} alt="Email" className='w-6 h-6' />
+                                              <p className='text-blue-800 font-semibold'>  Email: <span className='text-gray-500 font-normal'>{customerDetail.customerEmail}</span></p>
+                                          </div>
+                                          <div className='flex gap-1' >
+                                              <img src={phoneicon} alt="Email" className='w-6 h-6' />
+                                              <p className='text-blue-800 font-semibold'> Contact: <span className='text-gray-500 font-normal'>{customerDetail.customerMobile}</span></p>
+                                          </div>
+                                      </div> */}
                         </div>
                         <div className='border-b-2 border-dashed my-5'></div>
                         <div className='flex justify-between flex-wrap'>
@@ -771,7 +795,16 @@ const CustomersDataTable = ({ onFetchData }) => {
                             <h1 className='text-xl mb-2 mt-5 text-blue-800 font-bold'>Sub Total</h1>
                             <div className='flex justify-end'>
                               <p className='text-green-600 text-2xl'>{currency}</p>
-                              <p className='text-2xl font-semibold text-green-600'>{discountedTotalAmount}</p>
+                              <h1 className='text-2xl text-end font-semibold text-green-600'>
+                                {discountedTotalAmount}
+                              </h1>
+                              <input
+                                type="hidden"
+                                name="contact_form_payment"
+                                value={discountedTotalAmount}
+                                onChange={handleInputChangeCustomers} // Ensure this function handles hidden inputs properly
+                              />
+
                             </div>
                             <div className='items-center gap-2' style={{ display: discount > 0 ? 'flex' : 'none' }}>
                               <div className='flex gap-2'>
