@@ -28,14 +28,14 @@ const BarChartDB = ({ leadsDataDB, customerDataDB }) => {
             {
                 label: 'Leads',
                 data: [0, 0, 0, 0, 0, 0, 0],
-                backgroundColor: 'rgba(222, 115, 53, 0.9)', // Change the color for Leads
+                backgroundColor: 'rgba(255, 187, 31, 0.8)', // Change the color for Leads
                 borderColor: 'rgb(222, 115, 53)',
                 borderWidth: 1,
             },
             {
                 label: 'Customers',
                 data: [0, 0, 0, 0, 0, 0, 0],
-                backgroundColor: 'rgba(51, 42, 150, 0.9)', // Change the color for Customers
+                backgroundColor: 'rgba(44, 178, 255, 0.8)', // Change the color for Customers
                 borderColor: 'rgb(51, 42, 150)',
                 borderWidth: 1,
             },
@@ -72,14 +72,14 @@ const BarChartDB = ({ leadsDataDB, customerDataDB }) => {
                     {
                         label: 'Leads',
                         data: Object.values(leadsDayCounts),
-                        backgroundColor: 'rgba(222, 115, 53, 0.9)', // Change the color for Leads
+                        backgroundColor: 'rgba(255, 187, 31, 0.8)', // Change the color for Leads
                         borderColor: 'rgb(222, 115, 53)',
                         borderWidth: 1,
                     },
                     {
                         label: 'Customers',
                         data: Object.values(customersDayCounts),
-                        backgroundColor: 'rgba(51, 42, 150, 0.9)', // Change the color for Customers
+                        backgroundColor: 'rgba(44, 178, 255, 0.8)', // Change the color for Customers
                         borderColor: 'rgb(51, 42, 150)',
                         borderWidth: 1,
                     },
@@ -96,10 +96,26 @@ const BarChartDB = ({ leadsDataDB, customerDataDB }) => {
         plugins: {
             legend: {
                 position: 'top',
+                labels: {
+                    color: 'white', 
+                },
             },
-            title: {
-                display: true,
-                text: 'Leads and Customers Count',
+
+            // title: {
+            //     display: true,
+            //     text: 'Leads and Customers Count',
+            // },
+        },
+        scales: {
+            x: {
+                ticks: {
+                    color: 'white', 
+                },
+            },
+            y: {
+                ticks: {
+                    color: 'white', 
+                },
             },
         },
     };

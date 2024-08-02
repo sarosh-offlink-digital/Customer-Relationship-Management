@@ -83,7 +83,7 @@ const MyDataTable = ({ leadsData, sendConvertedCustomer }) => {
 
       {display === 'dataTable' && (
         <>
-        {/* test filter new */}
+          {/* test filter new */}
           {/* <div className="dropdown dropdown-right">
             <div tabIndex={0} role="button" className="btn m-1"><i class="fa-solid fa-filter text-sm mx-2"></i></div>
             <ul tabIndex={0} className="flex gap-2 dropdown-content bg-transparent z-[1]">
@@ -115,6 +115,57 @@ const MyDataTable = ({ leadsData, sendConvertedCustomer }) => {
           </div> */}
           {/* test filter new end */}
           <div className='flex justify-center items-center'>
+            {/* drawer filter start */}
+            <div className="drawer drawer-end  z-[999]">
+              <input id="my-drawer-4" type="checkbox" className="drawer-toggle"/>
+              <div className="drawer-content ">
+                {/* Page content here */}
+                {/* <label htmlFor="my-drawer-4" className="drawer-button btn btn-primary">Open drawer</label> */}
+              </div>
+              <div className="drawer-side ">
+                <label htmlFor="my-drawer-4" aria-label="close sidebar " className="drawer-overlay"></label>
+                <ul className="menu bg-base-100 text-base-content  min-h-full w-96 p-4">
+                  {/* Sidebar content here */}
+                  <div className='rounded-t-lg relative'>
+                    <h1 className='bg-gradient-to-r from-blue-800 via-blue-600 to-blue-400 text-white rounded-t-lg px-4 py-2 text-xl'>
+                      <i class="fa-solid fa-filter text-sm mx-2 "></i>Filter
+                    </h1>
+                    <div className="modal-action">
+                      {/* <form method="dialog">
+                        <button className=" text-white absolute right-3 top-2 tooltip tooltip-left tooltip-info" data-tip="Close">
+                          <i class="fa-solid fa-circle-xmark text-xl"></i>
+                        </button>
+                      </form> */}
+                    </div>
+                    <select className='border-2 py-2 m-2 rounded-lg cursor-pointer px-2 w-[340px] ' name="filter" id="filter" onChange={handleSelectChange}>
+                      <option value="">All Names</option>
+                      {leadsData.map((row) => (
+                        <option className='w-52' key={row.id} value={row.contact_form_name}>
+                          {row.contact_form_name}
+                        </option>
+                      ))}
+                    </select>
+                    <select className='border-2 py-2 m-2 rounded-lg cursor-pointer px-2  w-[340px] ' name="filter" id="filter" onChange={handleSelectChange}>
+                      <option value="">All Emails</option>
+                      {leadsData.map((row) => (
+                        <option key={row.id} value={row.contact_form_email}>
+                          {row.contact_form_email}
+                        </option>
+                      ))}
+                    </select>
+                    <select className='border-2 py-2 m-2 rounded-lg cursor-pointer px-2  w-[340px] ' name="filter" id="filter" onChange={handleSelectChange}>
+                      <option value="">All Services</option>
+                      {leadsData.map((row) => (
+                        <option key={row.id} value={row.contact_form_service}>
+                          {row.contact_form_service}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </ul>
+              </div>
+            </div>
+            {/* drawer filter end  */}
             <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
               <div className="modal-box  bg-white p-0 pb-32">
                 <div className="">
@@ -168,9 +219,10 @@ const MyDataTable = ({ leadsData, sendConvertedCustomer }) => {
                 className="border focus:border-blue-400 text-sm outline-transparent border-gray-300 w-36 lg:w-auto rounded-md px-1 py-1 mb-4 absolute z-30 right-2 top-3 lg:right-8 lg:top-7"
               />
               <div>
-                <button className="absolute z-30 text-white lg:left-6 lg:top-8 top-4 left-3 hover:scale-110 cursor-pointer tooltip tooltip-info" data-tip='Filter' onClick={() => document.getElementById('my_modal_5').showModal()}>
+              <label htmlFor="my-drawer-4" className="drawer-button absolute z-30 text-white lg:left-6 lg:top-8 top-4 left-3 hover:scale-110 cursor-pointer tooltip tooltip-info"> <i class="fa-solid fa-filter"></i></label>
+                {/* <button className="absolute z-30 text-white lg:left-6 lg:top-8 top-4 left-3 hover:scale-110 cursor-pointer tooltip tooltip-info" data-tip='Filter' onClick={() => document.getElementById('my_modal_5').showModal()}>
                   <i class="fa-solid fa-filter"></i>
-                </button>
+                </button> */}
               </div>
               <DataTable
                 title="Leads"
@@ -188,7 +240,7 @@ const MyDataTable = ({ leadsData, sendConvertedCustomer }) => {
                     style: {
                       fontSize: '16px',
                       fontWeight: 'bold',
-                      background: 'linear-gradient(to right, #1e3a8a, #2563eb, #60a5fa);',
+                      background: 'linear-gradient(to right, #1e3a8a, #2563eb, #571F8B);',
                       opacity: 'var(--tw-bg-opacity)',
                       color: 'white',
                       borderTopLeftRadius: "10px",

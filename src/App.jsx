@@ -18,7 +18,7 @@ import NewProject from './components/forms/NewProject';
 import ProjectForm from './components/forms/ProjectForm';
 import Invoices from './components/Invoices';
 import Payments from './components/Payments';
-
+import LeadsDashboard from '../src/components/Dashboards/LeadsDashboards'
 const App = () => {
   const [selectedId, setSelectedId] = useState(null);
   const [leadsData, setLeadsData] = useState([]);
@@ -84,15 +84,16 @@ const App = () => {
         <Route path="/users" element={<Users />} />
         <Route path="/mydatatable" element={<MyDataTable setSelectedCustomer={setSelectedId} />} />
         <Route path="/dashboard" element={<DashboardWithSideNav leadsData={leadsData} customerData={customerData} />} />
+        <Route path="/leadsdashboard" element={<LeadsDashboardWithSideNav leadsData={leadsData} customerData={customerData} />} />
         <Route path="/customerform" element={<CustomerFormWithSideNav customer={selectedId} />} />
         <Route path="/customers" element={<CustomerWithSideNav />} />
         <Route path="/leads" element={<LeadsWithSideNav leadsData={leadsData} />} />
         <Route path="/projects" element={<ProjectWithSideNav />} />
         <Route path="/payments" element={<PaymentsWithSideNav />} />
         <Route path="/invoices" element={<InvoicesWithSideNav />} />
-        <Route path="/tasks" element={<TasksWithSideNav />} />
+        <Route path="/tasks" element={<TasksWithSideNav />}/>
         <Route path="/profile" element={<UserProfileWithSideNav />} />
-        <Route path="/newcustomer" element={<NewCustomerFormWithSideNav />} />
+        <Route path="/newcustomer" element={<NewCustomerFormWithSideNav />}/>
         <Route path="/newproject" element={<NewProjectWithSideNav />} />
         <Route path="/projectform" element={<ProjectFormWithSideNav />} />
         <Route path="/leadform" element={<LeadsFormWithSideNav selectedId={selectedId} />} />
@@ -102,6 +103,7 @@ const App = () => {
 };
 
 const DashboardWithSideNav = ({ leadsData, customerData }) => <LayoutWithSideNav component={<Dashboard leadsData={leadsData} customerData={customerData} />} />;
+const LeadsDashboardWithSideNav = ({ leadsData, customerData }) => <LayoutWithSideNav component={<LeadsDashboard leadsData={leadsData} customerData={customerData} />} />;
 const LeadsWithSideNav = ({ leadsData }) => <LayoutWithSideNav component={<Leads leadsData={leadsData} />} />;
 const CustomerFormWithSideNav = () => <LayoutWithSideNav component={<CustomerDetail />} />;
 const CustomerWithSideNav = () => <LayoutWithSideNav component={<Customers />} />;

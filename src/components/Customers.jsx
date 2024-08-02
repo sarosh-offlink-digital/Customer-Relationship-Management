@@ -8,10 +8,28 @@ import pending from "../src/pending.png"
 import customerlogo from '../src/customer.png';
 const Customers = () => {
     const [totalCustomers, setTotalCustomers] = useState([])
+    const [paidCustomers, setPaidCustomers] = useState(0)
+    const [unPaidCustomers, setUnpaidCustomers] = useState(0)
     const totalCustomersData = totalCustomers.length
+    const totalPaidCustomersData = paidCustomers
+    const totalUnPaidCustomersData = unPaidCustomers
     const handleCustomersData = (data) => {
-        setTotalCustomers(data)
-    }
+        setTotalCustomers(data);
+
+        let paidCount = 0;
+        let unpaidCount = 0;
+
+        data.forEach(customer => {
+            if (customer.contact_form_payment_status === 'Paid') {
+                paidCount++;
+            } else {
+                unpaidCount++;
+            }
+        });
+
+        setPaidCustomers(paidCount);
+        setUnpaidCustomers(unpaidCount);
+    };
     return (
         <div className='flex flex-col w-full'>
             <div className='p-4'>
@@ -31,12 +49,12 @@ const Customers = () => {
           <div className="border-2 shadow-lg border-teal-500 border-l-[12px] flex flex-wrap justify-center lg:justify-between gap-1 lg:gap-3 items-center text-center hover:scale-105  cursor-pointer lg:h-16 h-16 w-full lg:w-auto text-teal-500 px-2 rounded-md py-4">
             <i className="fa-regular fa-circle-check text-2xl"></i>
             <h2 className="text-sm lg:text-base">Paid Customers</h2>
-            <h1 className="text-sm lg:text-base my-1 font-bold">0</h1>
+            <h1 className="text-sm lg:text-base my-1 font-bold">{totalPaidCustomersData}</h1>
           </div>
           <div className="border-2 shadow-lg border-orange-600 border-l-[12px] flex flex-wrap justify-center lg:justify-between gap-1 lg:gap-3 items-center text-center hover:scale-105  cursor-pointer lg:h-16 h-16 w-full lg:w-auto text-orange-600 px-2 rounded-md py-4">
           <i class="fa-solid fa-circle-exclamation text-2xl"></i>
             <h2 className="text-sm lg:text-base">Unpaid Customers</h2>
-            <h1 className="text-sm lg:text-base my-1 font-bold">{totalCustomersData}</h1>
+            <h1 className="text-sm lg:text-base my-1 font-bold">{totalUnPaidCustomersData}</h1>
           </div>
         </div>
             </div>

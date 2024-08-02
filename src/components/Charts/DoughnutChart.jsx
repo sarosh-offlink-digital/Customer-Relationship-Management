@@ -28,10 +28,9 @@ const DoughnutChartData = {
         'Data 3',
     ],
     datasets: [
-     
         {
             label: 'Leads',
-            data: [5, 10, 25,],
+            data: [5, 10, 25],
             backgroundColor: [
                 'rgba(227, 225, 225, 1)',
                 'rgba(87, 189, 138, 1)',  
@@ -45,8 +44,8 @@ const options = {};
 
 const DoughnutChart = () => {
     return (
-        <div className="mx-auto max-w-lg md:max-w-xl lg:max-w-2xl">
-            <div className="relative aspect-w-1 aspect-h-1">
+        <div className="mx-auto" style={{ maxWidth: '210px' }}> {/* Adjust maxWidth to desired size */}
+            <div className="relative" > {/* Maintain aspect ratio */}
                 <Doughnut options={options} data={DoughnutChartData} />
             </div>
         </div>

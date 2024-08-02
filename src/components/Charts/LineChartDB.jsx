@@ -28,12 +28,12 @@ const LineChartDB = ({ leadsDataDB, customerDataDB }) => {
             {
                 label: 'Leads',
                 data: [0, 0, 0, 0, 0, 0, 0],
-                borderColor: 'rgb(75, 192, 192)',
+                backgroundColor: 'rgb(75, 192, 192)',
             },
             {
                 label: 'Customers',
                 data: [0, 0, 0, 0, 0, 0, 0],
-                borderColor: 'rgb(54, 162, 235)',
+                backgroundColor: 'rgb(54, 162, 235)',
             },
         ],
     });
@@ -84,6 +84,25 @@ const LineChartDB = ({ leadsDataDB, customerDataDB }) => {
 
     const options = {
         responsive: true,
+        plugins: {
+            legend: {
+                labels: {
+                    color: 'white', 
+                },
+            },
+        },
+        scales: {
+            x: {
+                ticks: {
+                    color: 'white', 
+                },
+            },
+            y: {
+                ticks: {
+                    color: 'white', 
+                },
+            },
+        },
     };
 
     return (

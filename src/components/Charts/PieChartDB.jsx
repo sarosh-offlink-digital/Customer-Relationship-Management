@@ -1,55 +1,90 @@
 import React from 'react';
-import { Pie } from 'react-chartjs-2';
-import {
-    Chart as ChartJS,
-    CategoryScale,
-    LinearScale,
-    ArcElement,
-    Legend,
-    Title,
-    Tooltip,
-} from 'chart.js';
-
-ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    ArcElement,
-    Legend,
-    Title,
-    Tooltip,
-);
-
-const DoughnutChartData = {
-    labels: ['Payment Paid', 'Payment Unpaid'],
-    datasets: [
-        {
-            label: 'Customers',
-            data: [15, 4],
-            backgroundColor: [
-                'rgba(103, 65, 209, 1)',
-                'rgba(227, 225, 225, 1)',
-            ],
-        },
-    ],
-};
-
-const options = {
-    plugins: {
-        legend: {
-            position: 'bottom',
-            align: 'start',
-        },
-    },
-};
+import ReactApexChart from 'react-apexcharts';
 
 const PieChartDB = () => {
-    return (
-        <div className="mx-auto max-w-lg md:max-w-xl lg:max-w-2xl">
-            <div className="relative aspect-w-1 aspect-h-1">
-                <Pie options={options} data={DoughnutChartData} />
-            </div>
-        </div>
-    );
+  const series = [
+    {
+      name: 'Sales Target',
+      group: 'budget',
+      data: [44000, 55000, 41000, 67000, 22000]
+    },
+    
+    {
+      name: 'Reached',
+      group: 'budget',
+      data: [13000, 36000, 20000, 8000, 13000]
+    },
+   
+  ];
+
+  const options = {
+    chart: {
+      type: 'bar',
+      height: 350,
+      stacked: true,
+    },
+    stroke: {
+      width: 1,
+      colors: ['#fff']
+    },
+    dataLabels: {
+      formatter: (val) => {
+        return val / 1000 + 'K';
+      },
+      style: {
+        colors: ['#fff'] // White color for data labels
+      }
+    },
+    plotOptions: {
+      bar: {
+        horizontal: true
+      }
+    },
+    xaxis: {
+      categories: [
+        'Jan',
+        'Feb',
+        'March',
+        'April',
+        'May'
+      ],
+      labels: {
+        formatter: (val) => {
+          return val / 1000 + 'K';
+        },
+        style: {
+          colors: '#fff' // White color for x-axis labels
+        }
+      }
+    },
+    yaxis: {
+      labels: {
+        style: {
+          colors: '#fff' // White color for y-axis labels
+        }
+      }
+    },
+    fill: {
+      opacity: 1,
+    },
+    colors: ['#43ff64d9', '#ff8d00cc', '#80f1cb', '#00E396'],
+    legend: {
+      position: 'top',
+      horizontalAlign: 'left',
+      labels: {
+        colors: '#fff' // White color for legend labels
+      }
+    }
+  };
+
+  return (
+    <div>
+      <div id="chart">
+        <ReactApexChart options={options} series={series} type="bar" height={415} />
+      </div>
+      <div id="html-dist"></div>
+    </div>
+  );
 };
 
 export default PieChartDB;
